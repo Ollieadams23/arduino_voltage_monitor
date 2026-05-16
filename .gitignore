@@ -1,0 +1,8 @@
+data/
+images/
+*.pyc
+*.o
+*.bin
+*.elf
+.DS_Store
+.vscode/
