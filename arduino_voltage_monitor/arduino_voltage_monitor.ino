@@ -12,6 +12,18 @@ void setup() {
   Serial.println("WiFi connected!");
 }
 
+// Define the analog pin used for voltage sensing
+#define VOLTAGE_PIN 34 // Change to your actual analog pin if different
+
 void loop() {
-  // Main code here
+  // Read raw analog value
+  int rawValue = analogRead(VOLTAGE_PIN);
+  // Convert to voltage (assuming 3.3V reference and 12-bit ADC)
+  float voltage = (rawValue / 4095.0) * 3.3;
+  Serial.print("Raw ADC: ");
+  Serial.print(rawValue);
+  Serial.print(" | Voltage: ");
+  Serial.print(voltage, 3);
+  Serial.println(" V");
+  delay(1000); // Read every second
 }
