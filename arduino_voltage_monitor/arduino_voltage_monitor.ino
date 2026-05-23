@@ -4,15 +4,20 @@
 #include <WiFiManager.h> // Install WiFiManager library via Library Manager
 #include <WiFi.h>
 #include <WebServer.h>
+#include <Preferences.h>
 
 #define VOLTAGE_PIN 34 // Change to your actual analog pin if different
 #define VLED_PIN 2     // GPIO pin for V LED (change if needed)
 
 WebServer server(80);
+Preferences preferences;
 float lastVoltage = 0.0;
 float alertThreshold = 5.0; // Default alert voltage threshold
 unsigned long lastReadMs = 0;
 const unsigned long READ_INTERVAL_MS = 1000;
+
+
+
 
 void updateLedState() {
   digitalWrite(VLED_PIN, lastVoltage < alertThreshold ? HIGH : LOW);
@@ -38,9 +43,13 @@ String getVoltageHtml() {
 }
 
 void setup() {
-    pinMode(VLED_PIN, OUTPUT);
+  pinMode(VLED_PIN, OUTPUT);
   digitalWrite(VLED_PIN, LOW); // LED off initially for active-high wiring
   Serial.begin(115200);
+  // Load alert threshold from Preferences
+  preferences.begin("settings", true); // read-only
+  alertThreshold = preferences.getFloat("vthresh", alertThreshold); // fallback to current value if not set
+  preferences.end();
   // Create WiFiManager object
   WiFiManager wifiManager;
   // Set custom AP SSID and password (password must be at least 8 chars)
@@ -64,6 +73,10 @@ void setup() {
   server.on("/set_threshold", []() {
     if (server.hasArg("value")) {
       alertThreshold = server.arg("value").toFloat();
+      // Save new threshold to Preferences
+      preferences.begin("settings", false); // write mode
+      preferences.putFloat("vthresh", alertThreshold);
+      preferences.end();
       updateLedState();
       server.send(200, "text/plain", String(alertThreshold, 2));
     } else {

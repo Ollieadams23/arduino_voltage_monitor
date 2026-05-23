@@ -19,6 +19,10 @@ Below is a simple schematic for safely measuring up to 12V with your ESP32 using
 - **Vin**: The voltage you want to measure (up to ~14V for safety).
 - **ESP32 GND**: Connect to battery ground.
 
+
+**LED Indicator:**
+- There is a 100Ω resistor in series with the LED connected to the ESP32 output pin (VLED_PIN) to limit current and protect the LED.
+
 **Note:**
 - Do not connect Vin directly to the ESP32 analog pin!
 - Use 1% tolerance resistors for best accuracy.
