@@ -24,6 +24,7 @@ bool emailAlertsEnabled = false;
 String emailSender;
 String emailAppPassword;
 String alertRecipient;
+float repeatAlertHours = 0.0;
 
 const float ALERT_RESET_HYSTERESIS = 0.20;
 const unsigned long EMAIL_RETRY_INTERVAL_MS = 60000;
@@ -40,6 +41,14 @@ bool hasEmailCredentials() {
 
 bool isEmailConfigured() {
   return emailAlertsEnabled && hasEmailCredentials();
+}
+
+unsigned long getRepeatAlertIntervalMs() {
+  if (repeatAlertHours <= 0.0f) {
+    return 0;
+  }
+
+  return (unsigned long)(repeatAlertHours * 3600000.0f);
 }
 
 String htmlEscape(const String& value) {
@@ -59,6 +68,7 @@ void loadSettings() {
   emailSender = preferences.getString("mail_from", "");
   emailAppPassword = preferences.getString("mail_pass", "");
   alertRecipient = preferences.getString("mail_to", "");
+  repeatAlertHours = preferences.getFloat("mail_rpt_h", 0.0f);
   preferences.end();
 }
 
@@ -68,20 +78,23 @@ void saveThresholdSetting() {
   preferences.end();
 }
 
-void saveEmailSettings(bool enabled, const String& sender, const String& appPassword, const String& recipient) {
+void saveEmailSettings(bool enabled, const String& sender, const String& appPassword, const String& recipient, float repeatHours) {
   emailAlertsEnabled = enabled;
   emailSender = sender;
   emailAppPassword = appPassword;
   alertRecipient = recipient;
+  repeatAlertHours = repeatHours < 0.0f ? 0.0f : repeatHours;
 
   preferences.begin("settings", false);
   preferences.putBool("mail_on", emailAlertsEnabled);
   preferences.putString("mail_from", emailSender);
   preferences.putString("mail_pass", emailAppPassword);
   preferences.putString("mail_to", alertRecipient);
+  preferences.putFloat("mail_rpt_h", repeatAlertHours);
   preferences.end();
 
   lowVoltageAlertSent = false;
+  lastEmailAttemptMs = 0;
 }
 
 void smtpCallback(SMTP_Status status) {
@@ -190,6 +203,7 @@ void updateLedState() {
 
 String getVoltageHtml() {
   String emailStatus = emailAlertsEnabled ? (hasEmailCredentials() ? "Enabled" : "Enabled, but setup is incomplete") : "Disabled";
+  String repeatStatus = repeatAlertHours > 0.0f ? String(repeatAlertHours, 2) + " hour(s)" : "Off";
   String html = "<html><head><title>Voltage Monitor</title>";
   html += "<script>";
   html += "function syncThresholdInput(t) { const input = document.getElementById('thresholdInput'); if (document.activeElement !== input) { input.value = t; } }";
@@ -208,6 +222,7 @@ String getVoltageHtml() {
   html += "<p>Sender: " + (emailSender.length() > 0 ? htmlEscape(emailSender) : String("Not set")) + "</p>";
   html += "<p>Recipient: " + (alertRecipient.length() > 0 ? htmlEscape(alertRecipient) : String("Not set")) + "</p>";
   html += "<p>App password stored: " + String(emailAppPassword.length() > 0 ? "Yes" : "No") + "</p>";
+  html += "<p>Repeat alerts while still low: " + repeatStatus + "</p>";
   html += "<form method='POST' action='/email_settings'>";
   html += "<p><label><input type='checkbox' name='enabled' value='1'";
   if (emailAlertsEnabled) {
@@ -218,6 +233,8 @@ String getVoltageHtml() {
   html += "<p>App password: <input type='password' name='app_password' value=''></p>";
   html += "<p>Leave the password blank to keep the currently stored app password.</p>";
   html += "<p>Alert recipient: <input type='email' name='recipient' value='" + htmlEscape(alertRecipient) + "'></p>";
+  html += "<p>Repeat alert interval in hours: <input type='number' step='0.25' min='0' name='repeat_hours' value='" + String(repeatAlertHours, 2) + "'></p>";
+  html += "<p>Set to 0 to disable repeat reminders while voltage stays low.</p>";
   html += "<p><input type='submit' value='Save Email Settings'></p>";
   html += "</form>";
   html += "<p><button onclick=\"fetch('/test_email').then(r => r.text()).then(msg => alert(msg));\">Send Test Email</button></p>";
@@ -270,12 +287,13 @@ void setup() {
     appPassword.trim();
     String recipient = server.arg("recipient");
     recipient.trim();
+    float repeatHours = server.arg("repeat_hours").toFloat();
 
     if (appPassword.length() == 0) {
       appPassword = emailAppPassword;
     }
 
-    saveEmailSettings(server.hasArg("enabled"), sender, appPassword, recipient);
+    saveEmailSettings(server.hasArg("enabled"), sender, appPassword, recipient, repeatHours);
     server.sendHeader("Location", "/");
     server.send(303, "text/plain", "Email settings saved.");
   });
@@ -315,12 +333,19 @@ void loop() {
 
   bool isLowVoltage = lastVoltage < alertThreshold;
   if (isLowVoltage) {
-    if (!lowVoltageAlertSent && millis() - lastEmailAttemptMs >= EMAIL_RETRY_INTERVAL_MS) {
+    bool shouldSendFirstAlert = !lowVoltageAlertSent && (lastEmailAttemptMs == 0 || millis() - lastEmailAttemptMs >= EMAIL_RETRY_INTERVAL_MS);
+    bool shouldSendRepeatAlert = lowVoltageAlertSent && getRepeatAlertIntervalMs() > 0 && millis() - lastEmailAttemptMs >= getRepeatAlertIntervalMs();
+
+    if (shouldSendFirstAlert || shouldSendRepeatAlert) {
       lastEmailAttemptMs = millis();
-      lowVoltageAlertSent = sendLowVoltageAlert(lastVoltage);
+      bool emailSent = sendLowVoltageAlert(lastVoltage);
+      if (emailSent) {
+        lowVoltageAlertSent = true;
+      }
     }
   } else if (lastVoltage > alertThreshold + ALERT_RESET_HYSTERESIS) {
     lowVoltageAlertSent = false;
+    lastEmailAttemptMs = 0;
   }
 
   Serial.print("Raw ADC: ");
