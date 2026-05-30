@@ -1,41 +1,20 @@
 # Arduino Voltage Monitor
 
-ESP32-based voltage monitor with:
-- analog voltage measurement through a resistor divider
-- local web page for live readings and threshold changes
-- LED indication when voltage is below the threshold
-- optional Gmail email alerts with configurable repeat reminders
-
-## Hardware
-
-Current sketch assumptions:
-- board: ESP32
-- analog input: GPIO34
-- alert LED: GPIO2
-- voltage divider: 100k over 30k
-
-That divider gives a scale factor of about `4.333`, which is what the sketch uses to convert the ADC pin voltage back to the input voltage.
-
-## Features
-
-- Reads voltage once per second
-- Hosts a local web page over Wi-Fi
-- Stores threshold and email settings in ESP32 Preferences
-- Email alerts are disabled by default
-- Sends one email when voltage first drops below the threshold
-- Rearms after the voltage rises above the threshold plus a small hysteresis margin
-- Can optionally repeat reminder emails every configured number of hours while voltage stays low
+ESP32-based voltage monitor with a local web page, live voltage display, hourly graph, low-voltage LED alert, and optional Gmail email notifications.
 
 ## Required Arduino Libraries
 
 - WiFiManager
 - ESP Mail Client
 
-## Arduino IDE Notes
+## Requirements
 
-This sketch targets ESP32, not a generic Arduino Uno.
+- ESP32 board
+- voltage divider wired as described in [voltage_divider_schematic.md](voltage_divider_schematic.md#L1)
+- Wi-Fi network for the device
+- Gmail account if email alerts are required
 
-If the sketch becomes too large after enabling email support, try a larger ESP32 partition scheme in Arduino IDE, such as `Huge APP` or `No OTA`.
+If the sketch becomes too large in Arduino IDE after enabling email support, try a larger ESP32 partition scheme such as `Huge APP` or `No OTA`.
 
 ## Wi-Fi Setup
 
@@ -45,11 +24,29 @@ Default captive portal details in the sketch:
 - SSID: `arduino voltage monitor`
 - password: `00000000`
 
+## Initial Setup
+
+For first-time setup:
+
+1. Power on the ESP32.
+2. On your phone or computer, connect to the Wi-Fi network named `arduino voltage monitor`.
+3. Enter the hotspot password `00000000`.
+4. If the captive portal does not open automatically, open a browser and go to `192.168.4.1`.
+5. Choose your normal Wi-Fi network and enter its password.
+6. After the ESP32 connects to your Wi-Fi, reconnect your phone or computer to that same normal Wi-Fi network.
+7. Find the ESP32 IP address from the Serial Monitor or your router's connected-device list.
+8. Open that IP address in a browser to reach the voltage monitor page.
+
 After connecting the board to Wi-Fi, open the device IP address in a browser.
+
+If you need to move the device to a different network, use the `Reset Wi-Fi Credentials` button on the web page. That clears the saved Wi-Fi network and restarts the ESP32. On the next boot, WiFiManager will open the setup portal again.
 
 ## Web Page Functions
 
 The self-hosted page lets you:
+- view a graph of the last 48 hours of voltage history
+- view the current Wi-Fi SSID and device IP
+- clear saved Wi-Fi credentials and reboot into setup mode
 - view the current measured input voltage
 - change the low-voltage threshold
 - enable or disable email alerts
@@ -76,15 +73,9 @@ Important:
 - use the Gmail app password, not the normal Gmail login password
 - the sender account and the app password must belong to the same Google account
 
-## Time Sync Requirement
-
-Gmail SMTP over TLS requires correct device time.
-
-The sketch now syncs time automatically using NTP after Wi-Fi connects and again before sending email if time is not already valid.
-
 ## Alert Behavior
 
-Low-voltage email behavior is currently:
+Email alert behavior:
 - first alert sends when voltage drops below the threshold
 - no repeated alerts while voltage stays low unless repeat reminders are enabled
 - repeat reminders send every configured number of hours while voltage remains low
@@ -101,11 +92,3 @@ Low-voltage email behavior is currently:
 6. Press `Send Test Email`.
 7. Check inbox and spam folder.
 8. If email fails, inspect Serial Monitor output.
-
-## Project Structure
-
-- `arduino_voltage_monitor.ino`: main sketch
-- `lib/`: custom libraries if added later
-- `data/`: files for SPIFFS or LittleFS if used later
-- `src/`: additional source files if split out later
-- `images/`: documentation images

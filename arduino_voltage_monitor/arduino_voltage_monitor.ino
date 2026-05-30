@@ -7,6 +7,7 @@
 #include <WebServer.h>
 #include <Preferences.h>
 #include <time.h>
+#include <math.h>
 
 #define VOLTAGE_PIN 34 // Change to your actual analog pin if different
 #define VLED_PIN 2     // GPIO pin for V LED (change if needed)
@@ -14,6 +15,11 @@
 WebServer server(80);
 Preferences preferences;
 SMTPSession smtp;
+struct VoltageHistoryPoint {
+  float voltage;
+  unsigned long epoch;
+};
+
 float lastVoltage = 0.0;
 float alertThreshold = 5.0; // Default alert voltage threshold
 unsigned long lastReadMs = 0;
@@ -25,10 +31,15 @@ String emailSender;
 String emailAppPassword;
 String alertRecipient;
 float repeatAlertHours = 0.0;
+VoltageHistoryPoint voltageHistory[48];
+int voltageHistoryCount = 0;
+int voltageHistoryWriteIndex = 0;
+unsigned long lastHistoryHourBucket = 0;
 
 const float ALERT_RESET_HYSTERESIS = 0.20;
 const unsigned long EMAIL_RETRY_INTERVAL_MS = 60000;
 const unsigned long TIME_SYNC_TIMEOUT_MS = 15000;
+const int VOLTAGE_HISTORY_HOURS = 48;
 
 const char* SMTP_HOST = "smtp.gmail.com";
 const int SMTP_PORT = 465;
@@ -41,6 +52,102 @@ bool hasEmailCredentials() {
 
 bool isEmailConfigured() {
   return emailAlertsEnabled && hasEmailCredentials();
+}
+
+void clearVoltageHistory() {
+  for (int index = 0; index < VOLTAGE_HISTORY_HOURS; index++) {
+    voltageHistory[index].voltage = 0.0f;
+    voltageHistory[index].epoch = 0;
+  }
+  voltageHistoryCount = 0;
+  voltageHistoryWriteIndex = 0;
+  lastHistoryHourBucket = 0;
+}
+
+void loadVoltageHistory() {
+  clearVoltageHistory();
+
+  preferences.begin("history", true);
+  size_t storedBytes = preferences.getBytesLength("points");
+  if (storedBytes == sizeof(voltageHistory)) {
+    preferences.getBytes("points", voltageHistory, sizeof(voltageHistory));
+    voltageHistoryCount = preferences.getInt("count", 0);
+    voltageHistoryWriteIndex = preferences.getInt("write_idx", 0);
+    lastHistoryHourBucket = preferences.getULong("last_hour", 0);
+  }
+  preferences.end();
+
+  if (voltageHistoryCount < 0 || voltageHistoryCount > VOLTAGE_HISTORY_HOURS) {
+    clearVoltageHistory();
+    return;
+  }
+
+  if (voltageHistoryWriteIndex < 0 || voltageHistoryWriteIndex >= VOLTAGE_HISTORY_HOURS) {
+    voltageHistoryWriteIndex = voltageHistoryCount % VOLTAGE_HISTORY_HOURS;
+  }
+}
+
+void saveVoltageHistory() {
+  preferences.begin("history", false);
+  preferences.putBytes("points", voltageHistory, sizeof(voltageHistory));
+  preferences.putInt("count", voltageHistoryCount);
+  preferences.putInt("write_idx", voltageHistoryWriteIndex);
+  preferences.putULong("last_hour", lastHistoryHourBucket);
+  preferences.end();
+}
+
+void appendVoltageHistory(float voltage, unsigned long epoch) {
+  voltageHistory[voltageHistoryWriteIndex].voltage = voltage;
+  voltageHistory[voltageHistoryWriteIndex].epoch = epoch;
+  voltageHistoryWriteIndex = (voltageHistoryWriteIndex + 1) % VOLTAGE_HISTORY_HOURS;
+  if (voltageHistoryCount < VOLTAGE_HISTORY_HOURS) {
+    voltageHistoryCount++;
+  }
+}
+
+void updateLatestVoltageHistory(float voltage, unsigned long epoch) {
+  if (voltageHistoryCount == 0) {
+    appendVoltageHistory(voltage, epoch);
+    return;
+  }
+
+  int latestIndex = (voltageHistoryWriteIndex + VOLTAGE_HISTORY_HOURS - 1) % VOLTAGE_HISTORY_HOURS;
+  voltageHistory[latestIndex].voltage = voltage;
+  voltageHistory[latestIndex].epoch = epoch;
+}
+
+void recordVoltageHistory(float voltage) {
+  time_t now = time(nullptr);
+  if (now <= 1700000000) {
+    return;
+  }
+
+  unsigned long currentHourBucket = (unsigned long)(now / 3600);
+  if (currentHourBucket != lastHistoryHourBucket) {
+    appendVoltageHistory(voltage, (unsigned long)now);
+    lastHistoryHourBucket = currentHourBucket;
+    saveVoltageHistory();
+  } else {
+    updateLatestVoltageHistory(voltage, (unsigned long)now);
+  }
+}
+
+String getVoltageHistoryJson() {
+  String json = "{\"points\":[";
+
+  if (voltageHistoryCount > 0) {
+    int startIndex = voltageHistoryCount == VOLTAGE_HISTORY_HOURS ? voltageHistoryWriteIndex : 0;
+    for (int offset = 0; offset < voltageHistoryCount; offset++) {
+      int historyIndex = (startIndex + offset) % VOLTAGE_HISTORY_HOURS;
+      if (offset > 0) {
+        json += ",";
+      }
+      json += "{\"epoch\":" + String(voltageHistory[historyIndex].epoch) + ",\"voltage\":" + String(voltageHistory[historyIndex].voltage, 3) + "}";
+    }
+  }
+
+  json += "],\"maxPoints\":" + String(VOLTAGE_HISTORY_HOURS) + "}";
+  return json;
 }
 
 unsigned long getRepeatAlertIntervalMs() {
@@ -205,41 +312,124 @@ String getVoltageHtml() {
   String emailStatus = emailAlertsEnabled ? (hasEmailCredentials() ? "Enabled" : "Enabled, but setup is incomplete") : "Disabled";
   String repeatStatus = repeatAlertHours > 0.0f ? String(repeatAlertHours, 2) + " hour(s)" : "Off";
   String html = "<html><head><title>Voltage Monitor</title>";
+  html += "<meta name='viewport' content='width=device-width, initial-scale=1'>";
+  html += "<style>";
+  html += ":root{--bg:#f3efe4;--panel:#fffdf8;--panel-strong:#fff7e4;--text:#1c241d;--muted:#5c685d;--line:#d5c9ab;--accent:#1e6b52;--accent-strong:#0f4e3a;--accent-soft:#d9efe6;--warn:#b86a00;--shadow:0 18px 40px rgba(73,56,24,0.10);}";
+  html += "*{box-sizing:border-box;}body{margin:0;font-family:'Aptos','Trebuchet MS','Segoe UI',sans-serif;line-height:1.45;color:var(--text);background:radial-gradient(circle at top left,#fff8ea 0%,#f3efe4 42%,#ece4d2 100%);}";
+  html += ".shell{max-width:1120px;margin:0 auto;padding:20px 16px 40px;}";
+  html += ".hero{padding:24px;border-radius:24px;background:linear-gradient(135deg,#244636 0%,#3f7554 48%,#9cbf70 100%);color:#f8f5ec;box-shadow:var(--shadow);}";
+  html += ".eyebrow{margin:0 0 8px;font-size:0.82rem;letter-spacing:0.16em;text-transform:uppercase;opacity:0.78;}";
+  html += "h1{margin:0;font-size:clamp(2rem,4vw,3.2rem);line-height:1.05;}";
+  html += ".hero-copy{max-width:700px;margin:12px 0 0;color:rgba(248,245,236,0.84);font-size:1rem;}";
+  html += ".hero-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:18px;}";
+  html += ".hero-stat{padding:14px 16px;border-radius:18px;background:rgba(255,255,255,0.10);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.16);}";
+  html += ".hero-stat-label{display:block;font-size:0.76rem;text-transform:uppercase;letter-spacing:0.12em;opacity:0.72;}";
+  html += ".hero-stat-value{display:block;margin-top:6px;font-size:1.25rem;font-weight:700;}";
+  html += ".layout{display:grid;grid-template-columns:1.45fr 0.95fr;gap:18px;margin-top:18px;}";
+  html += ".stack{display:grid;gap:18px;}";
+  html += ".panel{padding:20px;border-radius:22px;background:var(--panel);border:1px solid rgba(125,103,53,0.12);box-shadow:var(--shadow);}";
+  html += ".panel-accent{background:var(--panel-strong);}";
+  html += ".panel h2{margin:0 0 14px;font-size:1.15rem;}";
+  html += ".meta{margin:8px 0 0;color:var(--muted);font-size:0.95rem;}";
+  html += ".status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:10px;}";
+  html += ".status-card{padding:14px 16px;border-radius:18px;background:#faf6eb;border:1px solid var(--line);}";
+  html += ".status-card span{display:block;}";
+  html += ".status-label{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);}";
+  html += ".status-value{margin-top:6px;font-size:1.15rem;font-weight:700;}";
+  html += ".pill{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:0.9rem;font-weight:700;background:var(--accent-soft);color:var(--accent-strong);}";
+  html += ".pill.warn{background:#fde7c4;color:var(--warn);}";
+  html += ".form-grid{display:grid;gap:12px;}";
+  html += ".field{display:grid;gap:6px;}";
+  html += ".field label{font-size:0.92rem;font-weight:700;color:#2e3c31;}";
+  html += ".field small{color:var(--muted);font-size:0.84rem;}";
+  html += "input[type='email'],input[type='number'],input[type='password']{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:#fffdfa;color:var(--text);font:inherit;}";
+  html += "input[type='submit'],button{appearance:none;border:none;border-radius:999px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer;background:var(--accent);color:#f7f2e7;box-shadow:0 8px 18px rgba(30,107,82,0.22);}";
+  html += "input[type='submit']:hover,button:hover{background:var(--accent-strong);}";
+  html += ".button-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}";
+  html += ".button-secondary{background:#e7efe6;color:var(--accent-strong);box-shadow:none;border:1px solid rgba(30,107,82,0.12);}";
+  html += ".button-secondary:hover{background:#d6e9df;}";
+  html += ".danger{background:#7c3f27;color:#fff5ef;box-shadow:0 8px 18px rgba(124,63,39,0.20);}";
+  html += ".danger:hover{background:#5f2d1b;}";
+  html += ".check-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:#f8f2e4;border:1px solid var(--line);}input[type='checkbox']{width:18px;height:18px;accent-color:var(--accent);}";
+  html += "canvas{width:100%;max-width:100%;height:260px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,#fffdfa 0%,#f6f0df 100%);}#historyMeta{color:var(--muted);font-size:0.95rem;}";
+  html += ".note{margin:0;padding:12px 14px;border-radius:14px;background:#f6f0df;color:var(--muted);} .inline-form{display:flex;gap:10px;flex-wrap:wrap;align-items:end;} .inline-form .field{flex:1 1 220px;}";
+  html += "@media (max-width: 860px){.layout{grid-template-columns:1fr;}.shell{padding:14px 12px 28px;}.hero{padding:20px;}}";
+  html += "</style>";
   html += "<script>";
   html += "function syncThresholdInput(t) { const input = document.getElementById('thresholdInput'); if (document.activeElement !== input) { input.value = t; } }";
+  html += "function setTextIfPresent(id, value) { const element = document.getElementById(id); if (element) { element.innerText = value; } }";
+  html += "function formatHistoryLabel(epoch) { const d = new Date(epoch * 1000); return d.getHours().toString().padStart(2, '0') + ':00'; }";
+  html += "function drawHistory(payload) { const canvas = document.getElementById('historyChart'); const meta = document.getElementById('historyMeta'); if (!canvas) return; const ctx = canvas.getContext('2d'); const ratio = window.devicePixelRatio || 1; const cssWidth = canvas.clientWidth || 960; const cssHeight = canvas.clientHeight || 240; canvas.width = cssWidth * ratio; canvas.height = cssHeight * ratio; ctx.setTransform(ratio, 0, 0, ratio, 0, 0); ctx.clearRect(0, 0, cssWidth, cssHeight); const points = payload.points || []; if (!points.length) { ctx.fillStyle = '#666'; ctx.font = '14px Arial'; ctx.fillText('No hourly history yet. The chart fills as the device records each hour.', 16, 32); meta.textContent = 'History empty until the first hourly sample is captured.'; return; } let minV = points[0].voltage; let maxV = points[0].voltage; for (const point of points) { if (point.voltage < minV) minV = point.voltage; if (point.voltage > maxV) maxV = point.voltage; } if (Math.abs(maxV - minV) < 0.2) { maxV += 0.1; minV -= 0.1; } const pad = { left: 46, right: 14, top: 18, bottom: 32 }; const chartWidth = cssWidth - pad.left - pad.right; const chartHeight = cssHeight - pad.top - pad.bottom; ctx.strokeStyle = '#d7d7d7'; ctx.lineWidth = 1; ctx.beginPath(); for (let i = 0; i <= 4; i++) { const y = pad.top + (chartHeight * i / 4); ctx.moveTo(pad.left, y); ctx.lineTo(cssWidth - pad.right, y); } ctx.stroke(); ctx.fillStyle = '#444'; ctx.font = '12px Arial'; for (let i = 0; i <= 4; i++) { const value = maxV - ((maxV - minV) * i / 4); const y = pad.top + (chartHeight * i / 4); ctx.fillText(value.toFixed(2) + 'V', 4, y + 4); } ctx.strokeStyle = '#1f6feb'; ctx.lineWidth = 2; ctx.beginPath(); points.forEach((point, index) => { const x = pad.left + (points.length === 1 ? chartWidth / 2 : (chartWidth * index / (points.length - 1))); const normalized = (point.voltage - minV) / (maxV - minV); const y = pad.top + chartHeight - (normalized * chartHeight); if (index === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }); ctx.stroke(); ctx.fillStyle = '#1f6feb'; points.forEach((point, index) => { const x = pad.left + (points.length === 1 ? chartWidth / 2 : (chartWidth * index / (points.length - 1))); const normalized = (point.voltage - minV) / (maxV - minV); const y = pad.top + chartHeight - (normalized * chartHeight); ctx.beginPath(); ctx.arc(x, y, 2.5, 0, Math.PI * 2); ctx.fill(); if (index === 0 || index === points.length - 1 || index % 12 === 0) { ctx.fillStyle = '#444'; ctx.fillText(formatHistoryLabel(point.epoch), x - 14, cssHeight - 10); ctx.fillStyle = '#1f6feb'; } }); const start = new Date(points[0].epoch * 1000); const end = new Date(points[points.length - 1].epoch * 1000); meta.textContent = 'Showing ' + points.length + ' hourly point(s) from ' + start.toLocaleString() + ' to ' + end.toLocaleString() + '.'; }";
+  html += "function updateHistory() { fetch('/history').then(r => r.json()).then(drawHistory); }";
   html += "function updateVoltage() {";
-  html += "fetch('/voltage').then(r => r.text()).then(v => {document.getElementById('voltage').innerText = v + ' V';});";
-  html += "fetch('/threshold').then(r => r.text()).then(t => {document.getElementById('threshold').innerText = t + ' V';syncThresholdInput(t);});";
-  html += "} setInterval(updateVoltage, 1000); window.onload = updateVoltage;";
+  html += "fetch('/voltage').then(r => r.text()).then(v => { setTextIfPresent('voltage', v + ' V'); setTextIfPresent('voltageMirror', v + ' V'); });";
+  html += "fetch('/threshold').then(r => r.text()).then(t => { setTextIfPresent('threshold', t + ' V'); setTextIfPresent('thresholdMirror', t + ' V'); syncThresholdInput(t); });";
+  html += "} setInterval(updateVoltage, 1000); setInterval(updateHistory, 60000); window.onload = function(){ updateVoltage(); updateHistory(); }; window.onresize = updateHistory;";
   html += "</script></head><body>";
+  html += "<div class='shell'>";
+  html += "<header class='hero'>";
+  html += "<p class='eyebrow'>ESP32 Telemetry Node</p>";
   html += "<h1>Voltage Monitor</h1>";
-  html += "<p>Input Voltage: <span id='voltage'>--</span></p>";
-  html += "<p>Alert Threshold: <span id='threshold'>--</span>";
-  html += "<form onsubmit=\"event.preventDefault();fetch('/set_threshold?value=";
-  html += "' + document.getElementById('thresholdInput').value).then(() => setTimeout(updateVoltage, 100));\">Set Threshold: <input type='number' step='0.01' min='0' max='50' id='thresholdInput' value='" + String(alertThreshold, 2) + "'> V <input type='submit' value='Set'></form></p>";
+  html += "<p class='hero-copy'>Track your input voltage live, review the last 48 hours, and control alerting from one page without reflashing the board.</p>";
+  html += "<div class='hero-stats'>";
+  html += "<div class='hero-stat'><span class='hero-stat-label'>Current Voltage</span><span class='hero-stat-value' id='voltage'>--</span></div>";
+  html += "<div class='hero-stat'><span class='hero-stat-label'>Alert Threshold</span><span class='hero-stat-value' id='threshold'>--</span></div>";
+  html += "<div class='hero-stat'><span class='hero-stat-label'>Email Alerts</span><span class='hero-stat-value'>" + emailStatus + "</span></div>";
+  html += "</div>";
+  html += "</header>";
+  html += "<div class='layout'>";
+  html += "<div class='stack'>";
+  html += "<section class='panel panel-accent'>";
+  html += "<h2>Last 48 Hours</h2>";
+  html += "<canvas id='historyChart'></canvas>";
+  html += "<p id='historyMeta' class='meta'>Loading history...</p>";
+  html += "</section>";
+  html += "<section class='panel'>";
+  html += "<h2>Voltage Controls</h2>";
+  html += "<div class='status-grid'>";
+  html += "<div class='status-card'><span class='status-label'>Live Input</span><span class='status-value' id='voltageMirror'>" + String(lastVoltage, 3) + " V</span></div>";
+  html += "<div class='status-card'><span class='status-label'>Threshold</span><span class='status-value' id='thresholdMirror'>" + String(alertThreshold, 2) + " V</span></div>";
+  html += "<div class='status-card'><span class='status-label'>LED State</span><span class='status-value'>" + String(lastVoltage < alertThreshold ? "LOW ALERT" : "NORMAL") + "</span></div>";
+  html += "</div>";
+  html += "<form class='inline-form' onsubmit=\"event.preventDefault();fetch('/set_threshold?value=";
+  html += "' + document.getElementById('thresholdInput').value).then(() => setTimeout(function(){ updateVoltage(); }, 100));\">";
+  html += "<div class='field'><label for='thresholdInput'>Low-voltage threshold</label><input type='number' step='0.01' min='0' max='50' id='thresholdInput' value='" + String(alertThreshold, 2) + "'><small>Set the point where LED and email alerts should trigger.</small></div>";
+  html += "<div class='button-row'><input type='submit' value='Save Threshold'></div>";
+  html += "</form>";
+  html += "</section>";
+  html += "</div>";
+  html += "<div class='stack'>";
+  html += "<section class='panel'>";
+  html += "<h2>Wi-Fi</h2>";
+  html += "<div class='status-grid'>";
+  html += "<div class='status-card'><span class='status-label'>Connected SSID</span><span class='status-value'>" + htmlEscape(WiFi.SSID()) + "</span></div>";
+  html += "<div class='status-card'><span class='status-label'>Device IP</span><span class='status-value'>" + WiFi.localIP().toString() + "</span></div>";
+  html += "</div>";
+  html += "<p class='note'>Resetting Wi-Fi will clear the saved network and reboot the ESP32 into WiFiManager setup mode on the next boot.</p>";
+  html += "<form method='POST' action='/reset_wifi' onsubmit=\"return confirm('Clear saved Wi-Fi credentials and reboot into setup mode?');\">";
+  html += "<div class='button-row'><input class='danger' type='submit' value='Reset Wi-Fi Credentials'></div>";
+  html += "</form>";
+  html += "</section>";
+  html += "<section class='panel'>";
   html += "<h2>Email Alerts</h2>";
-  html += "<p>Status: " + emailStatus + "</p>";
-  html += "<p>Sender: " + (emailSender.length() > 0 ? htmlEscape(emailSender) : String("Not set")) + "</p>";
-  html += "<p>Recipient: " + (alertRecipient.length() > 0 ? htmlEscape(alertRecipient) : String("Not set")) + "</p>";
-  html += "<p>App password stored: " + String(emailAppPassword.length() > 0 ? "Yes" : "No") + "</p>";
-  html += "<p>Repeat alerts while still low: " + repeatStatus + "</p>";
-  html += "<form method='POST' action='/email_settings'>";
-  html += "<p><label><input type='checkbox' name='enabled' value='1'";
+  html += "<p class='pill" + String(emailAlertsEnabled ? "" : " warn") + "'>" + emailStatus + "</p>";
+  html += "<p class='meta'>Sender: " + (emailSender.length() > 0 ? htmlEscape(emailSender) : String("Not set")) + "<br>Recipient: " + (alertRecipient.length() > 0 ? htmlEscape(alertRecipient) : String("Not set")) + "<br>App password stored: " + String(emailAppPassword.length() > 0 ? "Yes" : "No") + "<br>Repeat reminders: " + repeatStatus + "</p>";
+  html += "<form class='form-grid' method='POST' action='/email_settings'>";
+  html += "<label class='check-row'><input type='checkbox' name='enabled' value='1'";
   if (emailAlertsEnabled) {
     html += " checked";
   }
-  html += "> Enable email alerts</label></p>";
-  html += "<p>Gmail address: <input type='email' name='sender' value='" + htmlEscape(emailSender) + "'></p>";
-  html += "<p>App password: <input type='password' name='app_password' value=''></p>";
-  html += "<p>Leave the password blank to keep the currently stored app password.</p>";
-  html += "<p>Alert recipient: <input type='email' name='recipient' value='" + htmlEscape(alertRecipient) + "'></p>";
-  html += "<p>Repeat alert interval in hours: <input type='number' step='0.25' min='0' name='repeat_hours' value='" + String(repeatAlertHours, 2) + "'></p>";
-  html += "<p>Set to 0 to disable repeat reminders while voltage stays low.</p>";
-  html += "<p><input type='submit' value='Save Email Settings'></p>";
+  html += "><span>Enable email alerts</span></label>";
+  html += "<div class='field'><label>Gmail address</label><input type='email' name='sender' value='" + htmlEscape(emailSender) + "'></div>";
+  html += "<div class='field'><label>App password</label><input type='password' name='app_password' value=''><small>Leave blank to keep the currently stored app password.</small></div>";
+  html += "<div class='field'><label>Alert recipient</label><input type='email' name='recipient' value='" + htmlEscape(alertRecipient) + "'></div>";
+  html += "<div class='field'><label>Repeat alert interval in hours</label><input type='number' step='0.25' min='0' name='repeat_hours' value='" + String(repeatAlertHours, 2) + "'><small>Set to 0 to disable repeat reminders while voltage stays low.</small></div>";
+  html += "<div class='button-row'><input type='submit' value='Save Email Settings'><button class='button-secondary' type='button' onclick=\"fetch('/test_email').then(r => r.text()).then(msg => alert(msg));\">Send Test Email</button></div>";
   html += "</form>";
-  html += "<p><button onclick=\"fetch('/test_email').then(r => r.text()).then(msg => alert(msg));\">Send Test Email</button></p>";
-  html += "<p>Updates every second.</p>";
-  html += "</body></html>";
+  html += "</section>";
+  html += "</div>";
+  html += "</div>";
+  html += "</div></body></html>";
   return html;
 }
 
@@ -248,6 +438,7 @@ void setup() {
   digitalWrite(VLED_PIN, LOW); // LED off initially for active-high wiring
   Serial.begin(115200);
   loadSettings();
+  loadVoltageHistory();
   // Create WiFiManager object
   WiFiManager wifiManager;
   // Set custom AP SSID and password (password must be at least 8 chars)
@@ -269,6 +460,16 @@ void setup() {
   });
   server.on("/threshold", []() {
     server.send(200, "text/plain", String(alertThreshold, 2));
+  });
+  server.on("/history", []() {
+    server.send(200, "application/json", getVoltageHistoryJson());
+  });
+  server.on("/reset_wifi", HTTP_POST, []() {
+    server.send(200, "text/plain", "Wi-Fi credentials cleared. Rebooting into setup mode...");
+    delay(500);
+    WiFi.disconnect(true, true);
+    delay(500);
+    ESP.restart();
   });
   server.on("/set_threshold", []() {
     if (server.hasArg("value")) {
@@ -330,6 +531,7 @@ void loop() {
   float vIn = vOut * (100.0 + 30.0) / 30.0; // = vOut * 4.333
   lastVoltage = vIn;
   updateLedState();
+  recordVoltageHistory(lastVoltage);
 
   bool isLowVoltage = lastVoltage < alertThreshold;
   if (isLowVoltage) {
