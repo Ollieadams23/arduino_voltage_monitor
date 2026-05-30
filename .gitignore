@@ -6,3 +6,4 @@ images/
 *.elf
 .DS_Store
 .vscode/
+.
