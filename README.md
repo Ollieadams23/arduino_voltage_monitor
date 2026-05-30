@@ -43,7 +43,7 @@ If you need to move the device to a different network, use the `Reset Wi-Fi Cred
 
 ## Web Page Functions
 
-![Voltage monitor web page](images/Screenshot%202026-05-30%20183506.png)
+![Voltage monitor web page](images/voltage-monitor-dashboard.png)
 
 The self-hosted page lets you:
 - view a graph of the last 48 hours of voltage history
