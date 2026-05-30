@@ -48,7 +48,7 @@ If you need to move the device to a different network, use the `Reset Wi-Fi Cred
 The self-hosted page lets you:
 - view a graph of the last 48 hours of voltage history
 - view the current Wi-Fi SSID and device IP
-- clear saved Wi-Fi credentials and reboot into setup mode
+- clear saved Wi-Fi credentials and reboot into setup mode  
 - view the current measured input voltage
 - change the low-voltage threshold
 - enable or disable email alerts
