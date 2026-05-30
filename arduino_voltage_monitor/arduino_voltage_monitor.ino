@@ -12,6 +12,15 @@
 #define VOLTAGE_PIN 34 // Change to your actual analog pin if different
 #define VLED_PIN 2     // GPIO pin for V LED (change if needed)
 
+const float ALERT_RESET_HYSTERESIS = 0.20;
+const unsigned long EMAIL_RETRY_INTERVAL_MS = 60000;
+const unsigned long TIME_SYNC_TIMEOUT_MS = 15000;
+const int HISTORY_BASE_INTERVAL_MINUTES = 5;
+const int HISTORY_TOTAL_HOURS = 48;
+const int VOLTAGE_HISTORY_POINTS = (HISTORY_TOTAL_HOURS * 60) / HISTORY_BASE_INTERVAL_MINUTES;
+const int HISTORY_INTERVAL_MIN_MINUTES = 5;
+const int HISTORY_INTERVAL_MAX_MINUTES = 180;
+
 WebServer server(80);
 Preferences preferences;
 SMTPSession smtp;
@@ -31,15 +40,11 @@ String emailSender;
 String emailAppPassword;
 String alertRecipient;
 float repeatAlertHours = 0.0;
-VoltageHistoryPoint voltageHistory[48];
+VoltageHistoryPoint voltageHistory[VOLTAGE_HISTORY_POINTS];
 int voltageHistoryCount = 0;
 int voltageHistoryWriteIndex = 0;
-unsigned long lastHistoryHourBucket = 0;
-
-const float ALERT_RESET_HYSTERESIS = 0.20;
-const unsigned long EMAIL_RETRY_INTERVAL_MS = 60000;
-const unsigned long TIME_SYNC_TIMEOUT_MS = 15000;
-const int VOLTAGE_HISTORY_HOURS = 48;
+unsigned long lastHistoryBucket = 0;
+int historyIntervalMinutes = 60;
 
 const char* SMTP_HOST = "smtp.gmail.com";
 const int SMTP_PORT = 465;
@@ -55,13 +60,30 @@ bool isEmailConfigured() {
 }
 
 void clearVoltageHistory() {
-  for (int index = 0; index < VOLTAGE_HISTORY_HOURS; index++) {
+  for (int index = 0; index < VOLTAGE_HISTORY_POINTS; index++) {
     voltageHistory[index].voltage = 0.0f;
     voltageHistory[index].epoch = 0;
   }
   voltageHistoryCount = 0;
   voltageHistoryWriteIndex = 0;
-  lastHistoryHourBucket = 0;
+  lastHistoryBucket = 0;
+}
+
+int sanitizeHistoryIntervalMinutes(int minutes) {
+  if (minutes < HISTORY_INTERVAL_MIN_MINUTES) {
+    return HISTORY_INTERVAL_MIN_MINUTES;
+  }
+  if (minutes > HISTORY_INTERVAL_MAX_MINUTES) {
+    return HISTORY_INTERVAL_MAX_MINUTES;
+  }
+  if (minutes % HISTORY_BASE_INTERVAL_MINUTES != 0) {
+    minutes = ((minutes + HISTORY_BASE_INTERVAL_MINUTES - 1) / HISTORY_BASE_INTERVAL_MINUTES) * HISTORY_BASE_INTERVAL_MINUTES;
+  }
+  return minutes;
+}
+
+unsigned long getHistoryIntervalSeconds() {
+  return (unsigned long)HISTORY_BASE_INTERVAL_MINUTES * 60UL;
 }
 
 void loadVoltageHistory() {
@@ -73,17 +95,17 @@ void loadVoltageHistory() {
     preferences.getBytes("points", voltageHistory, sizeof(voltageHistory));
     voltageHistoryCount = preferences.getInt("count", 0);
     voltageHistoryWriteIndex = preferences.getInt("write_idx", 0);
-    lastHistoryHourBucket = preferences.getULong("last_hour", 0);
+    lastHistoryBucket = preferences.getULong("last_bucket", 0);
   }
   preferences.end();
 
-  if (voltageHistoryCount < 0 || voltageHistoryCount > VOLTAGE_HISTORY_HOURS) {
+  if (voltageHistoryCount < 0 || voltageHistoryCount > VOLTAGE_HISTORY_POINTS) {
     clearVoltageHistory();
     return;
   }
 
-  if (voltageHistoryWriteIndex < 0 || voltageHistoryWriteIndex >= VOLTAGE_HISTORY_HOURS) {
-    voltageHistoryWriteIndex = voltageHistoryCount % VOLTAGE_HISTORY_HOURS;
+  if (voltageHistoryWriteIndex < 0 || voltageHistoryWriteIndex >= VOLTAGE_HISTORY_POINTS) {
+    voltageHistoryWriteIndex = voltageHistoryCount % VOLTAGE_HISTORY_POINTS;
   }
 }
 
@@ -92,15 +114,15 @@ void saveVoltageHistory() {
   preferences.putBytes("points", voltageHistory, sizeof(voltageHistory));
   preferences.putInt("count", voltageHistoryCount);
   preferences.putInt("write_idx", voltageHistoryWriteIndex);
-  preferences.putULong("last_hour", lastHistoryHourBucket);
+  preferences.putULong("last_bucket", lastHistoryBucket);
   preferences.end();
 }
 
 void appendVoltageHistory(float voltage, unsigned long epoch) {
   voltageHistory[voltageHistoryWriteIndex].voltage = voltage;
   voltageHistory[voltageHistoryWriteIndex].epoch = epoch;
-  voltageHistoryWriteIndex = (voltageHistoryWriteIndex + 1) % VOLTAGE_HISTORY_HOURS;
-  if (voltageHistoryCount < VOLTAGE_HISTORY_HOURS) {
+  voltageHistoryWriteIndex = (voltageHistoryWriteIndex + 1) % VOLTAGE_HISTORY_POINTS;
+  if (voltageHistoryCount < VOLTAGE_HISTORY_POINTS) {
     voltageHistoryCount++;
   }
 }
@@ -111,7 +133,7 @@ void updateLatestVoltageHistory(float voltage, unsigned long epoch) {
     return;
   }
 
-  int latestIndex = (voltageHistoryWriteIndex + VOLTAGE_HISTORY_HOURS - 1) % VOLTAGE_HISTORY_HOURS;
+  int latestIndex = (voltageHistoryWriteIndex + VOLTAGE_HISTORY_POINTS - 1) % VOLTAGE_HISTORY_POINTS;
   voltageHistory[latestIndex].voltage = voltage;
   voltageHistory[latestIndex].epoch = epoch;
 }
@@ -122,10 +144,10 @@ void recordVoltageHistory(float voltage) {
     return;
   }
 
-  unsigned long currentHourBucket = (unsigned long)(now / 3600);
-  if (currentHourBucket != lastHistoryHourBucket) {
+  unsigned long currentBucket = (unsigned long)(now / getHistoryIntervalSeconds());
+  if (currentBucket != lastHistoryBucket) {
     appendVoltageHistory(voltage, (unsigned long)now);
-    lastHistoryHourBucket = currentHourBucket;
+    lastHistoryBucket = currentBucket;
     saveVoltageHistory();
   } else {
     updateLatestVoltageHistory(voltage, (unsigned long)now);
@@ -135,18 +157,38 @@ void recordVoltageHistory(float voltage) {
 String getVoltageHistoryJson() {
   String json = "{\"points\":[";
 
-  if (voltageHistoryCount > 0) {
-    int startIndex = voltageHistoryCount == VOLTAGE_HISTORY_HOURS ? voltageHistoryWriteIndex : 0;
-    for (int offset = 0; offset < voltageHistoryCount; offset++) {
-      int historyIndex = (startIndex + offset) % VOLTAGE_HISTORY_HOURS;
-      if (offset > 0) {
+  int bucketSize = historyIntervalMinutes / HISTORY_BASE_INTERVAL_MINUTES;
+  if (bucketSize < 1) {
+    bucketSize = 1;
+  }
+
+  int displayCount = voltageHistoryCount / bucketSize;
+
+  if (displayCount > 0) {
+    int sourceStartIndex = voltageHistoryCount == VOLTAGE_HISTORY_POINTS ? voltageHistoryWriteIndex : 0;
+    int sourceOffset = voltageHistoryCount - (displayCount * bucketSize);
+
+    for (int displayIndex = 0; displayIndex < displayCount; displayIndex++) {
+      float voltageTotal = 0.0f;
+      unsigned long latestEpoch = 0;
+
+      for (int bucketOffset = 0; bucketOffset < bucketSize; bucketOffset++) {
+        int historyOffset = sourceOffset + (displayIndex * bucketSize) + bucketOffset;
+        int historyIndex = (sourceStartIndex + historyOffset) % VOLTAGE_HISTORY_POINTS;
+        voltageTotal += voltageHistory[historyIndex].voltage;
+        latestEpoch = voltageHistory[historyIndex].epoch;
+      }
+
+      if (displayIndex > 0) {
         json += ",";
       }
-      json += "{\"epoch\":" + String(voltageHistory[historyIndex].epoch) + ",\"voltage\":" + String(voltageHistory[historyIndex].voltage, 3) + "}";
+
+      float averagedVoltage = voltageTotal / bucketSize;
+      json += "{\"epoch\":" + String(latestEpoch) + ",\"voltage\":" + String(averagedVoltage, 3) + "}";
     }
   }
 
-  json += "],\"maxPoints\":" + String(VOLTAGE_HISTORY_HOURS) + "}";
+  json += "],\"maxPoints\":" + String(VOLTAGE_HISTORY_POINTS / bucketSize) + ",\"intervalMinutes\":" + String(historyIntervalMinutes) + ",\"baseIntervalMinutes\":" + String(HISTORY_BASE_INTERVAL_MINUTES) + ",\"totalHours\":" + String(HISTORY_TOTAL_HOURS) + "}";
   return json;
 }
 
@@ -176,6 +218,15 @@ void loadSettings() {
   emailAppPassword = preferences.getString("mail_pass", "");
   alertRecipient = preferences.getString("mail_to", "");
   repeatAlertHours = preferences.getFloat("mail_rpt_h", 0.0f);
+  historyIntervalMinutes = sanitizeHistoryIntervalMinutes(preferences.getInt("hist_int_m", historyIntervalMinutes));
+  preferences.end();
+}
+
+void saveHistoryIntervalSetting(int minutes) {
+  historyIntervalMinutes = sanitizeHistoryIntervalMinutes(minutes);
+
+  preferences.begin("settings", false);
+  preferences.putInt("hist_int_m", historyIntervalMinutes);
   preferences.end();
 }
 
@@ -343,6 +394,7 @@ String getVoltageHtml() {
   html += ".field label{font-size:0.92rem;font-weight:700;color:#2e3c31;}";
   html += ".field small{color:var(--muted);font-size:0.84rem;}";
   html += "input[type='email'],input[type='number'],input[type='password']{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:#fffdfa;color:var(--text);font:inherit;}";
+  html += "input[type='range']{width:100%;accent-color:var(--accent);}";
   html += "input[type='submit'],button{appearance:none;border:none;border-radius:999px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer;background:var(--accent);color:#f7f2e7;box-shadow:0 8px 18px rgba(30,107,82,0.22);}";
   html += "input[type='submit']:hover,button:hover{background:var(--accent-strong);}";
   html += ".button-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}";
@@ -358,8 +410,9 @@ String getVoltageHtml() {
   html += "<script>";
   html += "function syncThresholdInput(t) { const input = document.getElementById('thresholdInput'); if (document.activeElement !== input) { input.value = t; } }";
   html += "function setTextIfPresent(id, value) { const element = document.getElementById(id); if (element) { element.innerText = value; } }";
+  html += "function updateHistorySliderLabel(value) { const interval = parseInt(value, 10); const pointCount = Math.max(1, Math.floor((48 * 60) / interval)); setTextIfPresent('historyIntervalValue', interval + ' min'); setTextIfPresent('historySpanValue', pointCount + ' plotted points across 48 h'); }";
   html += "function formatHistoryLabel(epoch) { const d = new Date(epoch * 1000); return d.getHours().toString().padStart(2, '0') + ':00'; }";
-  html += "function drawHistory(payload) { const canvas = document.getElementById('historyChart'); const meta = document.getElementById('historyMeta'); if (!canvas) return; const ctx = canvas.getContext('2d'); const ratio = window.devicePixelRatio || 1; const cssWidth = canvas.clientWidth || 960; const cssHeight = canvas.clientHeight || 240; canvas.width = cssWidth * ratio; canvas.height = cssHeight * ratio; ctx.setTransform(ratio, 0, 0, ratio, 0, 0); ctx.clearRect(0, 0, cssWidth, cssHeight); const points = payload.points || []; if (!points.length) { ctx.fillStyle = '#666'; ctx.font = '14px Arial'; ctx.fillText('No hourly history yet. The chart fills as the device records each hour.', 16, 32); meta.textContent = 'History empty until the first hourly sample is captured.'; return; } let minV = points[0].voltage; let maxV = points[0].voltage; for (const point of points) { if (point.voltage < minV) minV = point.voltage; if (point.voltage > maxV) maxV = point.voltage; } if (Math.abs(maxV - minV) < 0.2) { maxV += 0.1; minV -= 0.1; } const pad = { left: 46, right: 14, top: 18, bottom: 32 }; const chartWidth = cssWidth - pad.left - pad.right; const chartHeight = cssHeight - pad.top - pad.bottom; ctx.strokeStyle = '#d7d7d7'; ctx.lineWidth = 1; ctx.beginPath(); for (let i = 0; i <= 4; i++) { const y = pad.top + (chartHeight * i / 4); ctx.moveTo(pad.left, y); ctx.lineTo(cssWidth - pad.right, y); } ctx.stroke(); ctx.fillStyle = '#444'; ctx.font = '12px Arial'; for (let i = 0; i <= 4; i++) { const value = maxV - ((maxV - minV) * i / 4); const y = pad.top + (chartHeight * i / 4); ctx.fillText(value.toFixed(2) + 'V', 4, y + 4); } ctx.strokeStyle = '#1f6feb'; ctx.lineWidth = 2; ctx.beginPath(); points.forEach((point, index) => { const x = pad.left + (points.length === 1 ? chartWidth / 2 : (chartWidth * index / (points.length - 1))); const normalized = (point.voltage - minV) / (maxV - minV); const y = pad.top + chartHeight - (normalized * chartHeight); if (index === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }); ctx.stroke(); ctx.fillStyle = '#1f6feb'; points.forEach((point, index) => { const x = pad.left + (points.length === 1 ? chartWidth / 2 : (chartWidth * index / (points.length - 1))); const normalized = (point.voltage - minV) / (maxV - minV); const y = pad.top + chartHeight - (normalized * chartHeight); ctx.beginPath(); ctx.arc(x, y, 2.5, 0, Math.PI * 2); ctx.fill(); if (index === 0 || index === points.length - 1 || index % 12 === 0) { ctx.fillStyle = '#444'; ctx.fillText(formatHistoryLabel(point.epoch), x - 14, cssHeight - 10); ctx.fillStyle = '#1f6feb'; } }); const start = new Date(points[0].epoch * 1000); const end = new Date(points[points.length - 1].epoch * 1000); meta.textContent = 'Showing ' + points.length + ' hourly point(s) from ' + start.toLocaleString() + ' to ' + end.toLocaleString() + '.'; }";
+  html += "function drawHistory(payload) { const canvas = document.getElementById('historyChart'); const meta = document.getElementById('historyMeta'); if (!canvas) return; const ctx = canvas.getContext('2d'); const ratio = window.devicePixelRatio || 1; const cssWidth = canvas.clientWidth || 960; const cssHeight = canvas.clientHeight || 240; canvas.width = cssWidth * ratio; canvas.height = cssHeight * ratio; ctx.setTransform(ratio, 0, 0, ratio, 0, 0); ctx.clearRect(0, 0, cssWidth, cssHeight); const points = payload.points || []; const intervalMinutes = payload.intervalMinutes || 60; const totalHours = payload.totalHours || 48; updateHistorySliderLabel(intervalMinutes); if (!points.length) { ctx.fillStyle = '#666'; ctx.font = '14px Arial'; ctx.fillText('No history yet. The chart fills as the device records each interval.', 16, 32); meta.textContent = 'History empty until the first interval sample is captured.'; return; } let minV = points[0].voltage; let maxV = points[0].voltage; for (const point of points) { if (point.voltage < minV) minV = point.voltage; if (point.voltage > maxV) maxV = point.voltage; } if (Math.abs(maxV - minV) < 0.2) { maxV += 0.1; minV -= 0.1; } const pad = { left: 46, right: 14, top: 18, bottom: 32 }; const chartWidth = cssWidth - pad.left - pad.right; const chartHeight = cssHeight - pad.top - pad.bottom; ctx.strokeStyle = '#d7d7d7'; ctx.lineWidth = 1; ctx.beginPath(); for (let i = 0; i <= 4; i++) { const y = pad.top + (chartHeight * i / 4); ctx.moveTo(pad.left, y); ctx.lineTo(cssWidth - pad.right, y); } ctx.stroke(); ctx.fillStyle = '#444'; ctx.font = '12px Arial'; for (let i = 0; i <= 4; i++) { const value = maxV - ((maxV - minV) * i / 4); const y = pad.top + (chartHeight * i / 4); ctx.fillText(value.toFixed(2) + 'V', 4, y + 4); } ctx.strokeStyle = '#1f6feb'; ctx.lineWidth = 2; ctx.beginPath(); points.forEach((point, index) => { const x = pad.left + (points.length === 1 ? chartWidth / 2 : (chartWidth * index / (points.length - 1))); const normalized = (point.voltage - minV) / (maxV - minV); const y = pad.top + chartHeight - (normalized * chartHeight); if (index === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }); ctx.stroke(); ctx.fillStyle = '#1f6feb'; points.forEach((point, index) => { const x = pad.left + (points.length === 1 ? chartWidth / 2 : (chartWidth * index / (points.length - 1))); const normalized = (point.voltage - minV) / (maxV - minV); const y = pad.top + chartHeight - (normalized * chartHeight); ctx.beginPath(); ctx.arc(x, y, 2.5, 0, Math.PI * 2); ctx.fill(); if (index === 0 || index === points.length - 1 || index % 12 === 0) { ctx.fillStyle = '#444'; ctx.fillText(formatHistoryLabel(point.epoch), x - 14, cssHeight - 10); ctx.fillStyle = '#1f6feb'; } }); const start = new Date(points[0].epoch * 1000); const end = new Date(points[points.length - 1].epoch * 1000); meta.textContent = 'Showing up to the last ' + totalHours + ' hour(s), grouped into ' + intervalMinutes + '-minute averages from ' + start.toLocaleString() + ' to ' + end.toLocaleString() + '.'; }";
   html += "function updateHistory() { fetch('/history').then(r => r.json()).then(drawHistory); }";
   html += "function updateVoltage() {";
   html += "fetch('/voltage').then(r => r.text()).then(v => { setTextIfPresent('voltage', v + ' V'); setTextIfPresent('voltageMirror', v + ' V'); });";
@@ -380,7 +433,9 @@ String getVoltageHtml() {
   html += "<div class='layout'>";
   html += "<div class='stack'>";
   html += "<section class='panel panel-accent'>";
-  html += "<h2>Last 48 Hours</h2>";
+  html += "<h2>History Graph</h2>";
+  html += "<div class='field'><label for='historyIntervalSlider'>Plot interval</label><input type='range' id='historyIntervalSlider' min='" + String(HISTORY_INTERVAL_MIN_MINUTES) + "' max='" + String(HISTORY_INTERVAL_MAX_MINUTES) + "' step='" + String(HISTORY_BASE_INTERVAL_MINUTES) + "' value='" + String(historyIntervalMinutes) + "' oninput='updateHistorySliderLabel(this.value)'><small><span id='historyIntervalValue'>" + String(historyIntervalMinutes) + " min</span> per point, <span id='historySpanValue'>" + String((HISTORY_TOTAL_HOURS * 60) / historyIntervalMinutes) + " plotted points across 48 h</span>.</small></div>";
+  html += "<form method='POST' action='/history_settings'><input type='hidden' id='historyIntervalInput' name='interval_minutes' value='" + String(historyIntervalMinutes) + "'><div class='button-row'><button class='button-secondary' type='submit' onclick=\"document.getElementById('historyIntervalInput').value=document.getElementById('historyIntervalSlider').value;\">Save Plot Interval</button></div></form>";
   html += "<canvas id='historyChart'></canvas>";
   html += "<p id='historyMeta' class='meta'>Loading history...</p>";
   html += "</section>";
@@ -463,6 +518,12 @@ void setup() {
   });
   server.on("/history", []() {
     server.send(200, "application/json", getVoltageHistoryJson());
+  });
+  server.on("/history_settings", HTTP_POST, []() {
+    int requestedMinutes = sanitizeHistoryIntervalMinutes(server.arg("interval_minutes").toInt());
+    saveHistoryIntervalSetting(requestedMinutes);
+    server.sendHeader("Location", "/");
+    server.send(303, "text/plain", "History interval saved.");
   });
   server.on("/reset_wifi", HTTP_POST, []() {
     server.send(200, "text/plain", "Wi-Fi credentials cleared. Rebooting into setup mode...");

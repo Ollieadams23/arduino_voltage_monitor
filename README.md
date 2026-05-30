@@ -47,6 +47,7 @@ If you need to move the device to a different network, use the `Reset Wi-Fi Cred
 
 The self-hosted page lets you:
 - view a graph of the last 48 hours of voltage history
+- change the graph plot interval with a slider and save it
 - view the current Wi-Fi SSID and device IP
 - clear saved Wi-Fi credentials and reboot into setup mode  
 - view the current measured input voltage
@@ -59,6 +60,8 @@ The self-hosted page lets you:
 - send a manual test email
 
 If the app password field is left blank while saving, the device keeps the previously stored password.
+
+Changing the graph plot interval does not clear the saved graph history. It re-groups the stored 48-hour history into larger or smaller plotted intervals.
 
 ## Gmail Setup
 
