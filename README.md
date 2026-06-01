@@ -63,6 +63,8 @@ If the app password field is left blank while saving, the device keeps the previ
 
 Changing the graph plot interval does not clear the saved graph history. It re-groups the stored 48-hour history into larger or smaller plotted intervals.
 
+Each plotted graph point is the average of all stored readings that fall inside the selected plot interval.
+
 ## Gmail Setup
 
 To use Gmail SMTP directly from the ESP32:

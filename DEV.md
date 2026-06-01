@@ -15,6 +15,7 @@ Stored on-device:
 - email app password as `mail_pass`
 - email recipient as `mail_to`
 - repeat reminder interval in hours as `mail_rpt_h`
+- graph plot interval in minutes as `hist_int_m`
 - 48-hour voltage history in the `history` namespace
 
 Implications:
@@ -30,6 +31,7 @@ Current `WebServer` routes:
 - `GET /threshold` returns the current threshold as plain text
 - `GET /history` returns hourly history as JSON
 - `GET /set_threshold?value=...` updates the threshold
+- `POST /history_settings` updates the graph plot interval
 - `POST /email_settings` updates email configuration and repeat interval
 - `GET /test_email` sends a manual test email
 - `POST /reset_wifi` clears saved Wi-Fi credentials and reboots
@@ -55,19 +57,23 @@ After Wi-Fi reset:
 
 ## History Behavior
 
-The sketch samples voltage every second, but the graph stores one history point per hour.
+The sketch samples voltage every second, but stored graph history is recorded at a fixed 5-minute base interval across a rolling 48-hour window.
 
 Details:
-- up to 48 hourly points are stored in a circular buffer
-- the current hour's point is updated in RAM as readings change
-- the history is committed to `Preferences` when a new hour bucket starts
+- up to 576 base points are stored in a circular buffer
+- each stored base point represents one 5-minute bucket
+- the current 5-minute bucket is updated in RAM as readings change
+- the history is committed to `Preferences` when a new 5-minute bucket starts
 - valid network time is required for timestamped history points
+- the UI can group those stored 5-minute points into larger plot intervals such as 15, 30, 60, or 180 minutes
+- each displayed plot point is the arithmetic average of all stored base points inside the selected display interval
 
 Implications:
-- the graph does not backfill missing past hours
+- the graph does not backfill missing past time buckets
 - immediately after flashing, the graph fills gradually over time
 - if time is not yet synced, hourly history is not recorded
-- the current hour sample is not persisted to flash until hour rollover, so a reboot inside the same hour can lose the in-progress point
+- the current in-progress 5-minute sample is not persisted to flash until bucket rollover, so a reboot inside the same bucket can lose the in-progress point
+- changing the plot interval does not clear history; it only changes how stored base points are grouped for display
 
 ## Measurement Model
 
