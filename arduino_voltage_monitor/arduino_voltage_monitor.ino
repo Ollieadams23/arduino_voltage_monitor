@@ -283,9 +283,10 @@ String buildEmailHistorySnapshotHtml() {
     return String("<p style='margin:16px 0 0;color:#5c685d;'>Recent trend not available yet.</p>");
   }
 
-  int shownCount = displayCount < EMAIL_SNAPSHOT_POINTS ? displayCount : EMAIL_SNAPSHOT_POINTS;
   float snapshotVoltages[EMAIL_SNAPSHOT_POINTS];
   unsigned long snapshotEpochs[EMAIL_SNAPSHOT_POINTS];
+  int shownCount = displayCount < EMAIL_SNAPSHOT_POINTS ? displayCount : EMAIL_SNAPSHOT_POINTS;
+
   float minVoltage = 0.0f;
   float maxVoltage = 0.0f;
 
@@ -311,7 +312,6 @@ String buildEmailHistorySnapshotHtml() {
   String html = "<div style='margin-top:18px;padding:16px;border:1px solid #d5c9ab;border-radius:16px;background:#fffaf0;'>";
   html += "<div style='font:700 14px Arial,sans-serif;color:#1c241d;margin-bottom:10px;'>Recent Trend Snapshot</div>";
   html += "<div style='font:12px Arial,sans-serif;color:#5c685d;margin-bottom:12px;'>Static preview only. Open the dashboard for the full scrollable graph.</div>";
-
   for (int index = 0; index < shownCount; index++) {
     float normalized = (snapshotVoltages[index] - minVoltage) / (maxVoltage - minVoltage);
     if (normalized < 0.0f) {
@@ -320,7 +320,6 @@ String buildEmailHistorySnapshotHtml() {
     if (normalized > 1.0f) {
       normalized = 1.0f;
     }
-
     int widthPercent = (int)roundf(normalized * 100.0f);
     if (widthPercent < 4) {
       widthPercent = 4;

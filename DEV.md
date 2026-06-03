@@ -6,7 +6,7 @@ This project stores runtime configuration on the ESP32 using `Preferences`, not 
 
 Namespaces:
 - `settings` for threshold and email configuration
-- `history` for the 48-point hourly graph buffer
+- `history` for the rolling timestamped voltage history buffer
 
 Stored on-device:
 - alert threshold in the `settings` namespace as `vthresh`
@@ -16,7 +16,10 @@ Stored on-device:
 - email recipient as `mail_to`
 - repeat reminder interval in hours as `mail_rpt_h`
 - graph plot interval in minutes as `hist_int_m`
-- 48-hour voltage history in the `history` namespace
+- 48-hour voltage history payload in `history.points`
+- stored history point count in `history.count`
+- circular-buffer write index in `history.write_idx`
+- latest persisted bucket marker in `history.last_bucket`
 
 Implications:
 - uploading the same sketch to a different board will not copy settings from another board
@@ -29,7 +32,7 @@ Current `WebServer` routes:
 - `GET /` renders the dashboard HTML
 - `GET /voltage` returns the current measured voltage as plain text
 - `GET /threshold` returns the current threshold as plain text
-- `GET /history` returns hourly history as JSON
+- `GET /history` returns grouped history as JSON with plotted points, plot interval, base interval, total span, and threshold
 - `GET /set_threshold?value=...` updates the threshold
 - `POST /history_settings` updates the graph plot interval
 - `POST /email_settings` updates email configuration and repeat interval
@@ -39,6 +42,8 @@ Current `WebServer` routes:
 Notes:
 - threshold update is currently done with a GET route, not POST
 - the page depends on client-side polling for `voltage`, `threshold`, and `history`
+- `history_settings` only changes how stored base points are grouped for display; it does not rewrite the saved history buffer
+- `test_email` returns a short plain-text success or failure message to the browser, but the outbound email itself is multipart text plus HTML
 
 ## Reset Scope
 
@@ -67,13 +72,16 @@ Details:
 - valid network time is required for timestamped history points
 - the UI can group those stored 5-minute points into larger plot intervals such as 15, 30, 60, or 180 minutes
 - each displayed plot point is the arithmetic average of all stored base points inside the selected display interval
+- the `/history` route returns grouped points plus `threshold`, `intervalMinutes`, `baseIntervalMinutes`, and `totalHours`
+- email snapshots use the same stored history and the current grouped display interval to build the email summary rows
 
 Implications:
 - the graph does not backfill missing past time buckets
 - immediately after flashing, the graph fills gradually over time
-- if time is not yet synced, hourly history is not recorded
+- if time is not yet synced, timestamped history is not recorded
 - the current in-progress 5-minute sample is not persisted to flash until bucket rollover, so a reboot inside the same bucket can lose the in-progress point
 - changing the plot interval does not clear history; it only changes how stored base points are grouped for display
+- the email snapshot can show fewer than 12 rows if the board has not yet accumulated enough valid timestamped history
 
 ## Measurement Model
 
@@ -103,6 +111,8 @@ Implementation details:
 - `lowVoltageAlertSent` is the edge-trigger latch
 - `lastEmailAttemptMs` is reused for both first-send retry gating and repeat reminder timing
 - alert rearm happens only after voltage rises above `threshold + hysteresis`
+- alert and test emails now send multipart content: plain-text fallback plus HTML when the library and client support it
+- the HTML email includes a styled list of timestamp and voltage rows plus a dashboard link, but the email version is not interactive or scrollable
 
 ## Time Requirement
 
@@ -140,10 +150,33 @@ That is why:
 
 The dashboard HTML, CSS, and JavaScript are built as one large `String` in firmware.
 
+Graph-specific behavior:
+- the dashboard chart is drawn client-side on two canvases: a fixed left axis canvas and a horizontally scrollable plot canvas
+- the visible chart window stays fixed-width while the plotted content can grow wider than the viewport
+- a bottom range input controls the horizontal scroll position
+- redraw logic always snaps the graph to the far right so the newest data is visible by default
+- the threshold is drawn as a dashed overlay line when a positive threshold is configured
+
 Implications:
 - page changes increase sketch size quickly
 - large UI additions can push the build over the default ESP32 partition size
 - if build size becomes an issue, the first place to simplify is inline HTML/CSS/JS or SMTP support
+
+## Email Rendering Notes
+
+Email sending currently uses Gmail SMTP over SSL on port `465` via `ESP_Mail_Client`.
+
+Message construction:
+- `sendVoltageEmail(...)` always sends a plain-text body
+- if an HTML body is provided, the same send path adds `message.html.content` so capable mail clients get a richer email
+- low-voltage alerts and manual test emails both generate the same style of HTML wrapper and then embed a styled timestamp and voltage summary
+
+Snapshot behavior:
+- the plain-text fallback still includes an ASCII-style trend snapshot for clients that strip HTML
+- the HTML version renders up to 12 rows containing timestamp, voltage, and a simple proportional bar
+- the HTML snapshot uses the same grouped history logic that feeds the dashboard API
+- low readings are highlighted against the configured threshold
+- because email clients do not run the dashboard JavaScript, the email summary is intentionally static and non-scrollable
 
 ## Security Notes
 
@@ -166,6 +199,7 @@ For a harder setup, likely next steps would be:
 Known constraints from the current implementation:
 - Gmail support adds significant flash usage because of SMTP and TLS
 - default ESP32 partition schemes may be too small once email and UI features accumulate
-- history graph data appears only after time sync and hourly sampling begin
+- history graph data appears only after time sync and 5-minute timestamped sampling begin
 - Wi-Fi reset does not wipe app settings or history
 - no explicit factory-reset route exists yet for clearing all `Preferences` namespaces
+- multipart HTML email increases email-body size compared with the original plain-text alert path
