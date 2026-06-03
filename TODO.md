@@ -16,16 +16,36 @@ Build an automation path like this:
 - Commit and push from the PC, not from the ESP32
 - Start the receiver and sync process automatically after Windows restarts
 
-## Phase 1: Define Data Format
+## Phase 1: Define Data Format ✓ COMPLETED
 
-- Decide the exact JSON payload the ESP32 should send
-- Include at least:
-  - timestamp
-  - current voltage
-  - alert threshold
-  - device IP or device name
-- Decide whether to send only the latest reading or also recent history
-- Decide how often the ESP32 should upload data
+**Status:** JSON format defined in `data/latest.json` (sample)
+
+The ESP32 should send this JSON structure:
+```json
+{
+  "voltage": 12.456,
+  "threshold": 11.50,
+  "timestamp": 1717401234,
+  "ssid": "YourNetwork",
+  "ip": "192.168.1.100",
+  "emailEnabled": true,
+  "emailSender": "your.esp32@gmail.com",
+  "emailRecipient": "alerts@example.com",
+  "hasAppPassword": true,
+  "repeatAlertHours": 2.00,
+  "history": {
+    "points": [
+      {"voltage": 12.34, "epoch": 1717384234},
+      {"voltage": 12.38, "epoch": 1717384534}
+    ],
+    "intervalMinutes": 5,
+    "totalHours": 48,
+    "threshold": 11.50
+  }
+}
+```
+
+Upload frequency: Every 5 minutes (aligned with history bucket interval)
 
 ## Phase 2: PC Receiver
 
@@ -76,15 +96,23 @@ Build an automation path like this:
 - Handle timeout or network failure without blocking the main monitor loop
 - Keep local dashboard and email alerts working even if the PC is offline
 
-## Phase 7: Static Site Consumption
+## Phase 7: Static Site Consumption ✓ COMPLETED
 
-- Point the static page at the committed JSON file in the repo
-- Confirm GitHub Pages or other static host can read the file over HTTPS
-- Decide whether the static page shows:
-  - only latest voltage
-  - last update time
-  - threshold
-  - recent history graph
+**Status:** Static page created at `index.html`
+
+The static GitHub Pages dashboard:
+- Fetches data from `data/latest.json` (pushed by PC-to-Git automation)
+- Displays current voltage, threshold, and last update time
+- Renders the full 48-hour history chart with threshold overlay
+- Shows device information (WiFi SSID, IP, email alert status)
+- Auto-refreshes every 60 seconds
+- Uses the same styling and chart rendering as the ESP32-hosted dashboard
+- Works as a read-only remote view (no settings controls)
+
+To enable on GitHub Pages:
+1. Push `index.html` and `data/` folder to your repository
+2. Enable GitHub Pages in repository settings (deploy from `main` branch, root folder)
+3. Access at `https://yourusername.github.io/voltage-monitor/`
 
 ## Reliability Checks
 

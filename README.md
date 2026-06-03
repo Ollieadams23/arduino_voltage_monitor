@@ -98,4 +98,47 @@ Email alert behavior:
 5. Configure threshold and email settings.
 6. Press `Send Test Email`.
 7. Check inbox and spam folder.
+
+## Remote Dashboard (GitHub Pages)
+
+This repository includes a static GitHub Pages dashboard (`index.html`) that provides remote access to your voltage monitor data from anywhere with internet access.
+
+### How It Works
+
+The ESP32 → PC → Git → GitHub Pages flow:
+1. ESP32 sends voltage data to your local PC via HTTP POST
+2. PC receiver writes data to `data/latest.json`
+3. Git automation script commits and pushes changes
+4. GitHub Pages serves the static dashboard
+5. Dashboard fetches and displays the latest data
+
+### Setup
+
+See [HOWTO_PC_GIT_SYNC.md](HOWTO_PC_GIT_SYNC.md#L1) for complete setup instructions including:
+- PC receiver script installation
+- Git automation configuration
+- Windows startup automation
+- ESP32 firmware modifications
+
+See [TODO.md](TODO.md#L1) for the full implementation task breakdown.
+
+### Features
+
+The remote dashboard includes:
+- Real-time voltage display (auto-refreshes every 60 seconds)
+- Full 48-hour history chart with threshold overlay
+- Device status (WiFi network, IP address, email alert status)
+- Same visual design as the ESP32-hosted dashboard
+- Read-only view (no settings controls)
+
+### Enabling GitHub Pages
+
+1. Push `index.html` and `data/` folder to your repository
+2. Go to repository Settings → Pages
+3. Set Source to "Deploy from a branch"
+4. Select branch: `main` (or `master`), folder: `/ (root)`
+5. Save and wait a few minutes for deployment
+6. Access at `https://yourusername.github.io/voltage-monitor/`
+
+The sample `data/latest.json` file shows the expected JSON format. Once the PC-to-Git automation is running, this file will be automatically updated with real voltage data.
 8. If email fails, inspect Serial Monitor output.
