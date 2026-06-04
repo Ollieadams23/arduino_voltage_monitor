@@ -279,22 +279,41 @@ Response format:
 }
 ```
 
-### PC-to-Git Workflow (Future Phase)
+### PC-to-Git Workflow
 
-Current status: ESP32 → PC is complete; PC → Git is not yet implemented.
+Status: **Fully implemented** with `git_sync.py` and `pc_receiver.py`
 
-Planned workflow:
+Workflow:
 1. ESP32 uploads to PC receiver every N minutes
-2. PC receiver writes `data/latest.json`
-3. File watcher or cron script detects change
-4. Script runs `git add`, `git commit`, `git push`
-5. GitHub Pages static site reads `data/latest.json`
+2. PC receiver writes `data/latest.json` (overwrites each time)
+3. `git_sync.py` watches for file changes using `watchdog` library
+4. When `data/latest.json` changes, waits 10 seconds (debounce)
+5. Runs `git add`, `git commit`, `git push` with voltage in commit message
+6. GitHub Pages static site reads `data/latest.json`
+
+Implementation details:
+- File watcher: Python `watchdog` library with `Observer` and `FileSystemEventHandler`
+- Debounce: 10 seconds to prevent commit spam from rapid changes
+- Commit message: "Update voltage data: {voltage}V at {timestamp}"
+- Git credentials: Must be configured (Credential Manager, SSH, or PAT) for unattended push
+- Multiple files tracked: `data/latest.json`, `data/history.jsonl`
+- Error handling: Logs errors but continues watching
 
 File size management:
 - `data/latest.json` always contains exactly 48 hours of history
 - Each ESP32 upload replaces the entire file
-- File size stays constant regardless of upload frequency
+- File size stays constant regardless of upload frequency (~5-10KB)
 - Git history will show one commit per upload, but file size never grows
+
+Startup automation:
+- `start_all.bat` launches both `pc_receiver.py` and `git_sync.py`
+- Can be automated via Windows Task Scheduler (run on login)
+- Alternative: NSSM service wrapper for both scripts
+
+Dependencies:
+- `watchdog>=3.0.0` - File system monitoring
+- `zeroconf>=0.132.0` - Optional mDNS advertising (not used by ESP32)
+- Git installed and configured with credentials
 
 ### Error Handling
 
@@ -324,8 +343,11 @@ Known constraints from the current implementation:
 - no explicit factory-reset route exists yet for clearing all `Preferences` namespaces
 - multipart HTML email increases email-body size compared with the original plain-text alert path
 - PC upload requires the PC to be powered on and the receiver script to be running
-- ESP32 cannot discover PC IP automatically without additional configuration (mDNS or broadcast discovery not yet implemented)
-- if PC IP address changes, the ESP32 must be reconfigured via web UI
+- ESP32 cannot discover PC IP automatically (ESP32's ESPmDNS library does not support client-side discovery)
+- if PC IP address changes, the ESP32 must be reconfigured manually via web UI
 - PC receiver must be added to Windows Firewall to accept connections
 - PC upload adds HTTPClient dependency and a small amount of flash usage
-- PC-to-Git automation is not yet implemented (manual Git workflow or scripting required)
+- Git automation requires Git credentials configured for unattended push
+- Git automation creates one commit per upload (can accumulate many commits over time)
+- PC-to-Git sync requires `watchdog` Python library installed
+- PC mDNS advertising available but not used by ESP32 (reserved for future mobile app discovery)

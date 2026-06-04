@@ -4,15 +4,25 @@ ESP32 Voltage Monitor - PC Receiver Server
 
 Receives voltage data from ESP32 via HTTP POST and saves to local files.
 Designed to run continuously and survive restarts.
+Advertises itself via mDNS for automatic discovery by ESP32.
 """
 
 import json
 import os
 import sys
+import socket
 from datetime import datetime
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 import logging
+
+try:
+    from zeroconf import Zeroconf, ServiceInfo
+    MDNS_AVAILABLE = True
+except ImportError:
+    MDNS_AVAILABLE = False
+    print("WARNING: zeroconf library not installed. mDNS auto-discovery will not work.")
+    print("Install with: python -m pip install zeroconf")
 
 # Configuration
 PORT = 52501
@@ -21,6 +31,10 @@ LATEST_FILE = DATA_DIR / "latest.json"
 HISTORY_FILE = DATA_DIR / "history.jsonl"
 LOG_FILE = DATA_DIR / "receiver.log"
 MAX_HISTORY_ENTRIES = 1000  # Limit history.jsonl to last 1000 entries
+
+# mDNS service configuration
+MDNS_SERVICE_NAME = "ESP32 Voltage Monitor PC Receiver"
+MDNS_SERVICE_TYPE = "_voltage-monitor._tcp.local."
 
 # Setup logging
 DATA_DIR.mkdir(exist_ok=True)
@@ -179,27 +193,108 @@ class VoltageReceiver(BaseHTTPRequestHandler):
             self.send_error(404, "Not found")
 
 
+def get_local_ip():
+    """Get the local IP address of this machine."""
+    try:
+        # Create a socket to determine the local IP
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+        return ip
+    except Exception:
+        return "127.0.0.1"
+
+
 def main():
-    """Start the HTTP server."""
+    """Start the HTTP server with mDNS advertising."""
     server_address = ('', PORT)
     httpd = HTTPServer(server_address, VoltageReceiver)
     
-    logger.info("="*60)
-    logger.info("ESP32 Voltage Monitor - PC Receiver Starting")
-    logger.info("="*60)
-    logger.info(f"Server listening on http://0.0.0.0:{PORT}")
-    logger.info(f"Data directory: {DATA_DIR}")
-    logger.info(f"Latest file: {LATEST_FILE}")
-    logger.info(f"History file: {HISTORY_FILE}")
-    logger.info(f"Log file: {LOG_FILE}")
-    logger.info("Press Ctrl+C to stop")
-    logger.info("="*60)
+    # Setup mDNS if available
+    zeroconf = None
+    service_info = None
+    
+    if MDNS_AVAILABLE:
+        try:
+            local_ip = get_local_ip()
+            hostname = socket.gethostname()
+            
+            # Create service info
+            service_info = ServiceInfo(
+                MDNS_SERVICE_TYPE,
+                f"{MDNS_SERVICE_NAME}.{MDNS_SERVICE_TYPE}",
+                addresses=[socket.inet_aton(local_ip)],
+                port=PORT,
+                properties={
+                    'version': '1.0',
+                    'path': '/'
+                },
+                server=f"{hostname}.local."
+            )
+            
+            # Register the service
+            zeroconf = Zeroconf()
+            zeroconf.register_service(service_info)
+            
+            logger.info("="*60)
+            logger.info("ESP32 Voltage Monitor - PC Receiver Starting")
+            logger.info("="*60)
+            logger.info(f"Server listening on http://0.0.0.0:{PORT}")
+            logger.info(f"Local IP: {local_ip}")
+            logger.info(f"mDNS Service: {MDNS_SERVICE_NAME}")
+            logger.info(f"mDNS Type: {MDNS_SERVICE_TYPE}")
+            logger.info(f"✓ Auto-discovery enabled - ESP32 can find this PC automatically")
+            logger.info(f"Data directory: {DATA_DIR}")
+            logger.info(f"Latest file: {LATEST_FILE}")
+            logger.info(f"History file: {HISTORY_FILE}")
+            logger.info(f"Log file: {LOG_FILE}")
+            logger.info("Press Ctrl+C to stop")
+            logger.info("="*60)
+            
+        except Exception as e:
+            logger.warning(f"Failed to start mDNS: {e}")
+            logger.info("="*60)
+            logger.info("ESP32 Voltage Monitor - PC Receiver Starting")
+            logger.info("="*60)
+            logger.info(f"Server listening on http://0.0.0.0:{PORT}")
+            logger.info(f"WARNING: mDNS auto-discovery not available")
+            logger.info(f"ESP32 must be configured with manual IP address")
+            logger.info(f"Data directory: {DATA_DIR}")
+            logger.info(f"Latest file: {LATEST_FILE}")
+            logger.info(f"History file: {HISTORY_FILE}")
+            logger.info(f"Log file: {LOG_FILE}")
+            logger.info("Press Ctrl+C to stop")
+            logger.info("="*60)
+    else:
+        logger.info("="*60)
+        logger.info("ESP32 Voltage Monitor - PC Receiver Starting")
+        logger.info("="*60)
+        logger.info(f"Server listening on http://0.0.0.0:{PORT}")
+        logger.info(f"WARNING: zeroconf not installed - mDNS auto-discovery disabled")
+        logger.info(f"Install with: python -m pip install zeroconf")
+        logger.info(f"Data directory: {DATA_DIR}")
+        logger.info(f"Latest file: {LATEST_FILE}")
+        logger.info(f"History file: {HISTORY_FILE}")
+        logger.info(f"Log file: {LOG_FILE}")
+        logger.info("Press Ctrl+C to stop")
+        logger.info("="*60)
     
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
         logger.info("\nShutting down server...")
         httpd.shutdown()
+        
+        # Cleanup mDNS
+        if zeroconf and service_info:
+            try:
+                zeroconf.unregister_service(service_info)
+                zeroconf.close()
+                logger.info("mDNS service unregistered")
+            except Exception as e:
+                logger.warning(f"Error during mDNS cleanup: {e}")
+        
         logger.info("Server stopped")
 
 

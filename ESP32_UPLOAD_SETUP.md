@@ -6,19 +6,20 @@ The ESP32 firmware has been updated to upload voltage data to your PC receiver a
 
 ### New Features Added:
 1. **HTTP Client** - Sends data to PC receiver via HTTP POST
-2. **PC Upload Settings** - New web UI panel to configure upload
-3. **Persistent Configuration** - Settings saved to ESP32 flash memory
-4. **Automatic Uploads** - Sends data on configurable interval
-5. **Graceful Degradation** - Continues working if PC is offline
+2. **Live Status Display** - Shows connection status in real-time on web UI
+3. **PC Upload Settings** - New web UI panel to configure upload
+4. **Persistent Configuration** - Settings saved to ESP32 flash memory
+5. **Automatic Uploads** - Sends data on configurable interval
+6. **Graceful Degradation** - Continues working if PC is offline
 
 ### New Code Sections:
 - `#include <HTTPClient.h>` - HTTP client library
-- Global variables for PC upload settings
-- `buildUploadJson()` - Creates full JSON payload
-- `uploadDataToPC()` - Sends data to PC receiver
+- Global variables for PC upload settings and status tracking
+- `buildUploadJson()` - Creates full JSON payload with 48h history
+- `uploadDataToPC()` - Uploads to configured URL with error handling
 - `savePCUploadSettings()` - Saves configuration
-- Web endpoints: `/pc_upload_settings` and `/test_upload`
-- New HTML panel for PC upload configuration
+- Web endpoints: `/pc_upload_settings`, `/test_upload`, `/upload_status`
+- New HTML panel with live status display and JavaScript polling
 - Upload logic in `loop()` function
 
 ## How to Upload the Updated Code
@@ -52,8 +53,6 @@ Note your PC's IP address (e.g., `192.168.1.100`).
    - **Upload interval**: `5` minutes (or your preference)
 4. **Click "Save PC Upload Settings"**
 
-### Step 3: Test the Connection
-
 1. **Make sure the PC receiver is running**:
    ```powershell
    python pc_receiver.py
@@ -61,10 +60,32 @@ Note your PC's IP address (e.g., `192.168.1.100`).
 
 2. **Click "Test Upload Now"** button on the ESP32 dashboard
 
-3. **Check for success**:
+3. **Watch the Connection Status** panel (updates every 2 seconds):
+   - ⚪ Idle → � Connecting... → ⬆️ Uploading... → ✅ Upload Successful
+
+4. **Check for success**:
    - ESP32: Should show "Test upload successful!"
    - PC receiver: Should show log entry with voltage data
    - File: `data/latest.json` should be updated
+
+## Live Connection Status
+
+The ESP32 web UI now shows real-time connection status that updates every 2 seconds.
+
+### Status Icons:
+- ⚪ **Idle** - Waiting for next upload
+- 🔌 **Connecting...** - Establishing connection to PC
+- ⬆️ **Uploading...** - Sending data right now
+- ✅ **Upload Successful** - Data uploaded successfully
+- ❌ **Upload Failed** - Connection or upload failed
+
+### What You'll See:
+```
+Connection Status: ✅ Upload Successful
+Next upload in: 243s
+```
+
+The status updates automatically without refreshing the page!
 
 ## Monitoring Uploads
 
@@ -72,22 +93,27 @@ Note your PC's IP address (e.g., `192.168.1.100`).
 
 You'll see messages like:
 ```
-Uploading data to PC receiver...
-PC Upload successful! Response code: 200
+Uploading data to PC receiver: http://192.168.1.100:52501
+Upload successful! Response code: 200
 Response: {"status":"success","message":"Data received and saved"...}
 ```
 
 Or if the PC is offline:
 ```
-Uploading data to PC receiver...
-PC Upload failed! Error code: -1
+Uploading data to PC receiver: http://192.168.1.100:52501
+Upload failed! Error code: -1
 Error: connection refused
 ```
 
 ### On the PC (Receiver Console)
 
-You'll see messages like:
+You'll see:
 ```
+============================================================
+ESP32 Voltage Monitor - PC Receiver Starting
+============================================================
+Server listening on http://0.0.0.0:52501
+...
 192.168.1.50 - "POST / HTTP/1.1" 200 -
 Updated data/latest.json - Voltage: 12.450V
 ```
@@ -104,6 +130,14 @@ Solutions:
 3. Verify ESP32 has correct PC IP address
 4. Test from browser: `http://YOUR_PC_IP:52501`
 5. Make sure ESP32 and PC are on same network
+
+### PC IP changed and uploads stopped
+
+You need to update the URL on the ESP32:
+1. Find new PC IP: `ipconfig` (Windows) or check router
+2. Go to ESP32 web dashboard
+3. PC Upload section → Update PC Receiver URL
+4. Save settings
 
 ### Uploads work but data not in GitHub
 

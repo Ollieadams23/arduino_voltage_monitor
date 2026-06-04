@@ -1,0 +1,351 @@
+2026-06-04 15:11:43,470 - INFO - ============================================================
+2026-06-04 15:11:43,470 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-04 15:11:43,471 - INFO - ============================================================
+2026-06-04 15:11:43,471 - INFO - Server listening on http://0.0.0.0:8080
+2026-06-04 15:11:43,471 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\data
+2026-06-04 15:11:43,471 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json
+2026-06-04 15:11:43,472 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\data\history.jsonl
+2026-06-04 15:11:43,472 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\data\receiver.log
+2026-06-04 15:11:43,473 - INFO - Press Ctrl+C to stop
+2026-06-04 15:11:43,473 - INFO - ============================================================
+2026-06-04 15:12:10,075 - INFO - 
+Shutting down server...
+2026-06-04 15:12:10,075 - INFO - Server stopped
+2026-06-04 15:14:27,103 - INFO - ============================================================
+2026-06-04 15:14:27,103 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-04 15:14:27,104 - INFO - ============================================================
+2026-06-04 15:14:27,107 - INFO - Server listening on http://0.0.0.0:8080
+2026-06-04 15:14:27,107 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\data
+2026-06-04 15:14:27,109 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json
+2026-06-04 15:14:27,109 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\data\history.jsonl
+2026-06-04 15:14:27,109 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\data\receiver.log
+2026-06-04 15:14:27,110 - INFO - Press Ctrl+C to stop
+2026-06-04 15:14:27,110 - INFO - ============================================================
+2026-06-04 15:14:38,749 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.45V
+2026-06-04 15:14:38,750 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:14:41,799 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 11.3V
+2026-06-04 15:14:41,800 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:14:44,877 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.8V
+2026-06-04 15:14:44,878 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:14:46,949 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.0V
+2026-06-04 15:14:46,950 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:14:51,012 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.1V
+2026-06-04 15:14:51,013 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:14:55,077 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.2V
+2026-06-04 15:14:55,078 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:14:59,137 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.3V
+2026-06-04 15:14:59,138 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:15:03,205 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.4V
+2026-06-04 15:15:03,206 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:15:17,794 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.45V
+2026-06-04 15:15:17,795 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:15:20,870 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 11.3V
+2026-06-04 15:15:20,871 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:15:23,918 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.8V
+2026-06-04 15:15:23,920 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:15:25,980 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.0V
+2026-06-04 15:15:25,981 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:15:30,044 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.1V
+2026-06-04 15:15:30,045 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:15:34,091 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.2V
+2026-06-04 15:15:34,092 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:15:38,126 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.3V
+2026-06-04 15:15:38,130 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:15:42,201 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.4V
+2026-06-04 15:15:42,202 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:30:46,549 - INFO - 
+Shutting down server...
+2026-06-04 15:30:46,550 - INFO - Server stopped
+2026-06-04 15:30:49,465 - INFO - ============================================================
+2026-06-04 15:30:49,466 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-04 15:30:49,467 - INFO - ============================================================
+2026-06-04 15:30:49,469 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-04 15:30:49,469 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\data
+2026-06-04 15:30:49,470 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json
+2026-06-04 15:30:49,470 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\data\history.jsonl
+2026-06-04 15:30:49,471 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\data\receiver.log
+2026-06-04 15:30:49,471 - INFO - Press Ctrl+C to stop
+2026-06-04 15:30:49,471 - INFO - ============================================================
+2026-06-04 15:31:08,480 - INFO - ============================================================
+2026-06-04 15:31:08,480 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-04 15:31:08,480 - INFO - ============================================================
+2026-06-04 15:31:08,481 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-04 15:31:08,481 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\data
+2026-06-04 15:31:08,481 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json
+2026-06-04 15:31:08,481 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\data\history.jsonl
+2026-06-04 15:31:08,482 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\data\receiver.log
+2026-06-04 15:31:08,482 - INFO - Press Ctrl+C to stop
+2026-06-04 15:31:08,482 - INFO - ============================================================
+2026-06-04 15:31:18,209 - INFO - 
+Shutting down server...
+2026-06-04 15:31:18,209 - INFO - Server stopped
+2026-06-04 15:31:29,227 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.45V
+2026-06-04 15:31:29,228 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:31:32,260 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 11.3V
+2026-06-04 15:31:32,261 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:31:35,295 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.8V
+2026-06-04 15:31:35,296 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:31:37,333 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.0V
+2026-06-04 15:31:37,334 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:31:41,427 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.1V
+2026-06-04 15:31:41,428 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:31:45,489 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.2V
+2026-06-04 15:31:45,490 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:31:49,530 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.3V
+2026-06-04 15:31:49,531 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 15:31:53,585 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 12.4V
+2026-06-04 15:31:53,587 - INFO - 127.0.0.1 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:01:53,452 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.803V
+2026-06-04 16:01:53,456 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:02:12,345 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 16:02:12,347 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:06:53,495 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:06:53,497 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:09:51,984 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.799V
+2026-06-04 16:09:51,986 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:10:10,024 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.841V
+2026-06-04 16:10:10,026 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:11:09,819 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.827V
+2026-06-04 16:11:09,820 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:12:09,982 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 16:12:09,984 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:13:09,754 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.841V
+2026-06-04 16:13:09,756 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:14:09,763 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.817V
+2026-06-04 16:14:09,765 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:15:10,063 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 16:15:10,064 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:16:09,816 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 16:16:09,818 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:17:09,767 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 16:17:09,769 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:18:09,778 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.841V
+2026-06-04 16:18:09,779 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:19:09,850 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.848V
+2026-06-04 16:19:09,852 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:20:09,852 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.848V
+2026-06-04 16:20:09,854 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:21:09,800 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:21:09,801 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:22:10,366 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 16:22:10,369 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:23:09,960 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.775V
+2026-06-04 16:23:09,962 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:24:09,983 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.799V
+2026-06-04 16:24:09,985 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:25:11,213 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.782V
+2026-06-04 16:25:11,215 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:26:10,988 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 16:26:10,990 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:27:10,963 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 16:27:10,966 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:28:10,961 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 16:28:10,963 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:29:10,966 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:29:10,969 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:30:10,957 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 16:30:10,959 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:31:11,219 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.838V
+2026-06-04 16:31:11,221 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:32:11,845 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.841V
+2026-06-04 16:32:11,847 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:33:11,476 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.841V
+2026-06-04 16:33:11,478 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:34:11,412 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.834V
+2026-06-04 16:34:11,414 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:35:11,431 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 16:35:11,433 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:36:11,406 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 16:36:11,407 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:37:11,451 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:37:11,453 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:38:11,408 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.824V
+2026-06-04 16:38:11,410 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:39:11,404 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 16:39:11,406 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:40:11,396 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 16:40:11,397 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:41:11,403 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:41:11,405 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:42:11,934 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:42:11,936 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:43:11,430 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 16:43:11,432 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:44:11,396 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:44:11,398 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:45:11,381 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:45:11,383 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:46:11,430 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:46:11,433 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:47:11,561 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:47:11,564 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:48:11,571 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:48:11,572 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:49:11,364 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.838V
+2026-06-04 16:49:11,366 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:50:11,359 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:50:11,361 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:51:11,409 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 16:51:11,411 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:52:11,711 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:52:11,713 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:53:11,612 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:53:11,614 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:54:11,350 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 16:54:11,353 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:55:11,361 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.841V
+2026-06-04 16:55:11,363 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:56:11,358 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 16:56:11,359 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:57:11,347 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 16:57:11,349 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:58:11,552 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 16:58:11,554 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 16:59:11,590 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 16:59:11,592 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:00:11,536 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 17:00:11,539 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:01:11,532 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 17:01:11,534 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:02:11,616 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 17:02:11,619 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:03:11,537 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 17:03:11,539 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:04:11,556 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 17:04:11,558 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:05:11,706 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 17:05:11,708 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:06:11,756 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.848V
+2026-06-04 17:06:11,758 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:07:11,702 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.848V
+2026-06-04 17:07:11,703 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:08:11,700 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 17:08:11,703 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:09:11,698 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 17:09:11,700 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:10:11,690 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 17:10:11,692 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:11:11,687 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.831V
+2026-06-04 17:11:11,690 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:12:12,046 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.841V
+2026-06-04 17:12:12,048 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:13:11,686 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 17:13:11,688 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:14:11,680 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.838V
+2026-06-04 17:14:11,683 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:15:11,677 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 17:15:11,679 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:16:11,714 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.841V
+2026-06-04 17:16:11,717 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:17:11,717 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.848V
+2026-06-04 17:17:11,719 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:18:11,668 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.824V
+2026-06-04 17:18:11,670 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:19:11,663 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.838V
+2026-06-04 17:19:11,665 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:20:11,730 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.848V
+2026-06-04 17:20:11,731 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:21:11,690 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 17:21:11,692 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:22:12,176 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.82V
+2026-06-04 17:22:12,178 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:23:12,724 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 17:23:12,726 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:24:12,753 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 17:24:12,755 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:25:12,777 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.838V
+2026-06-04 17:25:12,779 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:26:12,726 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.838V
+2026-06-04 17:26:12,728 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:27:12,724 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.848V
+2026-06-04 17:27:12,726 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:28:12,754 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 17:28:12,756 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:29:12,768 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.838V
+2026-06-04 17:29:12,770 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:30:12,704 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.848V
+2026-06-04 17:30:12,706 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:31:12,759 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.838V
+2026-06-04 17:31:12,761 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:32:12,978 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.824V
+2026-06-04 17:32:12,981 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:33:12,710 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 17:33:12,712 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:34:12,695 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.841V
+2026-06-04 17:34:12,696 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:35:12,734 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 17:35:12,736 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:36:12,685 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 17:36:12,687 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:37:12,690 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.852V
+2026-06-04 17:37:12,692 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:38:12,680 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.848V
+2026-06-04 17:38:12,682 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:39:12,893 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 17:39:12,895 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:40:12,670 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.838V
+2026-06-04 17:40:12,672 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:41:12,669 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 17:41:12,671 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:42:13,275 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 17:42:13,276 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:43:12,732 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.834V
+2026-06-04 17:43:12,735 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:44:12,687 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 17:44:12,690 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:45:12,716 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.834V
+2026-06-04 17:45:12,717 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:46:12,748 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.855V
+2026-06-04 17:46:12,750 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:47:12,714 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.799V
+2026-06-04 17:47:12,717 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:48:12,779 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.813V
+2026-06-04 17:48:12,782 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 17:49:14,200 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.792V
+2026-06-04 17:49:14,202 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 18:14:54,431 - INFO - 
+Shutting down server...
+2026-06-04 18:14:54,432 - INFO - Server stopped
+2026-06-04 18:14:59,520 - INFO - ============================================================
+2026-06-04 18:14:59,520 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-04 18:14:59,521 - INFO - ============================================================
+2026-06-04 18:14:59,521 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-04 18:14:59,522 - INFO - Local IP: 192.168.43.94
+2026-06-04 18:14:59,522 - INFO - mDNS Service: ESP32 Voltage Monitor PC Receiver
+2026-06-04 18:14:59,522 - INFO - mDNS Type: _voltage-monitor._tcp.local.
+2026-06-04 18:14:59,563 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\data
+2026-06-04 18:14:59,563 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json
+2026-06-04 18:14:59,563 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\data\history.jsonl
+2026-06-04 18:14:59,564 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\data\receiver.log
+2026-06-04 18:14:59,565 - INFO - Press Ctrl+C to stop
+2026-06-04 18:14:59,565 - INFO - ============================================================
+2026-06-04 20:39:03,322 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.827V
+2026-06-04 20:39:03,358 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:40:03,569 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.782V
+2026-06-04 20:40:03,601 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:41:03,751 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.82V
+2026-06-04 20:41:03,785 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:42:04,502 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.806V
+2026-06-04 20:42:04,536 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:43:03,743 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.803V
+2026-06-04 20:43:03,775 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:44:03,731 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.806V
+2026-06-04 20:44:03,764 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:45:03,693 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.834V
+2026-06-04 20:45:03,726 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:46:04,106 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.813V
+2026-06-04 20:46:04,136 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:46:46,159 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.834V
+2026-06-04 20:46:46,192 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:47:04,102 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.834V
+2026-06-04 20:47:04,141 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:48:04,269 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.817V
+2026-06-04 20:48:04,313 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:48:39,008 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.824V
+2026-06-04 20:48:39,044 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:49:04,328 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.824V
+2026-06-04 20:49:04,364 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:49:46,825 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.799V
+2026-06-04 20:49:46,862 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:50:04,268 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.799V
+2026-06-04 20:50:04,307 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -

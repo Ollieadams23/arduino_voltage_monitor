@@ -60,39 +60,55 @@ Features implemented:
 - ✓ Returns success/error responses
 - ✓ Logging to console and `data/receiver.log`
 - ✓ Status page at http://localhost:52501
+- ✓ **mDNS auto-discovery** - ESP32 can find PC automatically
 
 Files created:
-- `pc_receiver.py` - Main server script
+- `pc_receiver.py` - Main server script with mDNS advertising
 - `test_receiver.py` - Test script to verify server
 - `PC_RECEIVER_SETUP.md` - Complete setup and troubleshooting guide
-- `requirements.txt` - Python dependencies (requests for testing)
+- `requirements.txt` - Python dependencies (requests for testing, zeroconf for mDNS)
+- `MDNS_AUTODISCOVERY.md` - Complete mDNS feature documentation
 
 Next steps:
+- Run `python -m pip install zeroconf` for auto-discovery (optional but recommended)
 - Run `python pc_receiver.py` to start the server
 - Run `python -m pip install requests` then `python test_receiver.py` to test
 - Follow `PC_RECEIVER_SETUP.md` to set up automatic startup
-- Find your PC's IP address for ESP32 configuration
+- ESP32 can auto-discover PC (no manual IP needed!)
 
-## Phase 3: File Change Handling
+## Phase 3: File Change Handling ✓ COMPLETED
 
-- Detect when `data/latest.json` changes
-- Avoid committing unchanged or duplicate content
-- Add optional debouncing so rapid updates do not create too many commits
-- Decide whether to push:
-  - immediately on change
-  - on a fixed interval such as every 5 minutes
-  - only when voltage changes by a meaningful amount
+**Status:** File watcher implemented in `git_sync.py`
 
-## Phase 4: Git Automation
+- ✓ Detects when `data/latest.json` changes using watchdog library
+- ✓ Avoids committing unchanged content (checks git status)
+- ✓ Debouncing implemented (10 second default, configurable)
+- ✓ Push strategy: debounced automatic (waits 10s after change)
 
-- Confirm the repo can push without manual login prompts
-- Configure Git Credential Manager or SSH keys on the PC
-- Write an automated sync script that runs:
-  - `git add`
-  - `git commit`
-  - `git push`
-- Use a safe commit message format such as `Update voltage data`
-- Make the script exit cleanly when there is nothing new to commit
+## Phase 4: Git Automation ✓ IN PROGRESS
+
+**Status:** Git sync script created in `git_sync.py`
+
+Features implemented:
+- ✓ Automated sync script using watchdog library
+- ✓ Runs `git add`, `git commit`, `git push` automatically
+- ✓ Commit messages include voltage and timestamp
+- ✓ Checks for changes before committing (avoids empty commits)
+- ✓ Debouncing prevents commit spam
+- ✓ Full error handling and logging
+- ✓ Graceful shutdown on Ctrl+C
+
+Files created:
+- `git_sync.py` - Main file watcher and Git automation
+- `start_all.bat` - Launcher for both receiver and sync
+- `GIT_SYNC_SETUP.md` - Complete setup guide
+- `requirements.txt` updated with watchdog dependency
+
+Next steps:
+- Install watchdog: `python -m pip install watchdog`
+- Configure Git credentials (see GIT_SYNC_SETUP.md)
+- Test with: `python git_sync.py`
+- Run both services with: `start_all.bat`
 
 ## Phase 5: Windows Startup Automation
 
@@ -110,11 +126,13 @@ Next steps:
 
 Features implemented:
 - ✓ HTTPClient library included
+- ✓ **Live status display** - Real-time connection status with emoji indicators
+- ✓ **Status API** - `/upload_status` endpoint for JavaScript polling
 - ✓ PC receiver URL configuration (saved to preferences)
 - ✓ Upload interval control (configurable in minutes)
 - ✓ JSON builder function with full voltage + history data
-- ✓ uploadDataToPC() function with error handling
-- ✓ Web UI panel for PC upload settings
+- ✓ uploadDataToPC() function with status tracking
+- ✓ Web UI panel for PC upload settings with live status updates
 - ✓ Test upload button in web interface
 - ✓ Automatic uploads on configured interval
 - ✓ Graceful failure handling (keeps working if PC is offline)
@@ -123,7 +141,7 @@ Features implemented:
 Next steps:
 - Upload the updated sketch to your ESP32
 - Configure PC receiver URL in the ESP32 web interface
-- Test the upload functionality
+- Test the upload functionality and watch live status updates
 - Verify that local dashboard and email alerts still work when PC is offline
 
 ## Phase 7: Static Site Consumption ✓ COMPLETED

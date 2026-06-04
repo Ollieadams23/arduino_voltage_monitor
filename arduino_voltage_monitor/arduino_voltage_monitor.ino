@@ -53,6 +53,7 @@ bool pcUploadEnabled = false;
 String pcReceiverURL = "";
 unsigned long uploadIntervalMs = 300000; // 5 minutes default
 unsigned long lastUploadAttemptMs = 0;
+String uploadStatus = "idle"; // idle, connecting, uploading, success, failed
 
 const char* SMTP_HOST = "smtp.gmail.com";
 const int SMTP_PORT = 465;
@@ -507,10 +508,13 @@ String buildUploadJson() {
 
 bool uploadDataToPC() {
   if (!pcUploadEnabled || pcReceiverURL.length() == 0) {
+    uploadStatus = "idle";
     return false;
   }
   
-  Serial.println("Uploading data to PC receiver...");
+  uploadStatus = "connecting";
+  Serial.print("Uploading data to PC receiver: ");
+  Serial.println(pcReceiverURL);
   
   HTTPClient http;
   http.begin(pcReceiverURL);
@@ -519,22 +523,25 @@ bool uploadDataToPC() {
   
   String payload = buildUploadJson();
   
+  uploadStatus = "uploading";
   int httpResponseCode = http.POST(payload);
   
   if (httpResponseCode > 0) {
     String response = http.getString();
-    Serial.print("PC Upload successful! Response code: ");
+    Serial.print("Upload successful! Response code: ");
     Serial.println(httpResponseCode);
     Serial.print("Response: ");
     Serial.println(response);
     http.end();
+    uploadStatus = "success";
     return true;
   } else {
-    Serial.print("PC Upload failed! Error code: ");
+    Serial.print("Upload failed! Error code: ");
     Serial.println(httpResponseCode);
     Serial.print("Error: ");
     Serial.println(http.errorToString(httpResponseCode));
     http.end();
+    uploadStatus = "failed";
     return false;
   }
 }
@@ -815,8 +822,12 @@ String getVoltageHtml() {
   html += "</section>";
   html += "<section class='panel'>";
   html += "<h2>PC Upload</h2>";
-  String uploadStatus = pcUploadEnabled ? (pcReceiverURL.length() > 0 ? "Enabled" : "Enabled (no URL set)") : "Disabled";
-  html += "<p class='pill" + String(pcUploadEnabled && pcReceiverURL.length() > 0 ? "" : " warn") + "'>" + uploadStatus + "</p>";
+  String uploadStatusText = pcUploadEnabled ? (pcReceiverURL.length() > 0 ? "Enabled" : "Enabled (no URL set)") : "Disabled";
+  html += "<p class='pill" + String(pcUploadEnabled && pcReceiverURL.length() > 0 ? "" : " warn") + "'>" + uploadStatusText + "</p>";
+  html += "<div id='uploadStatus' style='margin:10px 0;padding:10px;background:#f0f0f0;border-radius:4px;'>";
+  html += "<p style='margin:0;'><strong>Connection Status:</strong> <span id='statusText'>Loading...</span></p>";
+  html += "<p style='margin:5px 0 0;font-size:0.9em;color:#666;' id='statusDetails'></p>";
+  html += "</div>";
   html += "<p class='meta'>PC Receiver URL: " + (pcReceiverURL.length() > 0 ? htmlEscape(pcReceiverURL) : String("Not set")) + "<br>Upload Interval: " + String(uploadIntervalMs / 60000) + " minutes</p>";
   html += "<form class='form-grid' method='POST' action='/pc_upload_settings'>";
   html += "<label class='check-row'><input type='checkbox' name='enabled' value='1'";
@@ -824,10 +835,39 @@ String getVoltageHtml() {
     html += " checked";
   }
   html += "><span>Enable PC upload</span></label>";
-  html += "<div class='field'><label>PC Receiver URL</label><input type='text' name='pc_url' value='" + htmlEscape(pcReceiverURL) + "' placeholder='http://192.168.1.100:52501'><small>Enter your PC's IP address and port (e.g., http://192.168.1.100:52501)</small></div>";
+  html += "<div class='field'><label>PC Receiver URL (optional)</label><input type='text' name='pc_url' value='" + htmlEscape(pcReceiverURL) + "' placeholder='http://192.168.1.100:52501 or leave blank for auto-discovery'><small>Leave blank to auto-discover PC receiver via mDNS, or enter manual URL</small></div>";
   html += "<div class='field'><label>Upload interval (minutes)</label><input type='number' min='1' max='60' name='interval_minutes' value='" + String(uploadIntervalMs / 60000) + "'><small>How often to send data to the PC (default: 5 minutes)</small></div>";
   html += "<div class='button-row'><input type='submit' value='Save PC Upload Settings'><button class='button-secondary' type='button' onclick=\"fetch('/test_upload').then(r => r.text()).then(msg => alert(msg));\">Test Upload Now</button></div>";
   html += "</form>";
+  html += "<script>";
+  html += "function updateUploadStatus() {";
+  html += "  fetch('/upload_status').then(r => r.json()).then(data => {";
+  html += "    let statusEmoji = '';";
+  html += "    let statusText = '';";
+  html += "    let details = '';";
+  html += "    switch(data.status) {";
+  html += "      case 'idle': statusEmoji='⚪'; statusText='Idle'; break;";
+  html += "      case 'connecting': statusEmoji='🔌'; statusText='Connecting...'; details='Establishing connection'; break;";
+  html += "      case 'uploading': statusEmoji='⬆️'; statusText='Uploading...'; break;";
+  html += "      case 'success': statusEmoji='✅'; statusText='Upload Successful'; break;";
+  html += "      case 'failed': statusEmoji='❌'; statusText='Upload Failed'; details='Connection or upload failed. Check PC receiver.'; break;";
+  html += "      default: statusEmoji='❓'; statusText='Unknown';";
+  html += "    }";
+  html += "    if (data.enabled && data.nextUploadIn > 0) {";
+  html += "      details += (details ? '<br>' : '') + 'Next upload in: ' + Math.floor(data.nextUploadIn) + 's';";
+  html += "    }";
+  html += "    document.getElementById('statusText').textContent = statusEmoji + ' ' + statusText;";
+  html += "    document.getElementById('statusDetails').innerHTML = details || 'Waiting for next upload...';";
+  html += "  }).catch(e => {";
+  html += "    document.getElementById('statusText').textContent = '⚠️ Status unavailable';";
+  html += "  });";
+  html += "}";
+  html += "if (document.readyState === 'loading') {";
+  html += "  document.addEventListener('DOMContentLoaded', function() { updateUploadStatus(); setInterval(updateUploadStatus, 2000); });";
+  html += "} else {";
+  html += "  updateUploadStatus(); setInterval(updateUploadStatus, 2000);";
+  html += "}";
+  html += "</script>";
   html += "</section>";
   html += "</div>";
   html += "</div>";
@@ -932,6 +972,15 @@ void setup() {
     } else {
       server.send(500, "text/plain", "Test upload failed. Check Serial output and PC upload settings.");
     }
+  });
+  server.on("/upload_status", []() {
+    String json = "{";
+    json += "\"status\":\"" + uploadStatus + "\"";
+    json += ",\"enabled\":" + String(pcUploadEnabled ? "true" : "false");
+    json += ",\"manualURL\":\"" + pcReceiverURL + "\"";
+    json += ",\"nextUploadIn\":" + String((uploadIntervalMs - (millis() - lastUploadAttemptMs)) / 1000);
+    json += "}";
+    server.send(200, "application/json", json);
   });
   server.begin();
 }
