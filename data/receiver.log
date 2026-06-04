@@ -403,3 +403,5 @@ OSError: [WinError 59] An unexpected network error occurred
 2026-06-04 21:47:08,455 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
 2026-06-04 21:47:59,276 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.074V
 2026-06-04 21:47:59,327 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 21:52:09,297 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.197V
+2026-06-04 21:52:09,333 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
