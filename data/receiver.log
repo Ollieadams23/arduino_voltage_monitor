@@ -349,3 +349,57 @@ Shutting down server...
 2026-06-04 20:49:46,862 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
 2026-06-04 20:50:04,268 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.799V
 2026-06-04 20:50:04,307 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:51:04,278 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.82V
+2026-06-04 20:51:04,320 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:56:04,845 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.81V
+2026-06-04 20:56:04,877 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 20:56:13,076 - INFO - 
+Shutting down server...
+2026-06-04 20:56:13,080 - WARNING - Error with socket 1468 (('192.168.43.94', 5353))): [WinError 59] An unexpected network error occurred
+Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\proactor_events.py", line 523, in _loop_writing
+    fut.result()
+  File "C:\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
+    value = callback(transferred, key, ov)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
+    return ov.getresult()
+           ^^^^^^^^^^^^^^
+OSError: [WinError 59] An unexpected network error occurred
+2026-06-04 20:56:13,355 - INFO - mDNS service unregistered
+2026-06-04 20:56:13,355 - INFO - Server stopped
+2026-06-04 20:56:14,852 - INFO - ============================================================
+2026-06-04 20:56:14,853 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-04 20:56:14,854 - INFO - ============================================================
+2026-06-04 20:56:14,854 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-04 20:56:14,854 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-04 20:56:14,855 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\data
+2026-06-04 20:56:14,856 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json
+2026-06-04 20:56:14,856 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\data\history.jsonl
+2026-06-04 20:56:14,857 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\data\receiver.log
+2026-06-04 20:56:14,858 - INFO - Press Ctrl+C to stop
+2026-06-04 20:56:14,859 - INFO - ============================================================
+2026-06-04 21:01:04,869 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.817V
+2026-06-04 21:01:04,897 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 21:02:05,996 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.775V
+2026-06-04 21:02:06,021 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 21:07:06,148 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.827V
+2026-06-04 21:07:06,174 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 21:12:06,174 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.81V
+2026-06-04 21:12:06,200 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 21:17:06,152 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.824V
+2026-06-04 21:17:06,180 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 21:22:06,138 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.845V
+2026-06-04 21:22:06,167 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 21:27:06,273 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.799V
+2026-06-04 21:27:06,302 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 21:32:06,307 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.831V
+2026-06-04 21:32:06,332 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 21:37:06,243 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.796V
+2026-06-04 21:37:06,277 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 21:42:06,267 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 3.82V
+2026-06-04 21:42:06,627 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 21:47:08,426 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.029V
+2026-06-04 21:47:08,455 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 21:47:59,276 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.074V
+2026-06-04 21:47:59,327 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -

@@ -312,7 +312,6 @@ Startup automation:
 
 Dependencies:
 - `watchdog>=3.0.0` - File system monitoring
-- `zeroconf>=0.132.0` - Optional mDNS advertising (not used by ESP32)
 - Git installed and configured with credentials
 
 ### Error Handling
@@ -350,4 +349,3 @@ Known constraints from the current implementation:
 - Git automation requires Git credentials configured for unattended push
 - Git automation creates one commit per upload (can accumulate many commits over time)
 - PC-to-Git sync requires `watchdog` Python library installed
-- PC mDNS advertising available but not used by ESP32 (reserved for future mobile app discovery)

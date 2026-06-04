@@ -304,13 +304,13 @@
         <section class="panel">
           <h2>Email Alerts</h2>
           <p class="pill" id="emailStatusPill">--</p>
-          <p class="meta" id="emailMeta">--</p>
+          <p class="meta" id="emailMeta"></p>
         </section>
 
         <section class="panel">
           <h2>Data Source</h2>
           <p class="note">Data is synced from your ESP32 via a local PC to this GitHub Pages site. Updates are pushed automatically whenever new voltage readings are captured.</p>
-          <p class="meta" style="margin-top:10px;">Repository: <a href="https://github.com/yourusername/voltage-monitor" style="color:var(--accent);">voltage-monitor</a></p>
+          <p class="meta" style="margin-top:10px;">Repository: <a href="https://github.com/ollieadams23/voltage-monitor" style="color:var(--accent);">voltage-monitor</a></p>
         </section>
       </div>
     </div>
@@ -572,14 +572,6 @@
             emailPill.className = 'pill' + (emailEnabled ? '' : ' warn');
           }
           
-          const emailMeta = 'Sender: ' + (data.emailSender || 'Not set') + '<br>' +
-                           'Recipient: ' + (data.emailRecipient || 'Not set') + '<br>' +
-                           'App password stored: ' + (data.hasAppPassword ? 'Yes' : 'No') + '<br>' +
-                           'Repeat reminders: ' + (data.repeatAlertHours > 0 ? 'Every ' + data.repeatAlertHours.toFixed(2) + ' hours' : 'Disabled');
-          const emailMetaEl = document.getElementById('emailMeta');
-          if (emailMetaEl) {
-            emailMetaEl.innerHTML = emailMeta;
-          }
 
           // Draw history chart
           drawHistory(data.history);

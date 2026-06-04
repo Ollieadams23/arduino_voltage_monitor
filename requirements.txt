@@ -1,13 +1,7 @@
-# PC Receiver dependencies
-# 
-# The server (pc_receiver.py) optionally uses:
-# - zeroconf for mDNS auto-discovery (highly recommended)
-# 
+# PC Receiver and test dependencies
+
 # The test script (test_receiver.py) needs:
 requests>=2.31.0
 
 # Git sync (git_sync.py) needs:
 watchdog>=3.0.0
-
-# mDNS auto-discovery (optional but recommended):
-zeroconf>=0.132.0

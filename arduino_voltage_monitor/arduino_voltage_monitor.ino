@@ -835,7 +835,7 @@ String getVoltageHtml() {
     html += " checked";
   }
   html += "><span>Enable PC upload</span></label>";
-  html += "<div class='field'><label>PC Receiver URL (optional)</label><input type='text' name='pc_url' value='" + htmlEscape(pcReceiverURL) + "' placeholder='http://192.168.1.100:52501 or leave blank for auto-discovery'><small>Leave blank to auto-discover PC receiver via mDNS, or enter manual URL</small></div>";
+  html += "<div class='field'><label>PC Receiver URL</label><input type='text' name='pc_url' value='" + htmlEscape(pcReceiverURL) + "' placeholder='http://192.168.1.100:52501'><small>Enter your PC's IP address and port. This field is required when PC upload is enabled.</small></div>";
   html += "<div class='field'><label>Upload interval (minutes)</label><input type='number' min='1' max='60' name='interval_minutes' value='" + String(uploadIntervalMs / 60000) + "'><small>How often to send data to the PC (default: 5 minutes)</small></div>";
   html += "<div class='button-row'><input type='submit' value='Save PC Upload Settings'><button class='button-secondary' type='button' onclick=\"fetch('/test_upload').then(r => r.text()).then(msg => alert(msg));\">Test Upload Now</button></div>";
   html += "</form>";

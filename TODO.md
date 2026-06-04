@@ -60,17 +60,14 @@ Features implemented:
 - ✓ Returns success/error responses
 - ✓ Logging to console and `data/receiver.log`
 - ✓ Status page at http://localhost:52501
-- ✓ **mDNS auto-discovery** - ESP32 can find PC automatically
 
 Files created:
-- `pc_receiver.py` - Main server script with mDNS advertising
+- `pc_receiver.py` - Main server script
 - `test_receiver.py` - Test script to verify server
 - `PC_RECEIVER_SETUP.md` - Complete setup and troubleshooting guide
-- `requirements.txt` - Python dependencies (requests for testing, zeroconf for mDNS)
-- `MDNS_AUTODISCOVERY.md` - Complete mDNS feature documentation
+- `requirements.txt` - Python dependencies (requests for testing, watchdog for git sync)
 
 Next steps:
-- Run `python -m pip install zeroconf` for auto-discovery (optional but recommended)
 - Run `python pc_receiver.py` to start the server
 - Run `python -m pip install requests` then `python test_receiver.py` to test
 - Follow `PC_RECEIVER_SETUP.md` to set up automatic startup

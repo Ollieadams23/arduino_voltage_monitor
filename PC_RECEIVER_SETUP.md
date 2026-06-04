@@ -21,11 +21,6 @@ Server listening on http://0.0.0.0:52501
 ...
 ```
 
-**Note:** The PC receiver supports mDNS broadcasting (optional), but the ESP32 firmware uses manual IP configuration. You can optionally install zeroconf for future features:
-```powershell
-python -m pip install zeroconf
-```
-
 ### 2. Test from Your Browser
 
 Open `http://localhost:52501` in your browser. You should see a status page confirming the server is running.
