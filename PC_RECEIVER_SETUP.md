@@ -59,7 +59,31 @@ Your ESP32 will send data to: `http://YOUR_PC_IP:52501`
 
 ## Windows Startup Automation
 
-### Option A: Task Scheduler (Recommended)
+### Option A: Windows Service (Recommended)
+
+This repository now includes service wrappers for both long-running PC scripts.
+
+1. Install the service dependency:
+   ```powershell
+   python -m pip install -r requirements.txt
+   ```
+2. Open PowerShell **as Administrator**.
+3. Run:
+   ```powershell
+   .\install_services.cmd
+   ```
+4. Verify the receiver service is running:
+   ```powershell
+   Get-Service ESP32VoltageReceiver
+   ```
+
+To remove the services later:
+
+```powershell
+.\uninstall_services.cmd
+```
+
+### Option B: Task Scheduler
 
 1. Open Task Scheduler (`taskschd.msc`)
 2. Click **Create Task** (not "Create Basic Task")
@@ -110,7 +134,7 @@ Get-ScheduledTask -TaskName "ESP32 Voltage Receiver" | Get-ScheduledTaskInfo
 Get-Content "data\receiver.log" -Tail 20 -Wait
 ```
 
-### Option B: Startup Folder (Simple, but requires login)
+### Option C: Startup Folder (Simple, but requires login)
 
 1. Create a batch file `start_receiver.bat`:
 

@@ -10,6 +10,7 @@ import json
 import os
 import subprocess
 import logging
+from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
 from datetime import datetime
 from watchdog.observers import Observer
@@ -26,7 +27,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(LOG_FILE),
+        TimedRotatingFileHandler(LOG_FILE, when='midnight', interval=1, backupCount=1, encoding='utf-8'),
         logging.StreamHandler()
     ]
 )

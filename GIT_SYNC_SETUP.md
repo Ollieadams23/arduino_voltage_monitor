@@ -163,7 +163,49 @@ I can create a launcher script that runs both together.
 
 ## Step 5: Windows Startup Automation
 
-### Method 1: Task Scheduler (Two Tasks)
+### Method 1: Windows Services (Recommended)
+
+The repository now includes Windows service wrappers for both scripts.
+
+1. Install the service dependency:
+   ```powershell
+   python -m pip install -r requirements.txt
+   ```
+2. Open PowerShell **as Administrator**.
+3. Install and start both services:
+   ```powershell
+   .\install_services.cmd
+   ```
+4. Check status:
+   ```powershell
+   Get-Service ESP32VoltageReceiver, ESP32GitSync
+   ```
+
+The Git sync service depends on the receiver service and is configured to restart automatically if it exits.
+
+### Optional: Tray Status Icon
+
+To keep a live status icon in the Windows tray:
+
+```powershell
+python -m pip install -r requirements.txt
+.\start_tray_status.cmd
+```
+
+The tray icon shows:
+- green when both services are running and data is fresh
+- yellow when services are running but data is stale or only one service is up
+- red when services are stopped or not installed
+
+Its menu also lets you start or stop each service and open the receiver or sync logs.
+
+To remove the services:
+
+```powershell
+.\uninstall_services.cmd
+```
+
+### Method 2: Task Scheduler (Two Tasks)
 
 Create two scheduled tasks (similar to PC receiver setup):
 
@@ -180,7 +222,7 @@ Create two scheduled tasks (similar to PC receiver setup):
 - Start in: `C:\Users\Ollie\Documents\projects\voltage monitor`
 - **Important:** Set trigger delay to **1 minute** (wait for receiver to start)
 
-### Method 2: Combined Launcher Script
+### Method 3: Combined Launcher Script
 
 Create `start_all.bat`:
 ```batch

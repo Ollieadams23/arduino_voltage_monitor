@@ -405,3 +405,34 @@ OSError: [WinError 59] An unexpected network error occurred
 2026-06-04 21:47:59,327 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
 2026-06-04 21:52:09,297 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.197V
 2026-06-04 21:52:09,333 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 21:57:09,223 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.179V
+2026-06-04 21:57:09,251 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 22:02:09,274 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.032V
+2026-06-04 22:02:09,305 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 22:03:53,159 - INFO - 
+Shutting down server...
+2026-06-04 22:03:53,159 - INFO - Server stopped
+2026-06-04 22:16:03,365 - INFO - ============================================================
+2026-06-04 22:16:03,366 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-04 22:16:03,366 - INFO - ============================================================
+2026-06-04 22:16:03,366 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-04 22:16:03,367 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-04 22:16:03,367 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\data
+2026-06-04 22:16:03,367 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json
+2026-06-04 22:16:03,367 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\data\history.jsonl
+2026-06-04 22:16:03,367 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\data\receiver.log
+2026-06-04 22:16:03,368 - INFO - Press Ctrl+C to stop
+2026-06-04 22:16:03,368 - INFO - ============================================================
+2026-06-04 22:17:09,167 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.19V
+2026-06-04 22:17:09,213 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 22:22:09,154 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.183V
+2026-06-04 22:22:09,181 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 22:27:09,170 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.186V
+2026-06-04 22:27:09,205 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 22:28:19,209 - INFO - 127.0.0.1 - "GET / HTTP/1.1" 200 -
+2026-06-04 22:28:20,435 - INFO - 127.0.0.1 - code 404, message Not found
+2026-06-04 22:28:20,436 - INFO - 127.0.0.1 - "GET /favicon.ico HTTP/1.1" 404 -
+2026-06-04 22:32:09,127 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.172V
+2026-06-04 22:32:09,171 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-04 22:37:09,097 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json - Voltage: 13.151V
+2026-06-04 22:37:09,124 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -

@@ -571,3 +571,59 @@ origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
 2026-06-04 21:51:16,693 - INFO - 
 Shutting down Git sync...
 2026-06-04 21:51:16,694 - INFO - Git sync stopped
+2026-06-04 22:16:38,908 - INFO - ============================================================
+2026-06-04 22:16:38,908 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-04 22:16:38,908 - INFO - ============================================================
+2026-06-04 22:16:38,908 - INFO - Checking Git configuration...
+2026-06-04 22:16:38,951 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-04 22:16:38,996 - INFO - Git repository detected
+2026-06-04 22:16:39,045 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-04 22:16:39,046 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\data\latest.json
+2026-06-04 22:16:39,046 - INFO - Debounce time: 10 seconds
+2026-06-04 22:16:39,046 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\data\git_sync.log
+2026-06-04 22:16:39,046 - INFO - Press Ctrl+C to stop
+2026-06-04 22:16:39,046 - INFO - ============================================================
+2026-06-04 22:17:09,161 - INFO - Detected change to latest.json
+2026-06-04 22:17:09,167 - INFO - Detected change to latest.json
+2026-06-04 22:17:10,121 - INFO - Starting Git sync...
+2026-06-04 22:17:10,261 - INFO - Staged data\latest.json
+2026-06-04 22:17:10,403 - INFO - Committed: Update voltage data: 13.19V at 2026-06-04 22:17:10
+2026-06-04 22:17:13,806 - INFO - Pushed to remote repository
+2026-06-04 22:17:13,807 - INFO - Sync complete - Voltage: 13.19V
+2026-06-04 22:22:09,149 - INFO - Detected change to latest.json
+2026-06-04 22:22:09,153 - INFO - Detected change to latest.json
+2026-06-04 22:22:09,154 - INFO - Detected change to latest.json
+2026-06-04 22:22:09,237 - INFO - Starting Git sync...
+2026-06-04 22:22:09,444 - INFO - Staged data\latest.json
+2026-06-04 22:22:09,573 - INFO - Committed: Update voltage data: 13.183V at 2026-06-04 22:22:09
+2026-06-04 22:22:12,506 - INFO - Pushed to remote repository
+2026-06-04 22:22:12,506 - INFO - Sync complete - Voltage: 13.183V
+2026-06-04 22:27:09,163 - INFO - Detected change to latest.json
+2026-06-04 22:27:09,167 - INFO - Detected change to latest.json
+2026-06-04 22:27:09,168 - INFO - Detected change to latest.json
+2026-06-04 22:27:09,171 - INFO - Detected change to latest.json
+2026-06-04 22:27:09,658 - INFO - Starting Git sync...
+2026-06-04 22:27:09,875 - INFO - Staged data\latest.json
+2026-06-04 22:27:10,060 - INFO - Committed: Update voltage data: 13.186V at 2026-06-04 22:27:09
+2026-06-04 22:27:13,278 - INFO - Pushed to remote repository
+2026-06-04 22:27:13,278 - INFO - Sync complete - Voltage: 13.186V
+2026-06-04 22:32:09,120 - INFO - Detected change to latest.json
+2026-06-04 22:32:09,125 - INFO - Detected change to latest.json
+2026-06-04 22:32:09,126 - INFO - Detected change to latest.json
+2026-06-04 22:32:09,128 - INFO - Detected change to latest.json
+2026-06-04 22:32:09,433 - INFO - Starting Git sync...
+2026-06-04 22:32:09,584 - INFO - Staged data\latest.json
+2026-06-04 22:32:09,730 - INFO - Committed: Update voltage data: 13.172V at 2026-06-04 22:32:09
+2026-06-04 22:32:12,648 - INFO - Pushed to remote repository
+2026-06-04 22:32:12,648 - INFO - Sync complete - Voltage: 13.172V
+2026-06-04 22:37:09,091 - INFO - Detected change to latest.json
+2026-06-04 22:37:09,095 - INFO - Detected change to latest.json
+2026-06-04 22:37:09,096 - INFO - Detected change to latest.json
+2026-06-04 22:37:09,098 - INFO - Detected change to latest.json
+2026-06-04 22:37:09,810 - INFO - Starting Git sync...
+2026-06-04 22:37:09,988 - INFO - Staged data\latest.json
+2026-06-04 22:37:10,147 - INFO - Committed: Update voltage data: 13.151V at 2026-06-04 22:37:09
+2026-06-04 22:37:13,010 - INFO - Pushed to remote repository
+2026-06-04 22:37:13,010 - INFO - Sync complete - Voltage: 13.151V

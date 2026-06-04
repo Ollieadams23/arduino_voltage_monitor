@@ -12,6 +12,7 @@ from datetime import datetime
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 import logging
+from logging.handlers import TimedRotatingFileHandler
 
 # Configuration
 PORT = 52501
@@ -27,7 +28,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(LOG_FILE),
+        TimedRotatingFileHandler(LOG_FILE, when='midnight', interval=1, backupCount=1, encoding='utf-8'),
         logging.StreamHandler(sys.stdout)
     ]
 )

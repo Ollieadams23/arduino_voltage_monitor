@@ -5,3 +5,10 @@ requests>=2.31.0
 
 # Git sync (git_sync.py) needs:
 watchdog>=3.0.0
+
+# Windows service support:
+pywin32>=306; platform_system == "Windows"
+
+# Windows tray status app:
+pystray>=0.19.5; platform_system == "Windows"
+Pillow>=10.0.0
