@@ -16,6 +16,9 @@ Stored on-device:
 - email recipient as `mail_to`
 - repeat reminder interval in hours as `mail_rpt_h`
 - graph plot interval in minutes as `hist_int_m`
+- PC upload enabled flag as `pc_upload`
+- PC receiver URL as `pc_url`
+- PC upload interval in milliseconds as `upload_int`
 - 48-hour voltage history payload in `history.points`
 - stored history point count in `history.count`
 - circular-buffer write index in `history.write_idx`
@@ -38,12 +41,15 @@ Current `WebServer` routes:
 - `POST /email_settings` updates email configuration and repeat interval
 - `GET /test_email` sends a manual test email
 - `POST /reset_wifi` clears saved Wi-Fi credentials and reboots
+- `POST /pc_upload_settings` updates PC upload configuration (enabled, URL, interval)
+- `GET /test_upload` sends a manual test upload to the PC receiver
 
 Notes:
 - threshold update is currently done with a GET route, not POST
 - the page depends on client-side polling for `voltage`, `threshold`, and `history`
 - `history_settings` only changes how stored base points are grouped for display; it does not rewrite the saved history buffer
 - `test_email` returns a short plain-text success or failure message to the browser, but the outbound email itself is multipart text plus HTML
+- `test_upload` triggers an immediate HTTP POST to the configured PC receiver URL
 
 ## Reset Scope
 
@@ -53,6 +59,7 @@ It does not clear:
 - alert threshold
 - email settings
 - repeat reminder settings
+- PC upload settings
 - saved voltage history
 
 After Wi-Fi reset:
@@ -150,6 +157,13 @@ That is why:
 
 The dashboard HTML, CSS, and JavaScript are built as one large `String` in firmware.
 
+UI panels:
+- **Voltage Monitor** - Current voltage, threshold controls, LED status
+- **48-Hour History** - Scrollable chart with configurable grouping interval
+- **Wi-Fi** - Network status and reset button
+- **Email Alerts** - Gmail configuration and test button
+- **PC Upload** - PC receiver URL, upload interval, and test button
+
 Graph-specific behavior:
 - the dashboard chart is drawn client-side on two canvases: a fixed left axis canvas and a horizontally scrollable plot canvas
 - the visible chart window stays fixed-width while the plotted content can grow wider than the viewport
@@ -194,6 +208,112 @@ For a harder setup, likely next steps would be:
 - hide or mask more stored email metadata
 - move static assets off inline strings if the UI keeps growing
 
+## PC Upload Architecture
+
+The ESP32 can optionally upload voltage data to a local PC receiver via HTTP POST.
+
+### ESP32 Upload Behavior
+
+Upload logic:
+- enabled/disabled via web UI configuration
+- uses `HTTPClient.h` to POST JSON to the configured PC receiver URL
+- uploads occur on a configurable interval (default 5 minutes, range 1-60 minutes)
+- each upload contains the **complete 48-hour rolling history** along with current voltage and device metadata
+- timeout set to 5 seconds to avoid blocking the main loop
+- failures are logged to Serial but do not stop the monitoring loop
+- email alerts and local dashboard continue working even if PC is offline
+
+Upload timing:
+- tracked independently from email alert timing
+- `lastUploadAttemptMs` compared against `uploadIntervalMs`
+- interval is stored in milliseconds in `Preferences` as `upload_int`
+- user configures interval in minutes via web UI; sketch converts to milliseconds
+
+JSON payload structure:
+- `voltage` - current measured voltage
+- `threshold` - configured alert threshold
+- `timestamp` - Unix epoch timestamp
+- `ssid` - WiFi SSID the ESP32 is connected to
+- `ip` - ESP32's local IP address
+- `emailEnabled` - whether email alerts are enabled
+- `emailSender` - configured Gmail sender address
+- `emailRecipient` - configured alert recipient address
+- `hasAppPassword` - whether an app password is stored (boolean, not the password itself)
+- `repeatAlertHours` - repeat reminder interval
+- `history` - nested object containing:
+  - `points[]` - array of `{voltage, epoch}` objects
+  - `intervalMinutes` - display grouping interval
+  - `totalHours` - always 48
+  - `threshold` - repeated for convenience
+
+### PC Receiver (`pc_receiver.py`)
+
+The PC receiver is a Python HTTP server that listens for uploads from the ESP32.
+
+Server configuration:
+- listens on port `52501` (chosen to avoid common port conflicts)
+- uses Python's built-in `http.server` module (no external dependencies except `requests` for testing)
+- runs continuously; designed to start automatically via Windows Task Scheduler
+
+File management:
+- **`data/latest.json`** - Overwrites with each upload (constant size ~5-10KB)
+  - Contains the full 48-hour history from the ESP32
+  - This file is the source for Git automation
+- **`data/history.jsonl`** - Appends each upload as one JSON line
+  - Automatically rotated to keep last 1000 entries
+  - For local debugging and archiving only (not pushed to Git)
+- **`data/receiver.log`** - Server activity log
+
+Request validation:
+- checks for required fields: `voltage`, `threshold`, `timestamp`
+- validates that values are numbers
+- returns HTTP 400 for invalid data
+- returns HTTP 200 with success JSON for valid uploads
+
+Response format:
+```json
+{
+  "status": "success",
+  "message": "Data received and saved",
+  "timestamp": "2026-06-04T12:34:56.789012"
+}
+```
+
+### PC-to-Git Workflow (Future Phase)
+
+Current status: ESP32 → PC is complete; PC → Git is not yet implemented.
+
+Planned workflow:
+1. ESP32 uploads to PC receiver every N minutes
+2. PC receiver writes `data/latest.json`
+3. File watcher or cron script detects change
+4. Script runs `git add`, `git commit`, `git push`
+5. GitHub Pages static site reads `data/latest.json`
+
+File size management:
+- `data/latest.json` always contains exactly 48 hours of history
+- Each ESP32 upload replaces the entire file
+- File size stays constant regardless of upload frequency
+- Git history will show one commit per upload, but file size never grows
+
+### Error Handling
+
+ESP32 side:
+- connection refused → logs error, continues monitoring
+- timeout → logs error, continues monitoring
+- HTTP error response → logs error, continues monitoring
+- no retry loop; waits for next scheduled interval
+
+PC receiver side:
+- invalid JSON → returns HTTP 400, logs warning
+- missing fields → returns HTTP 400, logs warning
+- server exception → returns HTTP 500, logs error with stack trace
+- history rotation failure → logs error but continues serving
+
+Both sides:
+- network failures do not crash or block the main loop
+- local monitoring (ESP32 dashboard, email alerts) works independently of PC upload status
+
 ## Operational Constraints
 
 Known constraints from the current implementation:
@@ -203,3 +323,9 @@ Known constraints from the current implementation:
 - Wi-Fi reset does not wipe app settings or history
 - no explicit factory-reset route exists yet for clearing all `Preferences` namespaces
 - multipart HTML email increases email-body size compared with the original plain-text alert path
+- PC upload requires the PC to be powered on and the receiver script to be running
+- ESP32 cannot discover PC IP automatically without additional configuration (mDNS or broadcast discovery not yet implemented)
+- if PC IP address changes, the ESP32 must be reconfigured via web UI
+- PC receiver must be added to Windows Firewall to accept connections
+- PC upload adds HTTPClient dependency and a small amount of flash usage
+- PC-to-Git automation is not yet implemented (manual Git workflow or scripting required)

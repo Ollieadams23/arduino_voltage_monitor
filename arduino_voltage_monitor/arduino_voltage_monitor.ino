@@ -3,6 +3,7 @@
 // Main Arduino sketch for voltage monitor
 #include <WiFiManager.h> // Install WiFiManager library via Library Manager
 #include <ESP_Mail_Client.h> // Install ESP Mail Client library via Library Manager
+#include <HTTPClient.h> // For uploading data to PC receiver
 #include <WiFi.h>
 #include <WebServer.h>
 #include <Preferences.h>
@@ -46,6 +47,12 @@ int voltageHistoryCount = 0;
 int voltageHistoryWriteIndex = 0;
 unsigned long lastHistoryBucket = 0;
 int historyIntervalMinutes = 60;
+
+// PC Upload settings
+bool pcUploadEnabled = false;
+String pcReceiverURL = "";
+unsigned long uploadIntervalMs = 300000; // 5 minutes default
+unsigned long lastUploadAttemptMs = 0;
 
 const char* SMTP_HOST = "smtp.gmail.com";
 const int SMTP_PORT = 465;
@@ -401,6 +408,9 @@ void loadSettings() {
   alertRecipient = preferences.getString("mail_to", "");
   repeatAlertHours = preferences.getFloat("mail_rpt_h", 0.0f);
   historyIntervalMinutes = sanitizeHistoryIntervalMinutes(preferences.getInt("hist_int_m", historyIntervalMinutes));
+  pcUploadEnabled = preferences.getBool("pc_upload", false);
+  pcReceiverURL = preferences.getString("pc_url", "");
+  uploadIntervalMs = preferences.getULong("upload_int", uploadIntervalMs);
   preferences.end();
 }
 
@@ -435,6 +445,98 @@ void saveEmailSettings(bool enabled, const String& sender, const String& appPass
 
   lowVoltageAlertSent = false;
   lastEmailAttemptMs = 0;
+}
+
+void savePCUploadSettings(bool enabled, const String& url, unsigned long intervalMinutes) {
+  pcUploadEnabled = enabled;
+  pcReceiverURL = url;
+  uploadIntervalMs = intervalMinutes * 60000; // Convert minutes to milliseconds
+  
+  preferences.begin("settings", false);
+  preferences.putBool("pc_upload", pcUploadEnabled);
+  preferences.putString("pc_url", pcReceiverURL);
+  preferences.putULong("upload_int", uploadIntervalMs);
+  preferences.end();
+  
+  Serial.println("PC Upload settings saved");
+}
+
+String buildUploadJson() {
+  String json = "{";
+  json += "\"voltage\":" + String(lastVoltage, 3);
+  json += ",\"threshold\":" + String(alertThreshold, 2);
+  json += ",\"timestamp\":" + String((unsigned long)time(nullptr));
+  json += ",\"ssid\":\"" + String(WiFi.SSID()) + "\"";
+  json += ",\"ip\":\"" + WiFi.localIP().toString() + "\"";
+  json += ",\"emailEnabled\":" + String(emailAlertsEnabled ? "true" : "false");
+  json += ",\"emailSender\":\"" + emailSender + "\"";
+  json += ",\"emailRecipient\":\"" + alertRecipient + "\"";
+  json += ",\"hasAppPassword\":" + String(emailAppPassword.length() > 0 ? "true" : "false");
+  json += ",\"repeatAlertHours\":" + String(repeatAlertHours, 2);
+  
+  // Add history data
+  json += ",\"history\":{";
+  json += "\"points\":[";
+  
+  int bucketSize = getHistoryBucketSize();
+  int displayCount = voltageHistoryCount / bucketSize;
+  
+  if (displayCount > 0) {
+    for (int displayIndex = 0; displayIndex < displayCount; displayIndex++) {
+      float averagedVoltage = 0.0f;
+      unsigned long latestEpoch = 0;
+      
+      if (getAveragedHistoryPoint(bucketSize, displayCount, displayIndex, averagedVoltage, latestEpoch)) {
+        if (displayIndex > 0) {
+          json += ",";
+        }
+        json += "{\"voltage\":" + String(averagedVoltage, 3);
+        json += ",\"epoch\":" + String(latestEpoch) + "}";
+      }
+    }
+  }
+  
+  json += "],\"intervalMinutes\":" + String(historyIntervalMinutes);
+  json += ",\"totalHours\":" + String(HISTORY_TOTAL_HOURS);
+  json += ",\"threshold\":" + String(alertThreshold, 2);
+  json += "}";
+  
+  json += "}";
+  return json;
+}
+
+bool uploadDataToPC() {
+  if (!pcUploadEnabled || pcReceiverURL.length() == 0) {
+    return false;
+  }
+  
+  Serial.println("Uploading data to PC receiver...");
+  
+  HTTPClient http;
+  http.begin(pcReceiverURL);
+  http.addHeader("Content-Type", "application/json");
+  http.setTimeout(5000); // 5 second timeout
+  
+  String payload = buildUploadJson();
+  
+  int httpResponseCode = http.POST(payload);
+  
+  if (httpResponseCode > 0) {
+    String response = http.getString();
+    Serial.print("PC Upload successful! Response code: ");
+    Serial.println(httpResponseCode);
+    Serial.print("Response: ");
+    Serial.println(response);
+    http.end();
+    return true;
+  } else {
+    Serial.print("PC Upload failed! Error code: ");
+    Serial.println(httpResponseCode);
+    Serial.print("Error: ");
+    Serial.println(http.errorToString(httpResponseCode));
+    http.end();
+    return false;
+  }
 }
 
 void smtpCallback(SMTP_Status status) {
@@ -711,6 +813,22 @@ String getVoltageHtml() {
   html += "<div class='button-row'><input type='submit' value='Save Email Settings'><button class='button-secondary' type='button' onclick=\"fetch('/test_email').then(r => r.text()).then(msg => alert(msg));\">Send Test Email</button></div>";
   html += "</form>";
   html += "</section>";
+  html += "<section class='panel'>";
+  html += "<h2>PC Upload</h2>";
+  String uploadStatus = pcUploadEnabled ? (pcReceiverURL.length() > 0 ? "Enabled" : "Enabled (no URL set)") : "Disabled";
+  html += "<p class='pill" + String(pcUploadEnabled && pcReceiverURL.length() > 0 ? "" : " warn") + "'>" + uploadStatus + "</p>";
+  html += "<p class='meta'>PC Receiver URL: " + (pcReceiverURL.length() > 0 ? htmlEscape(pcReceiverURL) : String("Not set")) + "<br>Upload Interval: " + String(uploadIntervalMs / 60000) + " minutes</p>";
+  html += "<form class='form-grid' method='POST' action='/pc_upload_settings'>";
+  html += "<label class='check-row'><input type='checkbox' name='enabled' value='1'";
+  if (pcUploadEnabled) {
+    html += " checked";
+  }
+  html += "><span>Enable PC upload</span></label>";
+  html += "<div class='field'><label>PC Receiver URL</label><input type='text' name='pc_url' value='" + htmlEscape(pcReceiverURL) + "' placeholder='http://192.168.1.100:52501'><small>Enter your PC's IP address and port (e.g., http://192.168.1.100:52501)</small></div>";
+  html += "<div class='field'><label>Upload interval (minutes)</label><input type='number' min='1' max='60' name='interval_minutes' value='" + String(uploadIntervalMs / 60000) + "'><small>How often to send data to the PC (default: 5 minutes)</small></div>";
+  html += "<div class='button-row'><input type='submit' value='Save PC Upload Settings'><button class='button-secondary' type='button' onclick=\"fetch('/test_upload').then(r => r.text()).then(msg => alert(msg));\">Test Upload Now</button></div>";
+  html += "</form>";
+  html += "</section>";
   html += "</div>";
   html += "</div>";
   html += "</div></body></html>";
@@ -795,6 +913,26 @@ void setup() {
       server.send(500, "text/plain", "Test email failed. Check Serial output and email settings.");
     }
   });
+  server.on("/pc_upload_settings", HTTP_POST, []() {
+    String url = server.arg("pc_url");
+    url.trim();
+    unsigned long intervalMinutes = server.arg("interval_minutes").toInt();
+    
+    if (intervalMinutes < 1) {
+      intervalMinutes = 5; // Default to 5 minutes
+    }
+    
+    savePCUploadSettings(server.hasArg("enabled"), url, intervalMinutes);
+    server.sendHeader("Location", "/");
+    server.send(303, "text/plain", "PC upload settings saved.");
+  });
+  server.on("/test_upload", []() {
+    if (uploadDataToPC()) {
+      server.send(200, "text/plain", "Test upload successful! Check Serial output and PC receiver logs.");
+    } else {
+      server.send(500, "text/plain", "Test upload failed. Check Serial output and PC upload settings.");
+    }
+  });
   server.begin();
 }
 
@@ -838,6 +976,14 @@ void loop() {
   } else if (lastVoltage > alertThreshold + ALERT_RESET_HYSTERESIS) {
     lowVoltageAlertSent = false;
     lastEmailAttemptMs = 0;
+  }
+
+  // PC Upload logic - upload on interval
+  if (pcUploadEnabled && pcReceiverURL.length() > 0) {
+    if (lastUploadAttemptMs == 0 || millis() - lastUploadAttemptMs >= uploadIntervalMs) {
+      lastUploadAttemptMs = millis();
+      uploadDataToPC();
+    }
   }
 
   Serial.print("Raw ADC: ");

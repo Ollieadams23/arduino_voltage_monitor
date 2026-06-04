@@ -1,0 +1,6 @@
+# PC Receiver dependencies
+# 
+# The server (pc_receiver.py) uses only Python standard library - no dependencies needed!
+# 
+# The test script (test_receiver.py) needs:
+requests>=2.31.0

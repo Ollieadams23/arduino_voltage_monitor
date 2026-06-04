@@ -47,14 +47,31 @@ The ESP32 should send this JSON structure:
 
 Upload frequency: Every 5 minutes (aligned with history bucket interval)
 
-## Phase 2: PC Receiver
+## Phase 2: PC Receiver ✓ IN PROGRESS
 
-- Create a small local HTTP receiver on the PC
-- Accept `POST` requests from the ESP32
-- Validate incoming JSON
-- Write the payload to a predictable file path such as `data/latest.json`
-- Optionally append a log file such as `data/history.jsonl`
-- Return a simple success response to the ESP32
+**Status:** Python server created in `pc_receiver.py`
+
+Features implemented:
+- ✓ HTTP server listening on port 52501
+- ✓ Accepts POST requests from ESP32
+- ✓ Validates incoming JSON structure
+- ✓ Writes to `data/latest.json`
+- ✓ Appends to `data/history.jsonl`
+- ✓ Returns success/error responses
+- ✓ Logging to console and `data/receiver.log`
+- ✓ Status page at http://localhost:52501
+
+Files created:
+- `pc_receiver.py` - Main server script
+- `test_receiver.py` - Test script to verify server
+- `PC_RECEIVER_SETUP.md` - Complete setup and troubleshooting guide
+- `requirements.txt` - Python dependencies (requests for testing)
+
+Next steps:
+- Run `python pc_receiver.py` to start the server
+- Run `python -m pip install requests` then `python test_receiver.py` to test
+- Follow `PC_RECEIVER_SETUP.md` to set up automatic startup
+- Find your PC's IP address for ESP32 configuration
 
 ## Phase 3: File Change Handling
 
@@ -87,14 +104,27 @@ Upload frequency: Every 5 minutes (aligned with history bucket interval)
   - NSSM or Windows service wrapper for long-running processes
 - Configure restart behavior if the receiver crashes
 
-## Phase 6: ESP32 Firmware Changes
+## Phase 6: ESP32 Firmware Changes ✓ IN PROGRESS
 
-- Add HTTP client support to the sketch
-- Add configuration for the PC receiver URL
-- Add upload interval control
-- Send JSON to the PC receiver
-- Handle timeout or network failure without blocking the main monitor loop
-- Keep local dashboard and email alerts working even if the PC is offline
+**Status:** HTTP client functionality added to `arduino_voltage_monitor.ino`
+
+Features implemented:
+- ✓ HTTPClient library included
+- ✓ PC receiver URL configuration (saved to preferences)
+- ✓ Upload interval control (configurable in minutes)
+- ✓ JSON builder function with full voltage + history data
+- ✓ uploadDataToPC() function with error handling
+- ✓ Web UI panel for PC upload settings
+- ✓ Test upload button in web interface
+- ✓ Automatic uploads on configured interval
+- ✓ Graceful failure handling (keeps working if PC is offline)
+- ✓ Settings persist across reboots
+
+Next steps:
+- Upload the updated sketch to your ESP32
+- Configure PC receiver URL in the ESP32 web interface
+- Test the upload functionality
+- Verify that local dashboard and email alerts still work when PC is offline
 
 ## Phase 7: Static Site Consumption ✓ COMPLETED
 
