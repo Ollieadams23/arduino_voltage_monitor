@@ -1,7 +1,7 @@
 {
   "voltage": 3.799,
   "threshold": 14.0,
-  "timestamp": 1780563154,
+  "timestamp": 1780563172,
   "ssid": "Repeater-F058",
   "ip": "192.168.1.93",
   "emailEnabled": true,
@@ -2313,12 +2313,12 @@
       },
       {
         "voltage": 3.799,
-        "epoch": 1780563154
+        "epoch": 1780563172
       }
     ],
     "intervalMinutes": 5,
     "totalHours": 48,
     "threshold": 14.0
   },
-  "receivedAt": "2026-06-04T20:49:46.816789"
+  "receivedAt": "2026-06-04T20:50:04.259656"
 }
