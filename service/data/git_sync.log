@@ -454,3 +454,54 @@ origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
 2026-06-05 19:06:40,419 - INFO - Committed: Update voltage data: 13.41V at 2026-06-05 19:06:40
 2026-06-05 19:06:43,334 - INFO - Pushed to remote repository
 2026-06-05 19:06:43,335 - INFO - Sync complete - Voltage: 13.41V
+2026-06-05 19:12:43,437 - INFO - Detected change to latest.json
+2026-06-05 19:12:43,447 - INFO - Detected change to latest.json
+2026-06-05 19:12:44,305 - INFO - Starting Git sync...
+2026-06-05 19:12:44,511 - INFO - Staged data\latest.json
+2026-06-05 19:12:46,302 - INFO - Committed: Update voltage data: 3.831V at 2026-06-05 19:12:44
+2026-06-05 19:12:49,714 - INFO - Detected change to latest.json
+2026-06-05 19:12:49,718 - INFO - Detected change to latest.json
+2026-06-05 19:12:49,905 - INFO - Pushed to remote repository
+2026-06-05 19:12:49,906 - INFO - Sync complete - Voltage: 3.831V
+2026-06-05 19:12:54,922 - INFO - Starting Git sync...
+2026-06-05 19:12:55,397 - INFO - Staged data\latest.json
+2026-06-05 19:12:55,508 - INFO - Committed: Update voltage data: 3.768V at 2026-06-05 19:12:55
+2026-06-05 19:12:58,959 - INFO - Pushed to remote repository
+2026-06-05 19:12:58,959 - INFO - Sync complete - Voltage: 3.768V
+2026-06-05 19:13:33,857 - INFO - Detected change to latest.json
+2026-06-05 19:13:33,866 - INFO - Detected change to latest.json
+2026-06-05 19:13:34,084 - INFO - Starting Git sync...
+2026-06-05 19:13:34,223 - INFO - Staged data\latest.json
+2026-06-05 19:13:34,351 - INFO - Committed: Update voltage data: 3.831V at 2026-06-05 19:13:34
+2026-06-05 19:13:37,712 - INFO - Pushed to remote repository
+2026-06-05 19:13:37,712 - INFO - Sync complete - Voltage: 3.831V
+2026-06-05 19:16:50,844 - INFO - Detected change to latest.json
+2026-06-05 19:16:50,889 - INFO - Detected change to latest.json
+2026-06-05 19:16:51,397 - INFO - Starting Git sync...
+2026-06-05 19:16:51,818 - INFO - Staged data\latest.json
+2026-06-05 19:16:52,798 - INFO - Committed: Update voltage data: 3.831V at 2026-06-05 19:16:51
+2026-06-05 19:16:57,460 - ERROR - Git push failed: To https://github.com/ollieadams23/arduino_voltage_monitor.git
+ ! [rejected]        master -> master (non-fast-forward)
+error: failed to push some refs to 'https://github.com/ollieadams23/arduino_voltage_monitor.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. If you want to integrate the remote changes,
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+2026-06-05 19:16:57,489 - ERROR - You may need to configure Git credentials or check network connection
+2026-06-05 19:17:44,416 - INFO - Detected change to latest.json
+2026-06-05 19:17:44,420 - INFO - Detected change to latest.json
+2026-06-05 19:17:44,426 - INFO - Detected change to latest.json
+2026-06-05 19:17:44,427 - INFO - Detected change to latest.json
+2026-06-05 19:17:44,518 - INFO - Starting Git sync...
+2026-06-05 19:17:44,688 - INFO - Staged data\latest.json
+2026-06-05 19:17:44,865 - INFO - Committed: Update voltage data: 3.824V at 2026-06-05 19:17:44
+2026-06-05 19:17:49,853 - ERROR - Git push failed: To https://github.com/ollieadams23/arduino_voltage_monitor.git
+ ! [rejected]        master -> master (non-fast-forward)
+error: failed to push some refs to 'https://github.com/ollieadams23/arduino_voltage_monitor.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. If you want to integrate the remote changes,
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+2026-06-05 19:17:49,899 - ERROR - You may need to configure Git credentials or check network connection

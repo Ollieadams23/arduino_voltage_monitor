@@ -536,7 +536,7 @@
     }
 
     function updateData() {
-      const dataUrl = 'data/latest.json';
+      const dataUrl = 'service/data/latest.json';
       
       fetch(dataUrl + '?t=' + Date.now())
         .then(response => {

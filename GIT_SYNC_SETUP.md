@@ -161,43 +161,66 @@ python git_sync.py
 
 I can create a launcher script that runs both together.
 
-## Step 5: Windows Startup Automation
+## Step 5: Running Continuously
 
-### Method 1: Windows Services (Recommended)
+You need to run two scripts continuously in the background:
+1. `pc_receiver.py` - Receives ESP32 data via HTTP
+2. `git_sync.py` - Watches for changes and pushes to GitHub
 
-The repository now includes Windows service wrappers for both scripts.
+### Option A: Two Terminal Windows (Manual)
 
-1. Install the service dependency:
-   ```powershell
-   python -m pip install -r requirements.txt
-   ```
-2. Open PowerShell **as Administrator**.
-3. Install and start both services:
-   ```powershell
-   .\install_services.cmd
-   ```
-4. Check status:
-   ```powershell
-   Get-Service ESP32VoltageReceiver, ESP32GitSync
-   ```
+Terminal 1:
+```powershell
+cd service
+python pc_receiver.py
+```
 
-The Git sync service depends on the receiver service and is configured to restart automatically if it exits.
+Terminal 2:
+```powershell
+cd service
+python git_sync.py
+```
 
-### Optional: Tray Status Icon
+Keep both terminals open. This is the simplest option for testing and development.
 
-To keep a live status icon in the Windows tray:
+### Option B: System Tray Monitor (Recommended)
+
+Run the tray status app to monitor both scripts from your taskbar:
 
 ```powershell
-python -m pip install -r requirements.txt
-.\start_tray_status.cmd
+cd service
+python tray_status.py
 ```
 
 The tray icon shows:
-- green when both services are running and data is fresh
-- yellow when services are running but data is stale or only one service is up
-- red when services are stopped or not installed
+- **Green** – Both scripts running and data is fresh
+- **Yellow** – Scripts running but waiting for ESP32 updates, or only one running
+- **Red** – Scripts stopped or not responding
 
-Its menu also lets you start or stop each service and open the receiver or sync logs.
+The tray menu lets you:
+- View real-time voltage and sync status
+- Open the receiver status page
+- View logs
+- Quit the app
+
+### Option C: Task Scheduler (Auto-start at Boot)
+
+To auto-start the scripts when Windows boots:
+
+1. Open Task Scheduler (`taskschd.msc`)
+2. Create a new task for `pc_receiver.py`:
+   - **General**: Name = "ESP32 Receiver", Run whether user is logged on
+   - **Trigger**: At startup (with 30-second delay for network)
+   - **Action**: Run `python pc_receiver.py` in the `service/` folder
+   - **Settings**: Restart on failure every 1 minute, max 3 attempts
+
+3. Create another task for `git_sync.py` with the same settings
+
+4. (Optional) Create a task for `tray_status.py` to auto-launch the monitor
+
+### Optional: Tray Status Icon
+
+If you want a live status indicator in your Windows tray:
 
 To remove the services:
 

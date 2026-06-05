@@ -2,7 +2,7 @@
 
 Below is a simple schematic for safely measuring up to 12V with your ESP32 using a voltage divider:
 
-```
+
 (Vin: 12V or 9V)
    |
   [100kΩ]

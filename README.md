@@ -117,14 +117,17 @@ The ESP32 → PC → Git → GitHub Pages flow:
 See [HOWTO_PC_GIT_SYNC.md](HOWTO_PC_GIT_SYNC.md#L1) for complete setup instructions including:
 - PC receiver script installation
 - Git automation configuration
-- Windows service installation and startup automation
-- ESP32 firmware modifications
+- Running scripts continuously and monitoring status
 
-For the Windows service installer, use `install_services.cmd` from an elevated terminal.
+To monitor both scripts from your Windows taskbar, run the tray status app after installing dependencies:
 
-For a tray icon showing receiver and Git sync status, run `start_tray_status.cmd` after installing the Windows dependencies.
+```powershell
+cd service
+python -m pip install -r ../requirements.txt
+python tray_status.py
+```
 
-The actual Windows service setup files are grouped under `service_setup/`.
+The tray icon shows real-time status and lets you view logs or open the receiver page.
 
 See [TODO.md](TODO.md#L1) for the full implementation task breakdown.
 
