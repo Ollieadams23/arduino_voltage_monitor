@@ -1,0 +1,156 @@
+2026-06-05 17:05:48,220 - INFO - ============================================================
+2026-06-05 17:05:48,221 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-05 17:05:48,223 - INFO - ============================================================
+2026-06-05 17:05:48,224 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-05 17:05:48,225 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-05 17:05:48,227 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-05 17:05:48,230 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:05:48,233 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-05 17:05:48,235 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-05 17:05:48,236 - INFO - Press Ctrl+C to stop
+2026-06-05 17:05:48,237 - INFO - ============================================================
+2026-06-05 17:08:58,886 - INFO - ============================================================
+2026-06-05 17:08:58,887 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-05 17:08:58,887 - INFO - ============================================================
+2026-06-05 17:08:58,888 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-05 17:08:58,888 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-05 17:08:58,888 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-05 17:08:58,889 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:08:58,889 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-05 17:08:58,890 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-05 17:08:58,890 - INFO - Press Ctrl+C to stop
+2026-06-05 17:08:58,890 - INFO - ============================================================
+2026-06-05 17:09:21,145 - INFO - ============================================================
+2026-06-05 17:09:21,145 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-05 17:09:21,145 - INFO - ============================================================
+2026-06-05 17:09:21,146 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-05 17:09:21,146 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-05 17:09:21,146 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-05 17:09:21,146 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:09:21,146 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-05 17:09:21,147 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-05 17:09:21,147 - INFO - Press Ctrl+C to stop
+2026-06-05 17:09:21,147 - INFO - ============================================================
+2026-06-05 17:11:52,187 - INFO - ============================================================
+2026-06-05 17:11:52,187 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-05 17:11:52,187 - INFO - ============================================================
+2026-06-05 17:11:52,187 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-05 17:11:52,187 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-05 17:11:52,188 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-05 17:11:52,188 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:11:52,188 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-05 17:11:52,188 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-05 17:11:52,188 - INFO - Press Ctrl+C to stop
+2026-06-05 17:11:52,188 - INFO - ============================================================
+2026-06-05 17:13:20,349 - INFO - ============================================================
+2026-06-05 17:13:20,349 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-05 17:13:20,349 - INFO - ============================================================
+2026-06-05 17:13:20,350 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-05 17:13:20,350 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-05 17:13:20,350 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-05 17:13:20,350 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:13:20,351 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-05 17:13:20,351 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-05 17:13:20,351 - INFO - Press Ctrl+C to stop
+2026-06-05 17:13:20,352 - INFO - ============================================================
+2026-06-05 17:15:10,978 - INFO - ============================================================
+2026-06-05 17:15:10,978 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-05 17:15:10,978 - INFO - ============================================================
+2026-06-05 17:15:10,978 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-05 17:15:10,978 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-05 17:15:10,978 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-05 17:15:10,979 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:15:10,979 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-05 17:15:10,979 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-05 17:15:10,979 - INFO - Press Ctrl+C to stop
+2026-06-05 17:15:10,979 - INFO - ============================================================
+2026-06-05 17:15:17,707 - INFO - ============================================================
+2026-06-05 17:15:17,708 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-05 17:15:17,709 - INFO - ============================================================
+2026-06-05 17:15:17,709 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-05 17:15:17,710 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-05 17:15:17,711 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-05 17:15:17,711 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:15:17,712 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-05 17:15:17,712 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-05 17:15:17,712 - INFO - Press Ctrl+C to stop
+2026-06-05 17:15:17,712 - INFO - ============================================================
+2026-06-05 17:24:26,642 - INFO - ============================================================
+2026-06-05 17:24:26,642 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-05 17:24:26,642 - INFO - ============================================================
+2026-06-05 17:24:26,643 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-05 17:24:26,643 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-05 17:24:26,643 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-05 17:24:26,643 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:24:26,643 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-05 17:24:26,643 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-05 17:24:26,644 - INFO - Press Ctrl+C to stop
+2026-06-05 17:24:26,644 - INFO - ============================================================
+2026-06-05 17:24:32,576 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 12.795V
+2026-06-05 17:24:32,590 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-05 17:25:28,079 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.413V
+2026-06-05 17:25:28,104 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-05 17:26:37,892 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.504V
+2026-06-05 17:26:37,912 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-05 17:26:39,808 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.483V
+2026-06-05 17:26:39,821 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-05 17:29:21,828 - INFO - ============================================================
+2026-06-05 17:29:21,829 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-05 17:29:21,830 - INFO - ============================================================
+2026-06-05 17:29:21,831 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-05 17:29:21,832 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-05 17:29:21,832 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-05 17:29:21,833 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:29:21,833 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-05 17:29:21,833 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-05 17:29:21,834 - INFO - Press Ctrl+C to stop
+2026-06-05 17:29:21,834 - INFO - ============================================================
+2026-06-05 17:29:36,655 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.308V
+2026-06-05 17:29:36,674 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-05 17:30:37,621 - INFO - ============================================================
+2026-06-05 17:30:37,621 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-05 17:30:37,622 - INFO - ============================================================
+2026-06-05 17:30:37,622 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-05 17:30:37,622 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-05 17:30:37,623 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-05 17:30:37,623 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:30:37,624 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-05 17:30:37,624 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-05 17:30:37,625 - INFO - Press Ctrl+C to stop
+2026-06-05 17:30:37,625 - INFO - ============================================================
+2026-06-05 17:30:50,863 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.389V
+2026-06-05 17:30:50,881 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-05 17:31:37,985 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.371V
+2026-06-05 17:31:37,998 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-05 17:36:37,965 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.486V
+2026-06-05 17:36:37,987 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-05 17:41:37,989 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.305V
+2026-06-05 17:41:38,004 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-05 17:46:37,932 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.448V
+2026-06-05 17:46:37,944 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-05 17:51:03,695 - INFO - ============================================================
+2026-06-05 17:51:03,696 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-05 17:51:03,698 - INFO - ============================================================
+2026-06-05 17:51:03,699 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-05 17:51:03,699 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-05 17:51:03,699 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-05 17:51:03,699 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:51:03,700 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-05 17:51:03,700 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-05 17:51:03,701 - INFO - Press Ctrl+C to stop
+2026-06-05 17:51:03,701 - INFO - ============================================================
+2026-06-05 17:51:37,916 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.277V
+2026-06-05 17:51:37,929 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-05 17:57:53,279 - INFO - ============================================================
+2026-06-05 17:57:53,280 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-05 17:57:53,281 - INFO - ============================================================
+2026-06-05 17:57:53,281 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-05 17:57:53,281 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-05 17:57:53,282 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-05 17:57:53,282 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:57:53,283 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-05 17:57:53,283 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-05 17:57:53,284 - INFO - Press Ctrl+C to stop
+2026-06-05 17:57:53,284 - INFO - ============================================================
+2026-06-05 17:58:17,925 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.469V
+2026-06-05 17:58:17,939 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -

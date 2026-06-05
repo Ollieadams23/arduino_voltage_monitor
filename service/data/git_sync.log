@@ -1,0 +1,244 @@
+2026-06-05 17:05:52,558 - INFO - ============================================================
+2026-06-05 17:05:52,559 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-05 17:05:52,559 - INFO - ============================================================
+2026-06-05 17:05:52,559 - INFO - Checking Git configuration...
+2026-06-05 17:05:52,607 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-05 17:05:52,658 - INFO - Git repository detected
+2026-06-05 17:05:52,699 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-05 17:05:52,699 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:05:52,699 - INFO - Debounce time: 10 seconds
+2026-06-05 17:05:52,700 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-05 17:05:52,700 - INFO - Press Ctrl+C to stop
+2026-06-05 17:05:52,700 - INFO - ============================================================
+2026-06-05 17:08:25,367 - INFO - ============================================================
+2026-06-05 17:08:25,368 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-05 17:08:25,368 - INFO - ============================================================
+2026-06-05 17:08:25,368 - INFO - Checking Git configuration...
+2026-06-05 17:08:25,405 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-05 17:08:25,443 - INFO - Git repository detected
+2026-06-05 17:08:25,483 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-05 17:08:25,483 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:08:25,484 - INFO - Debounce time: 10 seconds
+2026-06-05 17:08:25,484 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-05 17:08:25,484 - INFO - Press Ctrl+C to stop
+2026-06-05 17:08:25,484 - INFO - ============================================================
+2026-06-05 17:09:03,406 - INFO - ============================================================
+2026-06-05 17:09:03,407 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-05 17:09:03,407 - INFO - ============================================================
+2026-06-05 17:09:03,408 - INFO - Checking Git configuration...
+2026-06-05 17:09:03,446 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-05 17:09:03,487 - INFO - Git repository detected
+2026-06-05 17:09:03,528 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-05 17:09:03,529 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:09:03,531 - INFO - Debounce time: 10 seconds
+2026-06-05 17:09:03,533 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-05 17:09:03,533 - INFO - Press Ctrl+C to stop
+2026-06-05 17:09:03,534 - INFO - ============================================================
+2026-06-05 17:09:25,295 - INFO - ============================================================
+2026-06-05 17:09:25,295 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-05 17:09:25,296 - INFO - ============================================================
+2026-06-05 17:09:25,296 - INFO - Checking Git configuration...
+2026-06-05 17:09:25,332 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-05 17:09:25,369 - INFO - Git repository detected
+2026-06-05 17:09:25,409 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-05 17:09:25,409 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:09:25,410 - INFO - Debounce time: 10 seconds
+2026-06-05 17:09:25,410 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-05 17:09:25,410 - INFO - Press Ctrl+C to stop
+2026-06-05 17:09:25,410 - INFO - ============================================================
+2026-06-05 17:11:56,304 - INFO - ============================================================
+2026-06-05 17:11:56,305 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-05 17:11:56,305 - INFO - ============================================================
+2026-06-05 17:11:56,305 - INFO - Checking Git configuration...
+2026-06-05 17:11:56,345 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-05 17:11:56,391 - INFO - Git repository detected
+2026-06-05 17:11:56,440 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-05 17:11:56,441 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:11:56,442 - INFO - Debounce time: 10 seconds
+2026-06-05 17:11:56,442 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-05 17:11:56,443 - INFO - Press Ctrl+C to stop
+2026-06-05 17:11:56,443 - INFO - ============================================================
+2026-06-05 17:13:24,369 - INFO - ============================================================
+2026-06-05 17:13:24,369 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-05 17:13:24,370 - INFO - ============================================================
+2026-06-05 17:13:24,370 - INFO - Checking Git configuration...
+2026-06-05 17:13:24,409 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-05 17:13:24,451 - INFO - Git repository detected
+2026-06-05 17:13:24,491 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-05 17:13:24,492 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:13:24,493 - INFO - Debounce time: 10 seconds
+2026-06-05 17:13:24,495 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-05 17:13:24,496 - INFO - Press Ctrl+C to stop
+2026-06-05 17:13:24,496 - INFO - ============================================================
+2026-06-05 17:15:15,412 - INFO - ============================================================
+2026-06-05 17:15:15,413 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-05 17:15:15,413 - INFO - ============================================================
+2026-06-05 17:15:15,413 - INFO - Checking Git configuration...
+2026-06-05 17:15:15,470 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-05 17:15:15,522 - INFO - Git repository detected
+2026-06-05 17:15:15,568 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-05 17:15:15,569 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:15:15,570 - INFO - Debounce time: 10 seconds
+2026-06-05 17:15:15,570 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-05 17:15:15,570 - INFO - Press Ctrl+C to stop
+2026-06-05 17:15:15,570 - INFO - ============================================================
+2026-06-05 17:15:22,373 - INFO - ============================================================
+2026-06-05 17:15:22,374 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-05 17:15:22,375 - INFO - ============================================================
+2026-06-05 17:15:22,375 - INFO - Checking Git configuration...
+2026-06-05 17:15:22,413 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-05 17:15:22,453 - INFO - Git repository detected
+2026-06-05 17:15:22,491 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-05 17:15:22,491 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:15:22,493 - INFO - Debounce time: 10 seconds
+2026-06-05 17:15:22,495 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-05 17:15:22,495 - INFO - Press Ctrl+C to stop
+2026-06-05 17:15:22,496 - INFO - ============================================================
+2026-06-05 17:24:31,685 - INFO - ============================================================
+2026-06-05 17:24:31,686 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-05 17:24:31,686 - INFO - ============================================================
+2026-06-05 17:24:31,686 - INFO - Checking Git configuration...
+2026-06-05 17:24:31,728 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-05 17:24:31,773 - INFO - Git repository detected
+2026-06-05 17:24:31,821 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-05 17:24:31,821 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:24:31,821 - INFO - Debounce time: 10 seconds
+2026-06-05 17:24:31,821 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-05 17:24:31,822 - INFO - Press Ctrl+C to stop
+2026-06-05 17:24:31,822 - INFO - ============================================================
+2026-06-05 17:24:32,576 - INFO - Detected change to latest.json
+2026-06-05 17:24:32,823 - INFO - Starting Git sync...
+2026-06-05 17:24:32,931 - INFO - Staged data\latest.json
+2026-06-05 17:24:33,057 - INFO - Committed: Update voltage data: 12.795V at 2026-06-05 17:24:32
+2026-06-05 17:24:35,847 - INFO - Pushed to remote repository
+2026-06-05 17:24:35,847 - INFO - Sync complete - Voltage: 12.795V
+2026-06-05 17:25:28,075 - INFO - Detected change to latest.json
+2026-06-05 17:25:28,079 - INFO - Detected change to latest.json
+2026-06-05 17:25:28,913 - INFO - Starting Git sync...
+2026-06-05 17:25:29,054 - INFO - Staged data\latest.json
+2026-06-05 17:25:29,192 - INFO - Committed: Update voltage data: 13.413V at 2026-06-05 17:25:29
+2026-06-05 17:25:31,806 - INFO - Pushed to remote repository
+2026-06-05 17:25:31,806 - INFO - Sync complete - Voltage: 13.413V
+2026-06-05 17:26:37,888 - INFO - Detected change to latest.json
+2026-06-05 17:26:37,892 - INFO - Detected change to latest.json
+2026-06-05 17:26:37,998 - INFO - Starting Git sync...
+2026-06-05 17:26:38,213 - INFO - Staged data\latest.json
+2026-06-05 17:26:38,353 - INFO - Committed: Update voltage data: 13.504V at 2026-06-05 17:26:38
+2026-06-05 17:26:39,806 - INFO - Detected change to latest.json
+2026-06-05 17:26:39,808 - INFO - Detected change to latest.json
+2026-06-05 17:26:41,124 - INFO - Pushed to remote repository
+2026-06-05 17:26:41,124 - INFO - Sync complete - Voltage: 13.504V
+2026-06-05 17:26:48,128 - INFO - Starting Git sync...
+2026-06-05 17:26:48,226 - INFO - Staged data\latest.json
+2026-06-05 17:26:48,343 - INFO - Committed: Update voltage data: 13.483V at 2026-06-05 17:26:48
+2026-06-05 17:26:51,892 - INFO - Pushed to remote repository
+2026-06-05 17:26:51,893 - INFO - Sync complete - Voltage: 13.483V
+2026-06-05 17:29:26,770 - INFO - ============================================================
+2026-06-05 17:29:26,771 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-05 17:29:26,771 - INFO - ============================================================
+2026-06-05 17:29:26,771 - INFO - Checking Git configuration...
+2026-06-05 17:29:26,820 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-05 17:29:26,862 - INFO - Git repository detected
+2026-06-05 17:29:26,901 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-05 17:29:26,901 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:29:26,902 - INFO - Debounce time: 10 seconds
+2026-06-05 17:29:26,902 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-05 17:29:26,902 - INFO - Press Ctrl+C to stop
+2026-06-05 17:29:26,902 - INFO - ============================================================
+2026-06-05 17:29:36,652 - INFO - Detected change to latest.json
+2026-06-05 17:29:36,656 - INFO - Detected change to latest.json
+2026-06-05 17:29:36,909 - INFO - Starting Git sync...
+2026-06-05 17:29:37,052 - INFO - Staged data\latest.json
+2026-06-05 17:29:37,207 - INFO - Committed: Update voltage data: 13.308V at 2026-06-05 17:29:37
+2026-06-05 17:29:39,971 - INFO - Pushed to remote repository
+2026-06-05 17:29:39,971 - INFO - Sync complete - Voltage: 13.308V
+2026-06-05 17:30:42,325 - INFO - ============================================================
+2026-06-05 17:30:42,326 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-05 17:30:42,326 - INFO - ============================================================
+2026-06-05 17:30:42,326 - INFO - Checking Git configuration...
+2026-06-05 17:30:42,365 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-05 17:30:42,409 - INFO - Git repository detected
+2026-06-05 17:30:42,452 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-05 17:30:42,452 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:30:42,454 - INFO - Debounce time: 10 seconds
+2026-06-05 17:30:42,456 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-05 17:30:42,456 - INFO - Press Ctrl+C to stop
+2026-06-05 17:30:42,457 - INFO - ============================================================
+2026-06-05 17:30:50,858 - INFO - Detected change to latest.json
+2026-06-05 17:30:50,863 - INFO - Detected change to latest.json
+2026-06-05 17:30:51,463 - INFO - Starting Git sync...
+2026-06-05 17:30:51,568 - INFO - Staged data\latest.json
+2026-06-05 17:30:51,684 - INFO - Committed: Update voltage data: 13.389V at 2026-06-05 17:30:51
+2026-06-05 17:30:54,385 - INFO - Pushed to remote repository
+2026-06-05 17:30:54,385 - INFO - Sync complete - Voltage: 13.389V
+2026-06-05 17:31:37,981 - INFO - Detected change to latest.json
+2026-06-05 17:31:37,985 - INFO - Detected change to latest.json
+2026-06-05 17:31:38,410 - INFO - Starting Git sync...
+2026-06-05 17:31:38,505 - INFO - Staged data\latest.json
+2026-06-05 17:31:38,624 - INFO - Committed: Update voltage data: 13.371V at 2026-06-05 17:31:38
+2026-06-05 17:31:41,447 - INFO - Pushed to remote repository
+2026-06-05 17:31:41,448 - INFO - Sync complete - Voltage: 13.371V
+2026-06-05 17:36:37,956 - INFO - Detected change to latest.json
+2026-06-05 17:36:37,965 - INFO - Detected change to latest.json
+2026-06-05 17:36:38,772 - INFO - Starting Git sync...
+2026-06-05 17:36:38,911 - INFO - Staged data\latest.json
+2026-06-05 17:36:39,104 - INFO - Committed: Update voltage data: 13.486V at 2026-06-05 17:36:38
+2026-06-05 17:36:43,277 - INFO - Pushed to remote repository
+2026-06-05 17:36:43,278 - INFO - Sync complete - Voltage: 13.486V
+2026-06-05 17:41:37,985 - INFO - Detected change to latest.json
+2026-06-05 17:41:37,989 - INFO - Detected change to latest.json
+2026-06-05 17:41:38,471 - INFO - Starting Git sync...
+2026-06-05 17:41:38,574 - INFO - Staged data\latest.json
+2026-06-05 17:41:38,691 - INFO - Committed: Update voltage data: 13.305V at 2026-06-05 17:41:38
+2026-06-05 17:41:41,333 - INFO - Pushed to remote repository
+2026-06-05 17:41:41,333 - INFO - Sync complete - Voltage: 13.305V
+2026-06-05 17:46:37,928 - INFO - Detected change to latest.json
+2026-06-05 17:46:37,932 - INFO - Detected change to latest.json
+2026-06-05 17:46:38,529 - INFO - Starting Git sync...
+2026-06-05 17:46:38,628 - INFO - Staged data\latest.json
+2026-06-05 17:46:38,748 - INFO - Committed: Update voltage data: 13.448V at 2026-06-05 17:46:38
+2026-06-05 17:46:41,339 - INFO - Pushed to remote repository
+2026-06-05 17:46:41,339 - INFO - Sync complete - Voltage: 13.448V
+2026-06-05 17:57:57,632 - INFO - ============================================================
+2026-06-05 17:57:57,633 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-05 17:57:57,634 - INFO - ============================================================
+2026-06-05 17:57:57,634 - INFO - Checking Git configuration...
+2026-06-05 17:57:57,692 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-05 17:57:57,754 - INFO - Git repository detected
+2026-06-05 17:57:57,829 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-05 17:57:57,830 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-05 17:57:57,830 - INFO - Debounce time: 10 seconds
+2026-06-05 17:57:57,831 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-05 17:57:57,831 - INFO - Press Ctrl+C to stop
+2026-06-05 17:57:57,831 - INFO - ============================================================
+2026-06-05 17:58:17,922 - INFO - Detected change to latest.json
+2026-06-05 17:58:17,926 - INFO - Detected change to latest.json
+2026-06-05 17:58:18,843 - INFO - Starting Git sync...
+2026-06-05 17:58:18,961 - INFO - Staged data\latest.json
+2026-06-05 17:58:19,097 - INFO - Committed: Update voltage data: 13.469V at 2026-06-05 17:58:18
+2026-06-05 17:58:22,090 - INFO - Pushed to remote repository
+2026-06-05 17:58:22,091 - INFO - Sync complete - Voltage: 13.469V
