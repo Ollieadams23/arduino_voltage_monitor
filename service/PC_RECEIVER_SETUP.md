@@ -149,6 +149,68 @@ pause
 3. Create a shortcut to `start_receiver.bat` in the Startup folder
 4. Right-click the shortcut → Properties → Run: **Minimized**
 
+## System Tray Status Monitor
+
+A system tray application provides real-time status monitoring and service control from the Windows taskbar.
+
+### Starting the Tray App
+
+Run from the service folder:
+```powershell
+python tray_status.py
+```
+
+Or create a shortcut in your Startup folder for automatic launch on login.
+
+### Tray Icon Status Indicators
+
+The icon color indicates overall system health:
+
+- **Green circle** – Healthy: Both services running AND fresh data received
+- **Yellow circle** – Partial: One/both services running but no fresh data yet (waiting for ESP32 updates)
+- **Red circle** – Action needed: Services stopped, not installed, or disconnected
+
+### Tray Menu Features
+
+Click the icon to access:
+
+**Status Information:**
+- Overall status and health summary
+- Receiver service state (Running / Stopped / Not installed)
+- Git Sync service state (Running / Stopped / Not installed)
+- Latest voltage reading and age (minutes since last update)
+- Last Git push timestamp
+
+**Service Controls:**
+- Start/Stop Receiver service
+- Start/Stop Git Sync service
+- Automatic 1-second refresh after any action
+
+**Quick Actions:**
+- Open Receiver Status Page – Opens http://localhost:52501 in default browser
+- Open Receiver Log – Opens `data/receiver.log` in Notepad
+- Open Git Sync Log – Opens `data/git_sync.log` in Notepad
+- Refresh Now – Force immediate status update (otherwise refreshes every 30 seconds)
+- Quit – Exit the tray app
+
+### Data Flow Monitoring
+
+The tray app displays:
+- **Latest Voltage** – Most recent value received from ESP32
+- **Data Age** – How many minutes since the last ESP32 upload
+- **Last Git Push** – Timestamp of the most recent automatic git sync
+
+If no ESP32 data has been received yet, these fields show "not available".
+
+### Auto-Refresh Behavior
+
+Status updates happen every 30 seconds, showing:
+- Service state changes
+- New voltage readings
+- Latest sync times
+
+This keeps CPU usage low while still detecting state changes within ~30 seconds.
+
 ## Verifying It's Running
 
 ### Check if the server is listening:

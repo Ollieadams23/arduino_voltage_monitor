@@ -8,13 +8,13 @@ strCurrentDir = objFSO.GetParentFolderName(WScript.ScriptFullName)
 objShell.CurrentDirectory = strCurrentDir
 
 ' Launch your Python scripts invisibly (, 0) without flashing terminal windows
-objShell.Run "cmd /c python pc_receiver.py", 1, False
+objShell.Run "cmd /c python pc_receiver.py", 0, False
 
 ' Wait exactly 5 seconds (5000 milliseconds) for the receiver to catch its breath
 WScript.Sleep 5000
 
 ' Launch your Git sync script invisibly (, 0)
-objShell.Run "cmd /c python git_sync.py", 1, False
+objShell.Run "cmd /c python git_sync.py", 0, False
 
 ' Safely clear out the objects from your system memory
 Set objShell = Nothing

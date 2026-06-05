@@ -21,7 +21,7 @@ RECEIVER_LOG = DATA_DIR / "receiver.log"
 SYNC_LOG = DATA_DIR / "git_sync.log"
 RECEIVER_SERVICE = "ESP32VoltageReceiver"
 SYNC_SERVICE = "ESP32GitSync"
-REFRESH_SECONDS = 5
+REFRESH_SECONDS = 30
 STALE_MINUTES = 15
 
 
@@ -76,7 +76,7 @@ class TrayStatusApp:
         self._apply_status()
 
     def _service_action(self, service_name: str, action: str):
-        subprocess.run(["sc", action, service_name], capture_output=True, text=True)
+        subprocess.run(["sc", action, service_name], capture_output=True, text=True, creationflags=subprocess.CREATE_NO_WINDOW)
         time.sleep(1)
         self._force_refresh()
 
@@ -148,6 +148,7 @@ class TrayStatusApp:
             capture_output=True,
             text=True,
             timeout=10,
+            creationflags=subprocess.CREATE_NO_WINDOW,
         )
         output = (result.stdout or "") + (result.stderr or "")
         if "FAILED 1060" in output:
