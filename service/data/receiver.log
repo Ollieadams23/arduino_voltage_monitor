@@ -290,3 +290,5 @@
 2026-06-05 19:01:39,253 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
 2026-06-05 19:01:39,818 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.434V
 2026-06-05 19:01:39,830 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-05 19:06:39,807 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.41V
+2026-06-05 19:06:39,823 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -

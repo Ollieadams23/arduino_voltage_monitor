@@ -447,3 +447,10 @@ origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
 2026-06-05 19:01:40,291 - INFO - Committed: Update voltage data: 13.434V at 2026-06-05 19:01:40
 2026-06-05 19:01:44,746 - INFO - Pushed to remote repository
 2026-06-05 19:01:44,747 - INFO - Sync complete - Voltage: 13.434V
+2026-06-05 19:06:39,804 - INFO - Detected change to latest.json
+2026-06-05 19:06:39,807 - INFO - Detected change to latest.json
+2026-06-05 19:06:40,206 - INFO - Starting Git sync...
+2026-06-05 19:06:40,299 - INFO - Staged data\latest.json
+2026-06-05 19:06:40,419 - INFO - Committed: Update voltage data: 13.41V at 2026-06-05 19:06:40
+2026-06-05 19:06:43,334 - INFO - Pushed to remote repository
+2026-06-05 19:06:43,335 - INFO - Sync complete - Voltage: 13.41V
