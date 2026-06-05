@@ -19,8 +19,8 @@ DATA_DIR = PROJECT_ROOT / "data"
 LATEST_FILE = DATA_DIR / "latest.json"
 RECEIVER_LOG = DATA_DIR / "receiver.log"
 SYNC_LOG = DATA_DIR / "git_sync.log"
-RECEIVER_SERVICE = "ESP32VoltageReceiver"
-SYNC_SERVICE = "ESP32GitSync"
+RECEIVER_SCRIPT = "pc_receiver.py"
+SYNC_SCRIPT = "git_sync.py"
 REFRESH_SECONDS = 30
 STALE_MINUTES = 15
 
@@ -53,19 +53,15 @@ class TrayStatusApp:
             pystray.MenuItem(lambda item: self._overall_label(), None, enabled=False),
             pystray.Menu.SEPARATOR,
             pystray.MenuItem(lambda item: self._receiver_label(), None, enabled=False),
-            pystray.MenuItem("Start Receiver", lambda icon, item: self._service_action(RECEIVER_SERVICE, "start")),
-            pystray.MenuItem("Stop Receiver", lambda icon, item: self._service_action(RECEIVER_SERVICE, "stop")),
+            pystray.MenuItem("Open Receiver Log", lambda icon, item: self._open_file(RECEIVER_LOG)),
             pystray.Menu.SEPARATOR,
             pystray.MenuItem(lambda item: self._sync_label(), None, enabled=False),
-            pystray.MenuItem("Start Git Sync", lambda icon, item: self._service_action(SYNC_SERVICE, "start")),
-            pystray.MenuItem("Stop Git Sync", lambda icon, item: self._service_action(SYNC_SERVICE, "stop")),
+            pystray.MenuItem("Open Git Sync Log", lambda icon, item: self._open_file(SYNC_LOG)),
             pystray.Menu.SEPARATOR,
             pystray.MenuItem(lambda item: self._data_label(), None, enabled=False),
             pystray.MenuItem(lambda item: self._sync_time_label(), None, enabled=False),
             pystray.Menu.SEPARATOR,
             pystray.MenuItem("Open Receiver Status Page", lambda icon, item: webbrowser.open("http://localhost:52501")),
-            pystray.MenuItem("Open Receiver Log", lambda icon, item: self._open_file(RECEIVER_LOG)),
-            pystray.MenuItem("Open Git Sync Log", lambda icon, item: self._open_file(SYNC_LOG)),
             pystray.MenuItem("Refresh Now", lambda icon, item: self._force_refresh()),
             pystray.MenuItem("Quit", lambda icon, item: self.stop()),
         )
@@ -88,10 +84,14 @@ class TrayStatusApp:
         return f"Overall: {self.status['overallLabel']}"
 
     def _receiver_label(self):
-        return f"Receiver: {self.status['receiver']}"
+        status = self.status['receiver']
+        hint = "(run: python pc_receiver.py)" if status == "Stopped" else ""
+        return f"Receiver: {status} {hint}".strip()
 
     def _sync_label(self):
-        return f"Git Sync: {self.status['sync']}"
+        status = self.status['sync']
+        hint = "(run: python git_sync.py)" if status == "Stopped" else ""
+        return f"Git Sync: {status} {hint}".strip()
 
     def _data_label(self):
         if self.status["lastVoltage"] is None:
@@ -107,8 +107,8 @@ class TrayStatusApp:
         return f"Last Git push: {self.status['lastSyncAt']}"
 
     def collect_status(self):
-        receiver_state = self._query_service(RECEIVER_SERVICE)
-        sync_state = self._query_service(SYNC_SERVICE)
+        receiver_state = self._check_process_running(RECEIVER_SCRIPT)
+        sync_state = self._check_process_running(SYNC_SCRIPT)
         latest = self._read_latest_data()
         last_sync_at = self._read_last_sync_time()
 
@@ -125,12 +125,12 @@ class TrayStatusApp:
         elif both_running:
             overall = "yellow"
             overall_label = "Running, waiting for fresh data"
-        elif receiver_state == "NOT_INSTALLED" or sync_state == "NOT_INSTALLED":
-            overall = "red"
-            overall_label = "Service not installed"
         elif receiver_state == "RUNNING" or sync_state == "RUNNING":
             overall = "yellow"
-            overall_label = "Partially running"
+            overall_label = "One script running"
+        else:
+            overall = "red"
+            overall_label = "Scripts not running"
 
         return {
             "receiver": self._format_service_state(receiver_state),
@@ -142,31 +142,22 @@ class TrayStatusApp:
             "overallLabel": overall_label,
         }
 
-    def _query_service(self, service_name: str) -> str:
-        result = subprocess.run(
-            ["sc", "query", service_name],
-            capture_output=True,
-            text=True,
-            timeout=10,
-            creationflags=subprocess.CREATE_NO_WINDOW,
-        )
-        output = (result.stdout or "") + (result.stderr or "")
-        if "FAILED 1060" in output:
-            return "NOT_INSTALLED"
-        if result.returncode != 0:
+    def _check_process_running(self, script_name: str) -> str:
+        """Check if a Python script is running by searching process command lines."""
+        try:
+            result = subprocess.run(
+                ["tasklist", "/v", "/fo", "csv"],
+                capture_output=True,
+                text=True,
+                timeout=10,
+                creationflags=subprocess.CREATE_NO_WINDOW,
+            )
+            # Search for python.exe processes with this script name
+            if script_name in result.stdout:
+                return "RUNNING"
+            return "STOPPED"
+        except Exception:
             return "UNKNOWN"
-
-        for line in output.splitlines():
-            if "STATE" in line:
-                if "RUNNING" in line:
-                    return "RUNNING"
-                if "STOPPED" in line:
-                    return "STOPPED"
-                if "START_PENDING" in line:
-                    return "START_PENDING"
-                if "STOP_PENDING" in line:
-                    return "STOP_PENDING"
-        return "UNKNOWN"
 
     def _format_service_state(self, state: str) -> str:
         labels = {

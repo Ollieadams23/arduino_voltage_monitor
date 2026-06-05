@@ -57,97 +57,56 @@ Get-NetIPAddress -AddressFamily IPv4 | Where-Object {$_.IPAddress -like "192.168
 
 Your ESP32 will send data to: `http://YOUR_PC_IP:52501`
 
-## Windows Startup Automation
+## Running the Scripts
 
-### Option A: Windows Service (Recommended)
+The voltage monitor scripts run continuously in the background to receive ESP32 data and sync to GitHub.
 
-This repository now includes service wrappers for both long-running PC scripts.
+### Option 1: Manual Start (Simplest)
 
-1. Install the service dependency:
-   ```powershell
-   python -m pip install -r requirements.txt
-   ```
-2. Open PowerShell **as Administrator**.
-3. Run:
-   ```powershell
-   .\install_services.cmd
-   ```
-4. Verify the receiver service is running:
-   ```powershell
-   Get-Service ESP32VoltageReceiver
-   ```
-
-To remove the services later:
+Open PowerShell in the `service/` folder and run:
 
 ```powershell
-.\uninstall_services.cmd
+python pc_receiver.py
+python git_sync.py
 ```
 
-### Option B: Task Scheduler
+Run each in a separate terminal window, or use a process manager to keep them running.
+
+### Option 2: Using the Tray Status App
+
+The system tray app provides visual status monitoring and control:
+
+```powershell
+python tray_status.py
+```
+
+See [System Tray Status Monitor](#system-tray-status-monitor) section below for details.
+
+### Option 3: Task Scheduler (Auto-start at Boot)
+
+To auto-start the scripts when Windows boots:
 
 1. Open Task Scheduler (`taskschd.msc`)
-2. Click **Create Task** (not "Create Basic Task")
-3. **General** tab:
-   - Name: `ESP32 Voltage Receiver`
-   - Description: `HTTP server to receive voltage data from ESP32`
-   - Run whether user is logged on or not: ✓
-   - Run with highest privileges: ✓
-   - Hidden: ✓ (optional)
+2. Create a new task for `pc_receiver.py`:
+   - **General**: Run whether user is logged on or not
+   - **Trigger**: At startup (with 30-second delay)
+   - **Action**: Run `python pc_receiver.py` in the service folder
+   - **Settings**: Restart on failure
 
-4. **Triggers** tab → New:
-   - Begin the task: **At startup**
-   - Delay task for: **30 seconds** (gives network time to connect)
-   - Enabled: ✓
+3. Repeat for `git_sync.py` and `tray_status.py` (optional)
 
-5. **Actions** tab → New:
-   - Action: **Start a program**
-   - Program/script: `python`
-   - Add arguments: `pc_receiver.py`
-   - Start in: `C:\Users\Ollie\Documents\projects\voltage monitor`
+### Option 4: Startup Shortcut
 
-6. **Conditions** tab:
-   - Uncheck "Start the task only if the computer is on AC power"
-   - Check "Wake the computer to run this task" (optional)
+Create a `.vbs` script to launch the Python scripts hidden in the background on login:
 
-7. **Settings** tab:
-   - Allow task to be run on demand: ✓
-   - Run task as soon as possible after a scheduled start is missed: ✓
-   - If the task fails, restart every: **1 minute**
-   - Attempt to restart up to: **3 times**
-   - Stop the task if it runs longer than: **Unchecked** (needs to run continuously)
-   - If the running task does not end when requested: **Do not stop**
-
-8. Click **OK** and enter your Windows password
-
-**Test the task:**
-```powershell
-Start-ScheduledTask -TaskName "ESP32 Voltage Receiver"
+```vbs
+' start_scripts.vbs
+Set objShell = CreateObject("WScript.Shell")
+objShell.Run "python C:\Path\To\service\pc_receiver.py", 0, False
+objShell.Run "python C:\Path\To\service\git_sync.py", 0, False
 ```
 
-**Check if it's running:**
-```powershell
-Get-ScheduledTask -TaskName "ESP32 Voltage Receiver" | Get-ScheduledTaskInfo
-```
-
-**View logs:**
-```powershell
-Get-Content "data\receiver.log" -Tail 20 -Wait
-```
-
-### Option C: Startup Folder (Simple, but requires login)
-
-1. Create a batch file `start_receiver.bat`:
-
-```batch
-@echo off
-cd /d "%~dp0"
-python pc_receiver.py
-pause
-```
-
-2. Press `Win+R`, type `shell:startup`, press Enter
-3. Create a shortcut to `start_receiver.bat` in the Startup folder
-4. Right-click the shortcut → Properties → Run: **Minimized**
+Place in your Startup folder (`shell:startup`) for auto-launch on login.
 
 ## System Tray Status Monitor
 
@@ -166,9 +125,9 @@ Or create a shortcut in your Startup folder for automatic launch on login.
 
 The icon color indicates overall system health:
 
-- **Green circle** – Healthy: Both services running AND fresh data received
-- **Yellow circle** – Partial: One/both services running but no fresh data yet (waiting for ESP32 updates)
-- **Red circle** – Action needed: Services stopped, not installed, or disconnected
+- **Green circle** – Healthy: Both scripts running AND fresh data received
+- **Yellow circle** – Partial: Scripts running but no fresh data yet (waiting for ESP32 updates)
+- **Red circle** – Action needed: Scripts stopped or disconnected
 
 ### Tray Menu Features
 
@@ -176,21 +135,16 @@ Click the icon to access:
 
 **Status Information:**
 - Overall status and health summary
-- Receiver service state (Running / Stopped / Not installed)
-- Git Sync service state (Running / Stopped / Not installed)
+- Receiver script state
+- Git Sync script state
 - Latest voltage reading and age (minutes since last update)
 - Last Git push timestamp
-
-**Service Controls:**
-- Start/Stop Receiver service
-- Start/Stop Git Sync service
-- Automatic 1-second refresh after any action
 
 **Quick Actions:**
 - Open Receiver Status Page – Opens http://localhost:52501 in default browser
 - Open Receiver Log – Opens `data/receiver.log` in Notepad
 - Open Git Sync Log – Opens `data/git_sync.log` in Notepad
-- Refresh Now – Force immediate status update (otherwise refreshes every 30 seconds)
+- Refresh Now – Force immediate status update
 - Quit – Exit the tray app
 
 ### Data Flow Monitoring
@@ -205,11 +159,9 @@ If no ESP32 data has been received yet, these fields show "not available".
 ### Auto-Refresh Behavior
 
 Status updates happen every 30 seconds, showing:
-- Service state changes
+- Script state
 - New voltage readings
 - Latest sync times
-
-This keeps CPU usage low while still detecting state changes within ~30 seconds.
 
 ## Verifying It's Running
 
