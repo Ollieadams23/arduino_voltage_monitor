@@ -131,22 +131,22 @@ def sync_to_git():
     
     logger.info(f"Staged {relative_file}")
     
-    # Commit
-    returncode, stdout, stderr = run_git_command(['commit', '-m', commit_message])
+    # Commit (amend previous commit to keep history clean)
+    returncode, stdout, stderr = run_git_command(['commit', '--amend', '-m', commit_message])
     if returncode != 0:
         logger.error(f"Git commit failed: {stderr}")
         return
     
-    logger.info(f"Committed: {commit_message}")
+    logger.info(f"Committed (amended): {commit_message}")
     
-    # Push
-    returncode, stdout, stderr = run_git_command(['push'])
+    # Push with force to data-deploy branch
+    returncode, stdout, stderr = run_git_command(['push', 'origin', 'data-deploy', '--force'])
     if returncode != 0:
         logger.error(f"Git push failed: {stderr}")
         logger.error("You may need to configure Git credentials or check network connection")
         return
     
-    logger.info("Pushed to remote repository")
+    logger.info("Pushed to origin/data-deploy (force)")
     logger.info(f"Sync complete - Voltage: {voltage}V")
 
 

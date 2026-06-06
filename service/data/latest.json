@@ -1,7 +1,7 @@
 {
-  "voltage": 13.458,
+  "voltage": 13.43,
   "threshold": 12.6,
-  "timestamp": 1780723277,
+  "timestamp": 1780723811,
   "ssid": "Repeater-F058",
   "ip": "192.168.1.93",
   "emailEnabled": true,
@@ -11,14 +11,6 @@
   "repeatAlertHours": 1.0,
   "history": {
     "points": [
-      {
-        "voltage": 3.845,
-        "epoch": 1780544999
-      },
-      {
-        "voltage": 3.841,
-        "epoch": 1780545299
-      },
       {
         "voltage": 3.831,
         "epoch": 1780545599
@@ -2312,13 +2304,21 @@
         "epoch": 1780723199
       },
       {
-        "voltage": 13.458,
-        "epoch": 1780723277
+        "voltage": 13.315,
+        "epoch": 1780723499
+      },
+      {
+        "voltage": 13.444,
+        "epoch": 1780723799
+      },
+      {
+        "voltage": 13.43,
+        "epoch": 1780723810
       }
     ],
     "intervalMinutes": 5,
     "totalHours": 48,
     "threshold": 12.6
   },
-  "receivedAt": "2026-06-06T17:18:26.512711"
+  "receivedAt": "2026-06-06T17:27:20.665508"
 }
