@@ -71,3 +71,109 @@
 2026-06-06 17:18:26,900 - INFO - Committed: Update voltage data: 13.458V at 2026-06-06 17:18:26
 2026-06-06 17:18:29,759 - INFO - Pushed to remote repository
 2026-06-06 17:18:29,761 - INFO - Sync complete - Voltage: 13.458V
+2026-06-06 17:20:37,175 - INFO - ============================================================
+2026-06-06 17:20:37,176 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-06 17:20:37,176 - INFO - ============================================================
+2026-06-06 17:20:37,176 - INFO - Checking Git configuration...
+2026-06-06 17:20:37,215 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-06 17:20:37,261 - INFO - Git repository detected
+2026-06-06 17:20:37,306 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-06 17:20:37,307 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-06 17:20:37,307 - INFO - Debounce time: 10 seconds
+2026-06-06 17:20:37,307 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-06 17:20:37,308 - INFO - Press Ctrl+C to stop
+2026-06-06 17:20:37,308 - INFO - ============================================================
+2026-06-06 17:21:56,916 - INFO - Detected change to latest.json
+2026-06-06 17:21:56,923 - INFO - Detected change to latest.json
+2026-06-06 17:21:57,399 - INFO - Starting Git sync...
+2026-06-06 17:21:57,516 - INFO - Staged data\latest.json
+2026-06-06 17:21:57,657 - INFO - Committed (amended): Update voltage data: 13.444V at 2026-06-06 17:21:57
+2026-06-06 17:21:57,765 - ERROR - Git push failed: error: src refspec data-deploy does not match any
+error: failed to push some refs to 'https://github.com/ollieadams23/arduino_voltage_monitor.git'
+
+2026-06-06 17:21:57,765 - ERROR - You may need to configure Git credentials or check network connection
+2026-06-06 17:23:26,500 - INFO - Detected change to latest.json
+2026-06-06 17:23:26,508 - INFO - Detected change to latest.json
+2026-06-06 17:23:26,864 - INFO - Starting Git sync...
+2026-06-06 17:23:26,970 - INFO - Staged data\latest.json
+2026-06-06 17:23:27,101 - INFO - Committed (amended): Update voltage data: 13.434V at 2026-06-06 17:23:26
+2026-06-06 17:23:27,183 - ERROR - Git push failed: error: src refspec data-deploy does not match any
+error: failed to push some refs to 'https://github.com/ollieadams23/arduino_voltage_monitor.git'
+
+2026-06-06 17:23:27,183 - ERROR - You may need to configure Git credentials or check network connection
+2026-06-06 17:24:13,491 - INFO - ============================================================
+2026-06-06 17:24:13,491 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-06 17:24:13,492 - INFO - ============================================================
+2026-06-06 17:24:13,492 - INFO - Checking Git configuration...
+2026-06-06 17:24:13,537 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-06 17:24:13,583 - INFO - Git repository detected
+2026-06-06 17:24:13,626 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-06 17:24:13,627 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-06 17:24:13,627 - INFO - Debounce time: 10 seconds
+2026-06-06 17:24:13,627 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-06 17:24:13,628 - INFO - Press Ctrl+C to stop
+2026-06-06 17:24:13,628 - INFO - ============================================================
+2026-06-06 17:24:25,786 - INFO - Detected change to latest.json
+2026-06-06 17:24:25,792 - INFO - Detected change to latest.json
+2026-06-06 17:24:26,638 - INFO - Starting Git sync...
+2026-06-06 17:24:26,748 - INFO - Staged data\latest.json
+2026-06-06 17:24:26,885 - INFO - Committed (amended): Update voltage data: 13.434V at 2026-06-06 17:24:26
+2026-06-06 17:24:26,963 - ERROR - Git push failed: error: src refspec data-deploy does not match any
+error: failed to push some refs to 'https://github.com/ollieadams23/arduino_voltage_monitor.git'
+
+2026-06-06 17:24:26,963 - ERROR - You may need to configure Git credentials or check network connection
+2026-06-06 17:25:36,437 - INFO - ============================================================
+2026-06-06 17:25:36,437 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-06 17:25:36,438 - INFO - ============================================================
+2026-06-06 17:25:36,438 - INFO - Checking Git configuration...
+2026-06-06 17:25:36,511 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-06 17:25:36,585 - INFO - Git repository detected
+2026-06-06 17:25:36,645 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-06 17:25:36,646 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-06 17:25:36,646 - INFO - Debounce time: 10 seconds
+2026-06-06 17:25:36,646 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-06 17:25:36,647 - INFO - Press Ctrl+C to stop
+2026-06-06 17:25:36,647 - INFO - ============================================================
+2026-06-06 17:25:39,049 - INFO - Detected change to latest.json
+2026-06-06 17:25:39,057 - INFO - Detected change to latest.json
+2026-06-06 17:25:39,648 - INFO - Starting Git sync...
+2026-06-06 17:25:39,778 - INFO - Staged data\latest.json
+2026-06-06 17:25:39,923 - INFO - Committed (amended): Update voltage data: 13.42V at 2026-06-06 17:25:39
+2026-06-06 17:25:40,002 - ERROR - Git push failed: error: src refspec data-deploy does not match any
+error: failed to push some refs to 'https://github.com/ollieadams23/arduino_voltage_monitor.git'
+
+2026-06-06 17:25:40,003 - ERROR - You may need to configure Git credentials or check network connection
+2026-06-06 17:26:49,164 - INFO - ============================================================
+2026-06-06 17:26:49,165 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-06 17:26:49,166 - INFO - ============================================================
+2026-06-06 17:26:49,167 - INFO - Checking Git configuration...
+2026-06-06 17:26:49,244 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-06 17:26:49,333 - INFO - Git repository detected
+2026-06-06 17:26:49,394 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-06 17:26:49,395 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-06 17:26:49,395 - INFO - Debounce time: 10 seconds
+2026-06-06 17:26:49,395 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-06 17:26:49,395 - INFO - Press Ctrl+C to stop
+2026-06-06 17:26:49,395 - INFO - ============================================================
+2026-06-06 17:26:50,625 - INFO - Detected change to latest.json
+2026-06-06 17:26:50,637 - INFO - Detected change to latest.json
+2026-06-06 17:26:51,397 - INFO - Starting Git sync...
+2026-06-06 17:26:51,525 - INFO - Staged data\latest.json
+2026-06-06 17:26:51,675 - INFO - Committed (amended): Update voltage data: 13.434V at 2026-06-06 17:26:51
+2026-06-06 17:26:54,444 - INFO - Pushed to origin/data-deploy (force)
+2026-06-06 17:26:54,444 - INFO - Sync complete - Voltage: 13.434V
+2026-06-06 17:27:20,665 - INFO - Detected change to latest.json
+2026-06-06 17:27:20,671 - INFO - Detected change to latest.json
+2026-06-06 17:27:21,461 - INFO - Starting Git sync...
+2026-06-06 17:27:21,598 - INFO - Staged data\latest.json
+2026-06-06 17:27:21,801 - INFO - Committed (amended): Update voltage data: 13.43V at 2026-06-06 17:27:21
+2026-06-06 17:27:24,901 - INFO - Pushed to origin/data-deploy (force)
+2026-06-06 17:27:24,902 - INFO - Sync complete - Voltage: 13.43V

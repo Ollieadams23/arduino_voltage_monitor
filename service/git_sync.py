@@ -139,8 +139,8 @@ def sync_to_git():
     
     logger.info(f"Committed (amended): {commit_message}")
     
-    # Push with force to data-deploy branch
-    returncode, stdout, stderr = run_git_command(['push', 'origin', 'data-deploy', '--force'])
+    # Push with force to current branch
+    returncode, stdout, stderr = run_git_command(['push', '--force'])
     if returncode != 0:
         logger.error(f"Git push failed: {stderr}")
         logger.error("You may need to configure Git credentials or check network connection")
