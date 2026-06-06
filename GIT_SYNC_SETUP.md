@@ -8,8 +8,10 @@ The workflow:
 1. **ESP32** uploads voltage data to PC receiver (every 5 minutes)
 2. **PC receiver** writes `data/latest.json`
 3. **Git sync script** detects the change
-4. **Git sync script** commits and pushes to GitHub
+4. **Git sync script** commits (amends previous commit) and force-pushes to GitHub
 5. **GitHub Pages** serves the updated data to your static site
+
+**Key behavior:** The script uses `git commit --amend` and `git push --force` to keep only one commit on the branch. This prevents accumulation of many small commits while maintaining an update history via commit messages.
 
 ## Prerequisites
 
@@ -134,10 +136,12 @@ The git sync script should detect the change and push:
 Detected change to latest.json
 Starting Git sync...
 Staged data/latest.json
-Committed: Update voltage data: 12.450V at 2026-06-04 12:34:56
-Pushed to remote repository
+Committed (amended): Update voltage data: 12.450V at 2026-06-04 12:34:56
+Pushed to origin/data-deploy (force)
 ✓ Sync complete - Voltage: 12.450V
 ```
+
+**Note:** The script uses `git commit --amend` and `git push --force` to keep only one commit on the branch, preventing accumulation of many small commits in your repository history.
 
 ## Step 4: Run Both Scripts Together
 

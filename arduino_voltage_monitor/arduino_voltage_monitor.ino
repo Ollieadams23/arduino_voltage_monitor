@@ -16,6 +16,7 @@
 const float ALERT_RESET_HYSTERESIS = 0.20;
 const unsigned long EMAIL_RETRY_INTERVAL_MS = 60000;
 const unsigned long TIME_SYNC_TIMEOUT_MS = 15000;
+const unsigned long LOW_VOLTAGE_ALERT_DELAY_MS = 30000; // 30 seconds before sending initial alert
 const int HISTORY_BASE_INTERVAL_MINUTES = 5;
 const int HISTORY_TOTAL_HOURS = 48;
 const int VOLTAGE_HISTORY_POINTS = (HISTORY_TOTAL_HOURS * 60) / HISTORY_BASE_INTERVAL_MINUTES;
@@ -37,6 +38,7 @@ unsigned long lastReadMs = 0;
 const unsigned long READ_INTERVAL_MS = 1000;
 unsigned long lastEmailAttemptMs = 0;
 bool lowVoltageAlertSent = false;
+unsigned long lowVoltageStartMs = 0; // When voltage first dropped below threshold
 bool emailAlertsEnabled = false;
 String emailSender;
 String emailAppPassword;
@@ -1012,7 +1014,16 @@ void loop() {
 
   bool isLowVoltage = lastVoltage < alertThreshold;
   if (isLowVoltage) {
-    bool shouldSendFirstAlert = !lowVoltageAlertSent && (lastEmailAttemptMs == 0 || millis() - lastEmailAttemptMs >= EMAIL_RETRY_INTERVAL_MS);
+    // Track when voltage first dropped below threshold
+    if (lowVoltageStartMs == 0) {
+      lowVoltageStartMs = millis();
+    }
+    
+    // Only send initial alert if voltage has been low for at least 30 seconds
+    unsigned long timeLowMs = millis() - lowVoltageStartMs;
+    bool hasBeenLowLongEnough = timeLowMs >= LOW_VOLTAGE_ALERT_DELAY_MS;
+    
+    bool shouldSendFirstAlert = !lowVoltageAlertSent && hasBeenLowLongEnough && (lastEmailAttemptMs == 0 || millis() - lastEmailAttemptMs >= EMAIL_RETRY_INTERVAL_MS);
     bool shouldSendRepeatAlert = lowVoltageAlertSent && getRepeatAlertIntervalMs() > 0 && millis() - lastEmailAttemptMs >= getRepeatAlertIntervalMs();
 
     if (shouldSendFirstAlert || shouldSendRepeatAlert) {
@@ -1025,6 +1036,7 @@ void loop() {
   } else if (lastVoltage > alertThreshold + ALERT_RESET_HYSTERESIS) {
     lowVoltageAlertSent = false;
     lastEmailAttemptMs = 0;
+    lowVoltageStartMs = 0; // Reset the timer when voltage recovers
   }
 
   // PC Upload logic - upload on interval

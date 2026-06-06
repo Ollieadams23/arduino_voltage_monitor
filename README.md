@@ -83,11 +83,20 @@ Important:
 ## Alert Behavior
 
 Email alert behavior:
-- first alert sends when voltage drops below the threshold
+- first alert sends **only if voltage stays below the threshold for at least 30 seconds** (prevents false alerts from brief dips)
 - no repeated alerts while voltage stays low unless repeat reminders are enabled
 - repeat reminders send every configured number of hours while voltage remains low
 - setting repeat hours to `0` disables repeat reminders
 - once voltage recovers above threshold plus hysteresis, the alert state resets and the next drop can send a new first alert
+- if voltage briefly recovers above the threshold but drops again within 30 seconds, the timer restarts
+
+## Git Sync Behavior
+
+The included `git_sync.py` script watches the `data/latest.json` file and automatically commits changes to Git:
+- Uses `git commit --amend` to keep only one commit on the branch (overwrites previous commit)
+- Uses `git push --force` to update the remote with the amended commit
+- Prevents accumulating many small commits in the repository history
+- Note: Force push should only be used if this is a dedicated branch for voltage data
 
 ## Test Flow
 
@@ -98,6 +107,7 @@ Email alert behavior:
 5. Configure threshold and email settings.
 6. Press `Send Test Email`.
 7. Check inbox and spam folder.
+8. To test the 30-second alert delay: set a threshold above the current voltage, wait 30+ seconds, then check if an alert arrives.
 
 ## Remote Dashboard (GitHub Pages)
 
