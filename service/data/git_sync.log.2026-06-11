@@ -1,0 +1,45 @@
+2026-06-11 20:52:57,218 - INFO - ============================================================
+2026-06-11 20:52:57,225 - INFO - ESP32 Voltage Monitor - Git Auto-Sync Starting
+2026-06-11 20:52:57,225 - INFO - ============================================================
+2026-06-11 20:52:57,225 - INFO - Checking Git configuration...
+2026-06-11 20:52:57,360 - INFO - Git version: git version 2.47.0.windows.2
+2026-06-11 20:52:57,430 - INFO - Git repository detected
+2026-06-11 20:52:57,498 - INFO - Git remote:
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (fetch)
+origin	https://github.com/ollieadams23/arduino_voltage_monitor.git (push)
+2026-06-11 20:52:57,498 - INFO - Watching for changes: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-11 20:52:57,498 - INFO - Debounce time: 10 seconds
+2026-06-11 20:52:57,498 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\git_sync.log
+2026-06-11 20:52:57,498 - INFO - Press Ctrl+C to stop
+2026-06-11 20:52:57,500 - INFO - ============================================================
+2026-06-11 21:03:51,945 - INFO - Detected change to latest.json
+2026-06-11 21:03:52,405 - INFO - Starting Git sync...
+2026-06-11 21:03:52,805 - INFO - No changes to sync. data\latest.json is already tracked and Git sees no diff.
+2026-06-11 22:04:34,232 - INFO - Detected change to latest.json
+2026-06-11 22:04:34,241 - INFO - Detected change to latest.json
+2026-06-11 22:04:34,300 - INFO - Starting Git sync...
+2026-06-11 22:04:34,459 - INFO - Staged data\latest.json
+2026-06-11 22:04:34,679 - INFO - Committed (amended): Update voltage data: 13.483V at 2026-06-11 22:04:34
+2026-06-11 22:04:37,966 - INFO - Pushed to origin/data-deploy (force)
+2026-06-11 22:04:37,966 - INFO - Sync complete - Voltage: 13.483V
+2026-06-11 22:09:34,118 - INFO - Detected change to latest.json
+2026-06-11 22:09:34,126 - INFO - Detected change to latest.json
+2026-06-11 22:09:34,559 - INFO - Starting Git sync...
+2026-06-11 22:09:34,689 - INFO - Staged data\latest.json
+2026-06-11 22:09:34,854 - INFO - Committed (amended): Update voltage data: 13.49V at 2026-06-11 22:09:34
+2026-06-11 22:09:38,586 - INFO - Pushed to origin/data-deploy (force)
+2026-06-11 22:09:38,587 - INFO - Sync complete - Voltage: 13.49V
+2026-06-11 22:14:34,057 - INFO - Detected change to latest.json
+2026-06-11 22:14:34,066 - INFO - Detected change to latest.json
+2026-06-11 22:14:34,850 - INFO - Starting Git sync...
+2026-06-11 22:14:34,973 - INFO - Staged data\latest.json
+2026-06-11 22:14:35,142 - INFO - Committed (amended): Update voltage data: 13.497V at 2026-06-11 22:14:34
+2026-06-11 22:14:37,926 - INFO - Pushed to origin/data-deploy (force)
+2026-06-11 22:14:37,927 - INFO - Sync complete - Voltage: 13.497V
+2026-06-11 22:19:34,151 - INFO - Detected change to latest.json
+2026-06-11 22:19:34,173 - INFO - Detected change to latest.json
+2026-06-11 22:19:34,450 - INFO - Starting Git sync...
+2026-06-11 22:19:34,665 - INFO - Staged data\latest.json
+2026-06-11 22:19:35,338 - INFO - Committed (amended): Update voltage data: 13.465V at 2026-06-11 22:19:34
+2026-06-11 22:19:38,802 - INFO - Pushed to origin/data-deploy (force)
+2026-06-11 22:19:38,804 - INFO - Sync complete - Voltage: 13.465V

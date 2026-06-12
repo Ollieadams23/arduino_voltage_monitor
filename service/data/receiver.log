@@ -1,107 +1,24 @@
-2026-06-06 16:33:24,516 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.242V
-2026-06-06 16:33:24,538 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 16:38:24,604 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.417V
-2026-06-06 16:38:24,624 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 16:43:25,161 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.179V
-2026-06-06 16:43:25,179 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 16:48:25,922 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 12.805V
-2026-06-06 16:48:25,949 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 16:53:25,935 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.357V
-2026-06-06 16:53:25,955 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 16:58:26,001 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.472V
-2026-06-06 16:58:26,022 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:03:26,561 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.483V
-2026-06-06 17:03:26,583 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:08:26,696 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.465V
-2026-06-06 17:08:26,717 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:13:26,647 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.465V
-2026-06-06 17:13:26,854 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:18:26,519 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.458V
-2026-06-06 17:18:26,537 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:20:32,304 - INFO - ============================================================
-2026-06-06 17:20:32,305 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
-2026-06-06 17:20:32,305 - INFO - ============================================================
-2026-06-06 17:20:32,305 - INFO - Server listening on http://0.0.0.0:52501
-2026-06-06 17:20:32,305 - INFO - ESP32 must be configured with the PC's manual IP address
-2026-06-06 17:20:32,306 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
-2026-06-06 17:20:32,306 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
-2026-06-06 17:20:32,307 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
-2026-06-06 17:20:32,307 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
-2026-06-06 17:20:32,308 - INFO - Press Ctrl+C to stop
-2026-06-06 17:20:32,308 - INFO - ============================================================
-2026-06-06 17:21:56,923 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.444V
-2026-06-06 17:21:56,945 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:23:26,507 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.434V
-2026-06-06 17:23:26,528 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:24:08,713 - INFO - ============================================================
-2026-06-06 17:24:08,713 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
-2026-06-06 17:24:08,966 - INFO - ============================================================
-2026-06-06 17:24:08,967 - INFO - Server listening on http://0.0.0.0:52501
-2026-06-06 17:24:08,967 - INFO - ESP32 must be configured with the PC's manual IP address
-2026-06-06 17:24:08,967 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
-2026-06-06 17:24:08,968 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
-2026-06-06 17:24:08,968 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
-2026-06-06 17:24:08,969 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
-2026-06-06 17:24:08,969 - INFO - Press Ctrl+C to stop
-2026-06-06 17:24:08,969 - INFO - ============================================================
-2026-06-06 17:24:25,792 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.434V
-2026-06-06 17:24:25,817 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:25:31,551 - INFO - ============================================================
-2026-06-06 17:25:31,551 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
-2026-06-06 17:25:31,820 - INFO - ============================================================
-2026-06-06 17:25:31,820 - INFO - Server listening on http://0.0.0.0:52501
-2026-06-06 17:25:31,821 - INFO - ESP32 must be configured with the PC's manual IP address
-2026-06-06 17:25:31,821 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
-2026-06-06 17:25:31,823 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
-2026-06-06 17:25:31,824 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
-2026-06-06 17:25:31,827 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
-2026-06-06 17:25:31,827 - INFO - Press Ctrl+C to stop
-2026-06-06 17:25:31,827 - INFO - ============================================================
-2026-06-06 17:25:39,056 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.42V
-2026-06-06 17:25:39,077 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:26:44,863 - INFO - ============================================================
-2026-06-06 17:26:44,864 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
-2026-06-06 17:26:44,864 - INFO - ============================================================
-2026-06-06 17:26:44,864 - INFO - Server listening on http://0.0.0.0:52501
-2026-06-06 17:26:44,865 - INFO - ESP32 must be configured with the PC's manual IP address
-2026-06-06 17:26:44,865 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
-2026-06-06 17:26:44,865 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
-2026-06-06 17:26:44,865 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
-2026-06-06 17:26:44,865 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
-2026-06-06 17:26:44,866 - INFO - Press Ctrl+C to stop
-2026-06-06 17:26:44,866 - INFO - ============================================================
-2026-06-06 17:26:50,636 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.434V
-2026-06-06 17:26:50,666 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:27:20,671 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.43V
-2026-06-06 17:27:20,699 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:28:27,040 - INFO - ============================================================
-2026-06-06 17:28:27,041 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
-2026-06-06 17:28:27,042 - INFO - ============================================================
-2026-06-06 17:28:27,042 - INFO - Server listening on http://0.0.0.0:52501
-2026-06-06 17:28:27,042 - INFO - ESP32 must be configured with the PC's manual IP address
-2026-06-06 17:28:27,042 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
-2026-06-06 17:28:27,043 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
-2026-06-06 17:28:27,043 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
-2026-06-06 17:28:27,043 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
-2026-06-06 17:28:27,048 - INFO - Press Ctrl+C to stop
-2026-06-06 17:28:27,049 - INFO - ============================================================
-2026-06-06 17:28:27,216 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.462V
-2026-06-06 17:28:27,266 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:28:36,438 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.465V
-2026-06-06 17:28:36,458 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:29:01,483 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.465V
-2026-06-06 17:29:01,505 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:33:27,199 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.441V
-2026-06-06 17:33:27,221 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:38:27,570 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.448V
-2026-06-06 17:38:27,591 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:43:28,405 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.444V
-2026-06-06 17:43:28,426 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:48:28,433 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.451V
-2026-06-06 17:48:28,454 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:53:28,461 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.423V
-2026-06-06 17:53:28,485 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 17:58:28,510 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.444V
-2026-06-06 17:58:28,532 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
-2026-06-06 18:03:28,591 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.343V
-2026-06-06 18:03:28,615 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-06-12 17:57:28,065 - INFO - ============================================================
+2026-06-12 17:57:28,068 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-12 17:57:28,069 - INFO - ============================================================
+2026-06-12 17:57:28,069 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-12 17:57:28,069 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-12 17:57:28,069 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-12 17:57:28,070 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-12 17:57:28,070 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-12 17:57:28,071 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-12 17:57:28,071 - INFO - Press Ctrl+C to stop
+2026-06-12 17:57:28,071 - INFO - ============================================================
+2026-06-12 17:57:57,846 - INFO - ============================================================
+2026-06-12 17:57:57,847 - INFO - ESP32 Voltage Monitor - PC Receiver Starting
+2026-06-12 17:57:57,847 - INFO - ============================================================
+2026-06-12 17:57:57,847 - INFO - Server listening on http://0.0.0.0:52501
+2026-06-12 17:57:57,848 - INFO - ESP32 must be configured with the PC's manual IP address
+2026-06-12 17:57:57,848 - INFO - Data directory: C:\Users\Ollie\Documents\projects\voltage monitor\service\data
+2026-06-12 17:57:57,848 - INFO - Latest file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json
+2026-06-12 17:57:57,848 - INFO - History file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\history.jsonl
+2026-06-12 17:57:57,849 - INFO - Log file: C:\Users\Ollie\Documents\projects\voltage monitor\service\data\receiver.log
+2026-06-12 17:57:57,849 - INFO - Press Ctrl+C to stop
+2026-06-12 17:57:57,849 - INFO - ============================================================
+2026-06-12 17:59:53,555 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.521V
+2026-06-12 17:59:53,740 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -

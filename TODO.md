@@ -176,6 +176,18 @@ To enable on GitHub Pages:
 - Add a second file for graph history instead of only `latest.json`
 - Add basic authentication or a shared token between ESP32 and the PC receiver
 
+## Phase 8: Smart Life App Integration
+
+**Status:** Not started
+
+Features to implement:
+- [ ] Research Smart Life API / Tuya API integration
+- [ ] Create Smart Life device connection for ESP32
+- [ ] Send voltage data to Smart Life app
+- [ ] Display real-time voltage readings in Smart Life app
+- [ ] Set up alerts/notifications in Smart Life app
+- [ ] Test data synchronization between ESP32, PC, Git, and Smart Life app
+
 ## Completion Criteria
 
 - ESP32 can upload voltage data to the PC reliably
