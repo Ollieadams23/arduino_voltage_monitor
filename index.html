@@ -432,11 +432,11 @@
         minV -= 0.1;
       }
 
-      const pad = { left: 0, right: 18, top: 18, bottom: 46 };
+      const pad = { left: 0, right: 18, top: 18, bottom: 60 };
       const chartWidth = contentWidth - pad.left - pad.right;
       const chartHeight = cssHeight - pad.top - pad.bottom;
 
-      // Draw grid lines
+      // Draw horizontal grid lines (voltage levels)
       plotCtx.strokeStyle = '#d7d7d7';
       plotCtx.lineWidth = 1;
       plotCtx.beginPath();
@@ -446,6 +446,46 @@
         plotCtx.lineTo(contentWidth - pad.right, y);
       }
       plotCtx.stroke();
+
+      // Draw vertical grid lines and labels for each hour
+      const startEpoch = points[0].epoch;
+      const endEpoch = points[points.length - 1].epoch;
+      const startDate = new Date(startEpoch * 1000);
+      const endDate = new Date(endEpoch * 1000);
+      
+      // Find the first hour boundary after the start time
+      let hourBoundary = new Date(startDate);
+      hourBoundary.setMinutes(0, 0, 0);
+      if (hourBoundary.getTime() < startDate.getTime()) {
+        hourBoundary.setHours(hourBoundary.getHours() + 1);
+      }
+      
+      // Draw hour lines and labels
+      plotCtx.strokeStyle = '#e0e0e0';
+      plotCtx.lineWidth = 1;
+      plotCtx.setLineDash([3, 3]);
+      plotCtx.fillStyle = '#666';
+      plotCtx.font = '10px Arial';
+      
+      while (hourBoundary.getTime() <= endDate.getTime()) {
+        const hourEpoch = hourBoundary.getTime() / 1000;
+        const normalized = (hourEpoch - startEpoch) / (endEpoch - startEpoch);
+        const x = pad.left + (normalized * chartWidth);
+        
+        // Draw vertical line
+        plotCtx.beginPath();
+        plotCtx.moveTo(x, pad.top);
+        plotCtx.lineTo(x, cssHeight - pad.bottom);
+        plotCtx.stroke();
+        
+        // Draw hour label
+        const hours = hourBoundary.getHours().toString().padStart(2, '0');
+        plotCtx.fillText(hours + ':00', x - 15, cssHeight - 28);
+        
+        hourBoundary.setHours(hourBoundary.getHours() + 1);
+      }
+      
+      plotCtx.setLineDash([]);
 
       // Draw axis labels
       axisCtx.fillStyle = '#444';
@@ -535,6 +575,14 @@
       return days + 'd ago';
     }
 
+    function formatUpdateTime(timestamp) {
+      const date = new Date(timestamp);
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const seconds = date.getSeconds().toString().padStart(2, '0');
+      return hours + ':' + minutes + ':' + seconds;
+    }
+
     function updateData() {
       const dataUrl = 'service/data/latest.json';
       
@@ -552,7 +600,7 @@
           // Update hero stats
           setTextIfPresent('voltage', data.voltage.toFixed(3) + ' V');
           setTextIfPresent('threshold', data.threshold.toFixed(2) + ' V');
-          setTextIfPresent('lastUpdate', formatRelativeTime(data.timestamp * 1000));
+          setTextIfPresent('lastUpdate', formatUpdateTime(data.timestamp * 1000));
 
           // Update status cards
           setTextIfPresent('voltageMirror', data.voltage.toFixed(3) + ' V');
@@ -601,10 +649,10 @@
     // Auto-refresh every 60 seconds
     setInterval(updateData, 60000);
 
-    // Update relative timestamps every 10 seconds
+    // Update time display every 10 seconds
     setInterval(() => {
       if (lastFetchTime > 0) {
-        setTextIfPresent('lastUpdate', formatRelativeTime(lastFetchTime));
+        setTextIfPresent('lastUpdate', formatUpdateTime(lastFetchTime));
       }
     }, 10000);
 

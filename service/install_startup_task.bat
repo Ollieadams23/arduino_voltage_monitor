@@ -2,8 +2,19 @@
 :: Force the script to look at its own current folder
 cd /d "%~dp0"
 
+:: Check for admin privileges
+net session >nul 2>&1
+if %errorlevel% neq 0 (
+    echo.
+    echo ERROR: This script requires Administrator privileges!
+    echo Please right-click and select "Run as administrator"
+    echo.
+    pause
+    exit /b 1
+)
+
 :: Get the full path of your VBScript dynamically
-set "VBS_PATH=%cd%\launch_all.vbs"
+set "VBS_PATH=%cd%\start_service.vbs"
 
 echo Creating hidden startup task...
 echo.

@@ -1,0 +1,183 @@
+2026-07-15 16:18:10,075 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.863V
+2026-07-15 16:18:12,206 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 16:18:12,207 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 16:23:10,376 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.857V
+2026-07-15 16:23:10,592 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 16:23:10,592 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 16:28:10,363 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.689V
+2026-07-15 16:28:10,571 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 16:28:10,571 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 16:33:10,341 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.755V
+2026-07-15 16:33:10,551 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 16:33:10,551 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 16:38:10,403 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.748V
+2026-07-15 16:38:10,626 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 16:38:10,626 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 16:43:10,719 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.815V
+2026-07-15 16:43:10,893 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 16:43:10,893 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 16:48:10,302 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.843V
+2026-07-15 16:48:10,495 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 16:48:10,503 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 16:53:10,313 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.804V
+2026-07-15 16:53:10,473 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 16:53:10,473 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 16:58:10,386 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.801V
+2026-07-15 16:58:10,537 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 16:58:10,537 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 17:03:10,538 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.808V
+2026-07-15 17:03:10,750 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 17:03:10,750 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 17:08:10,475 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.801V
+2026-07-15 17:08:10,679 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 17:08:10,679 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 17:13:10,248 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.755V
+2026-07-15 17:13:10,472 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 17:13:10,472 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 17:18:10,236 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.745V
+2026-07-15 17:18:10,454 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 17:18:10,454 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 17:23:10,211 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.741V
+2026-07-15 17:23:10,404 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 17:23:10,404 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 17:28:10,211 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.727V
+2026-07-15 17:28:10,429 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 17:28:10,429 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 17:33:10,198 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.72V
+2026-07-15 17:33:10,398 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 17:33:10,398 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 17:38:10,229 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.741V
+2026-07-15 17:38:10,387 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 17:38:10,387 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 17:43:10,200 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.706V
+2026-07-15 17:43:10,403 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 17:43:10,403 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 17:48:10,247 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.699V
+2026-07-15 17:48:10,409 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 17:48:10,411 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 17:53:10,232 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.689V
+2026-07-15 17:53:10,394 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 17:53:10,394 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 17:58:10,269 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.692V
+2026-07-15 17:58:10,483 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 17:58:10,484 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 18:03:10,261 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.696V
+2026-07-15 18:03:10,554 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 18:03:10,554 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 18:08:10,233 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.581V
+2026-07-15 18:08:10,491 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 18:08:10,491 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 18:13:10,436 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.689V
+2026-07-15 18:13:10,627 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 18:13:10,629 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 18:18:10,251 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.689V
+2026-07-15 18:18:10,544 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 18:18:10,544 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 18:23:10,260 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.699V
+2026-07-15 18:23:10,484 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 18:23:10,485 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 18:28:10,359 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.72V
+2026-07-15 18:28:10,627 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 18:28:10,627 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 18:33:10,286 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.713V
+2026-07-15 18:33:10,508 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 18:33:10,511 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 18:38:10,263 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.713V
+2026-07-15 18:38:11,079 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 18:38:11,079 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 18:43:10,362 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.738V
+2026-07-15 18:43:10,804 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 18:43:10,804 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 18:53:10,367 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.63V
+2026-07-15 18:53:10,644 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 18:53:10,644 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 18:58:10,615 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.619V
+2026-07-15 18:58:10,811 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 18:58:10,811 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 19:03:10,309 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.612V
+2026-07-15 19:03:10,494 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 19:03:10,494 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 19:08:10,330 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.623V
+2026-07-15 19:08:10,554 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 19:08:10,559 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 19:13:10,276 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.657V
+2026-07-15 19:13:10,521 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 19:13:10,523 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 19:18:10,264 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.623V
+2026-07-15 19:18:10,429 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 19:18:10,429 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 19:23:10,246 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.633V
+2026-07-15 19:23:10,398 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 19:23:10,398 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 19:28:10,232 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.643V
+2026-07-15 19:28:10,437 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 19:28:10,437 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 19:33:10,254 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.64V
+2026-07-15 19:33:10,532 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 19:33:10,532 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 19:38:10,210 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.657V
+2026-07-15 19:38:10,373 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 19:38:10,373 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 19:43:10,189 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.675V
+2026-07-15 19:43:10,352 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 19:43:10,352 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 19:48:10,242 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.689V
+2026-07-15 19:48:10,408 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 19:48:10,408 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 19:53:10,238 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.671V
+2026-07-15 19:53:10,419 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 19:53:10,419 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 19:58:10,295 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.643V
+2026-07-15 19:58:10,532 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 19:58:10,533 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 20:03:10,244 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.64V
+2026-07-15 20:03:10,411 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 20:03:10,411 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 20:08:10,215 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.612V
+2026-07-15 20:08:10,437 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 20:08:10,437 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 20:13:10,439 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.619V
+2026-07-15 20:13:10,654 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 20:13:10,659 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 20:18:10,182 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.654V
+2026-07-15 20:18:10,356 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 20:18:10,356 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 20:23:10,497 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.668V
+2026-07-15 20:23:10,839 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 20:23:10,839 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 20:28:10,209 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.657V
+2026-07-15 20:28:10,586 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 20:28:10,586 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 20:33:10,244 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.65V
+2026-07-15 20:33:10,524 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 20:33:10,525 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 20:38:10,185 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.65V
+2026-07-15 20:38:10,378 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 20:38:10,378 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 20:43:10,797 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.668V
+2026-07-15 20:43:11,008 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 20:43:11,008 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 20:48:10,775 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.577V
+2026-07-15 20:48:10,927 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 20:48:10,927 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 20:53:10,755 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.637V
+2026-07-15 20:53:11,204 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 20:53:11,206 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 20:58:10,779 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.609V
+2026-07-15 20:58:10,995 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 20:58:10,997 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 21:03:10,836 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.612V
+2026-07-15 21:03:11,063 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 21:03:11,063 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 21:08:10,753 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.609V
+2026-07-15 21:08:10,950 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 21:08:10,950 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 21:13:10,686 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.602V
+2026-07-15 21:13:10,868 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 21:13:10,868 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 21:18:10,669 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.588V
+2026-07-15 21:18:10,891 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 21:18:10,891 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
+2026-07-15 21:23:10,705 - INFO - Updated C:\Users\Ollie\Documents\projects\voltage monitor\service\data\latest.json - Voltage: 13.598V
+2026-07-15 21:23:10,872 - INFO - Rotated history file: kept last 1000 entries, removed 1
+2026-07-15 21:23:10,872 - INFO - 192.168.1.93 - "POST / HTTP/1.1" 200 -
